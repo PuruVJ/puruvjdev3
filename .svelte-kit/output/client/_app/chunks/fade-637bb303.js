@@ -1,1 +1,0 @@
-import{_ as a}from"./vendor-775c2945.js";const s=(s,o)=>({duration:160,delay:150,easing:a,css:a=>`opacity: ${a}`}),o=(s,o)=>({duration:150,delayZero:0,easing:a,css:a=>`opacity: ${a}`});export{s as a,o as f};

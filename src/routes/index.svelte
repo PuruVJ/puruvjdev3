@@ -1,5 +1,12 @@
 <script context="module" lang="ts">
+  import BlogList from '$lib/components/BlogList.svelte';
+  import ContactMeLink from '$lib/components/ContactMeLink.svelte';
+  import ContactMeSvg from '$lib/components/ContactMeSVG.svelte';
+  import WavyHr from '$lib/components/WavyHR.svelte';
+  import { fadeIn, fadeOut } from '$lib/fade';
+  import type { IBlog } from '$lib/interfaces/blog.interface';
   import type { Load } from '@sveltejs/kit';
+  import { onMount } from 'svelte';
 
   export const load: Load = async ({ fetch }) => {
     const res = await fetch('./data/homepage-blogs-list.json');
@@ -10,15 +17,8 @@
 </script>
 
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import BlogList from '$lib/components/BlogList.svelte';
-  import ContactMeLink from '$lib/components/ContactMeLink.svelte';
-  import ContactMeSvg from '$lib/components/ContactMeSVG.svelte';
-  import { fadeIn, fadeOut } from '$lib/fade';
-  import WavyHr from '$lib/components/WavyHR.svelte';
-  import type { IBlog } from '$lib/interfaces/blog.interface';
-
   export let blogsList: IBlog[];
+  export const prerender = true;
 
   onMount(async () => {
     await import('lazysizes');

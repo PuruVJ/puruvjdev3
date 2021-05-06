@@ -32,9 +32,9 @@
   <!-- As this component is omnipresent, the script for different favicons will live here -->
 
   {#if dev}
-    <link rel="icon" href="./icons/favicon-dev.svg" />
+    <link rel="icon" href="/icons/favicon-dev.svg" />
   {:else}
-    <link rel="icon" href="./icons/favicon-{$theme}.png" />
+    <link rel="icon" href="/icons/favicon-{$theme}.png" />
   {/if}
 </svelte:head>
 

@@ -9,7 +9,7 @@ const config = {
     adapter: staticAdapter({}),
     paths: { base: '/', assets: '/static' },
     prerender: {
-      force: true,
+      // force: true,
     },
   },
 

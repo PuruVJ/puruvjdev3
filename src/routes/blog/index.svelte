@@ -19,6 +19,8 @@
   });
 
   export let blogsList: IBlog[];
+
+  export const prerender = true;
 </script>
 
 <svelte:head>
@@ -44,7 +46,6 @@
   <h1>Blog</h1>
 
   <BlogList {blogsList} />
-  <slot />
 </main>
 
 <!-- <style lang="scss">
