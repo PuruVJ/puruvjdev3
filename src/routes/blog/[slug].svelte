@@ -13,9 +13,11 @@
     const { slug } = page.params;
 
     try {
-      const res = await fetch(`../blog/${slug}.json`);
+      const res = await fetch(`/blog/${slug}.json`);
 
       const data = await res.json();
+
+      console.log(data);
 
       return { props: { blogData: data } };
     } catch (e) {
@@ -63,7 +65,7 @@
 
 <svelte:body on:scroll={throttle(10, false, handleProgressBar)} />
 
-<main in:fadeIn out:fadeOut>
+<main class="" in:fadeIn out:fadeOut>
   <LikeButton blogID={id} />
   <div class="progress" aria-roledescription="progress">
     <div class="indicator" style="transform: scaleX({$readingProgress})" />

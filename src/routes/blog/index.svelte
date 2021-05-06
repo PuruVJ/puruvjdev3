@@ -1,12 +1,10 @@
 <script context="module" lang="ts">
   import BlogList from '$lib/components/BlogList.svelte';
   import { fadeIn, fadeOut } from '$lib/fade';
-  import type { IBlog } from '$lib/interfaces/blog.interface';
-  import type { Load } from '@sveltejs/kit';
   import { onMount } from 'svelte';
 
   export const load: Load = async ({ fetch }) => {
-    const res = await fetch('./data/blogs-list.json');
+    const res = await fetch('/data/blogs-list.json');
     const data = await res.json();
 
     return { props: { blogsList: data } };
@@ -14,6 +12,8 @@
 </script>
 
 <script lang="ts">
+  import type { IBlog } from '$lib/interfaces/blog.interface';
+  import type { Load } from '@sveltejs/kit';
   onMount(() => {
     document.body.classList.add('background');
   });
@@ -42,11 +42,13 @@
   <link rel="canonical" href="https://puruvj.dev/blog/" />
 </svelte:head>
 
-<main tabindex="-1" in:fadeIn out:fadeOut>
-  <h1>Blog</h1>
+<div>
+  <main tabindex="-1" in:fadeIn out:fadeOut>
+    <h1>Blog</h1>
 
-  <BlogList {blogsList} />
-</main>
+    <BlogList {blogsList} />
+  </main>
+</div>
 
 <!-- <style lang="scss">
   h1 {
