@@ -1,0 +1,17 @@
+.DS_Store
+node_modules
+/.svelte
+/build
+/functions
+
+.DS_Store
+/node_modules/
+/src/node_modules/@sapper/
+yarn-error.log
+/__sapper__/
+.env
+
+.vercel
+
+/api/node_modules
+.vercel

@@ -1,0 +1,53 @@
+- title: puruvj.dev
+  url: https://puruvj.dev
+  stack: svelte, sapper, html, css, js, nodejs, web
+  description: >
+    This current website you are viewing 😁. Built in September 2020, it's the second revision.
+    It has JPG, PNG -> WebP conversion, generation of responsive images, and fallback mechanisms
+    ([Read about it here](https://puruvj.dev/blog/how-i-created-personal-site-part-3)),
+    conversion of GIFs to MP4s for performance([Read about it here](https://)). 
+    The content is stored as markdown files locally in the `src/blogs` folder, 
+    and converted to html and undergoes loads of modifications using [JSDOM](https://www.npmjs.com/package/jsdom)
+    to appear as good as it looks. Thumbnails are generated using Puppeteer every day in Github Actions.
+  repo:
+    url: https://github.com/puruvj/puruvjdev2
+    type: github
+  image: puruvjdev2.png
+
+- title: MacOS Web
+  url: https://macos.now.sh
+  stack: react, snowpack, framer motion, material UI, html, css, js, nodejs, web
+  description: >
+    I love MacOS extremely. Especially it's super awesome interactive dock. So I've embarked on this long 
+    journey to recreate the basic Desktop using React and friends. 
+  repo:
+    url: https://github.com/puruvj/macos-web
+    type: github
+  image: macos.png
+
+- title: Microsoft Todo Clone
+  url: https://ms-todo.vercel.app
+  stack: stenciljs, html, css, js, web
+  description: >
+    A clone of the amazing Microsoft Todo App for Windows. Built with StencilJS. 100% Keyboard accessible with
+    roving tabindexes(ex. Navigating a list with arrow keys after tabbing to it and retaining the last tabbed position)
+    \n
+    Basic CRUD Operations, Reactivity, data is stored in IndexedDB using a Web Worker to minimize the blocking nature of IndexedDB. 
+    Has a lot of themes, both gradients and beautiful optimized background images, which transition smoothly when changed.
+  repo:
+    url: https://github.com/puruvj/ms-todo-clone
+    type: github
+  image: ms-todo.png
+
+- title: Puru Eye Hospital
+  url: https://purueyehospital.com
+  stack: stenciljs, html, css, js, web, nodejs
+  description: >
+    The official site for Puru Eye Hospital, Jaipur, Rajasthan, India. This was the first site I built and 
+    deployed online(with a domain). This is the 3rd revision, built in August 2019, the first two being in Angular,
+    were **500kb+** in size, while this one had less than **8kb** JS and CSS combined. 
+    Images optimized in a similar manner as this blog you're reading.
+  repo:
+    url: https://github.com/puruvj/peh-stencil
+    type: github
+  image: peh.png

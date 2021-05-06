@@ -1,0 +1,30 @@
+{
+  "name": "puruvjdev3",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "preview": "svelte-kit preview",
+    "lint": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@mdi/js": "^5.9.55",
+    "lazysizes": "^5.3.2",
+    "svelte": "^3.37.0",
+    "throttle-debounce": "^3.0.1"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^1.0.0-next.8",
+    "@sveltejs/kit": "^1.0.0-next.100",
+    "@types/throttle-debounce": "^2.1.0",
+    "prettier": "~2.2.1",
+    "prettier-plugin-svelte": "^2.2.0",
+    "sass": "^1.32.11",
+    "svelte-preprocess": "^4.7.2",
+    "tslib": "^2.0.0",
+    "typescript": "^4.2.4",
+    "vite": "^2.2.3"
+  },
+  "type": "module"
+}
