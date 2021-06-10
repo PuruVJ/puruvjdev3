@@ -15,7 +15,7 @@ import { ASSETS_ROOT_PATH, BLOG_POSTS_MD_PATH, RELATIVE_ASSETS_PATH } from './co
 export async function blogMDHtml() {
   // Shiki instance
   const highlighter = await getHighlighter({
-    theme: JSON.parse(await fsp.readFile('./theme.json', 'utf-8')),
+    theme: 'material-theme-palenight',
   });
 
   // Prepare md for shiki

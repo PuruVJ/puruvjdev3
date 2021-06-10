@@ -17,7 +17,6 @@
 
       const data = await res.json();
 
-
       return { props: { blogData: data } };
     } catch (e) {
       return;
@@ -62,7 +61,7 @@
   <link rel="canonical" href="https://puruvj.dev/blog/{id}" />
 </svelte:head>
 
-<svelte:body on:scroll={throttle(10, false, handleProgressBar)} />
+<svelte:window on:scroll={throttle(10, false, handleProgressBar)} />
 
 <main class="" in:fadeIn out:fadeOut>
   <LikeButton blogID={id} />
