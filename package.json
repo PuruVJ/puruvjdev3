@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
-    "preebuild": "cd scripts && node index.js",
+    "prebuild": "cd scripts && node index.js",
     "g:works": "cd scripts && node generate-works-list.js",
     "g:sitemap": "cd scripts && node generate-sitemap.js && curl http://www.google.com/ping?sitemap=https://puruvj.dev/sitemap.xml",
     "preview": "svelte-kit preview"

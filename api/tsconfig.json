@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": ["es2015"],
+    "module": "commonjs",
+    "target": "es2015",
+    "sourceMap": true,
+    "typeRoots": ["node_modules/@types"],
+    "esModuleInterop": true,
+    "allowJs": true
+  }
+  // "include": ["src", "**/*"]
+}
