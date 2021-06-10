@@ -31,17 +31,24 @@
   const browserTitle = title.replace(/<img.*?alt="(.*?)"[^\>]+>/g, '$1');
 
   function handleProgressBar() {
-    let height = document.body.scrollHeight - document.documentElement.clientHeight;
-    const currentY = document.body.scrollTop;
+    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const currentY = document.documentElement.scrollTop;
     // console.log({ currentY, height, sh: document.body.scrollHeight });
 
     $readingProgress = currentY / height;
   }
 
-  onMount(async () => {
+  let throttledHandler: () => void;
+
+  onMount(() => {
+    throttledHandler = throttle(50, false, handleProgressBar);
     document.body.classList.remove('background');
 
-    await import('lazysizes');
+    import('lazysizes');
+
+    document.addEventListener('scroll', throttledHandler);
+
+    return () => document.removeEventListener('scroll', throttledHandler);
   });
 
   onDestroy(() => {
@@ -60,8 +67,6 @@
 
   <link rel="canonical" href="https://puruvj.dev/blog/{id}" />
 </svelte:head>
-
-<svelte:window on:scroll={throttle(10, false, handleProgressBar)} />
 
 <main class="" in:fadeIn out:fadeOut>
   <LikeButton blogID={id} />

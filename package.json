@@ -2,7 +2,7 @@
   "name": "puruvjdev3",
   "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev",
+    "start": "svelte-kit dev",
     "build": "svelte-kit build",
     "prebuild": "cd scripts && node index.js",
     "g:works": "cd scripts && node generate-works-list.js",

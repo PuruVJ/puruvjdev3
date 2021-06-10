@@ -8,8 +8,6 @@
   import { onMount } from 'svelte';
   import '../css/global.scss';
 
-  let previousScrollTop = false;
-
   onMount(async () => {
     await waitFor(200);
 
