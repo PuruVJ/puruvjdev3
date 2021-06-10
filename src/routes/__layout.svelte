@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { browser, dev } from '$app/env';
+  import { dev } from '$app/env';
   import { page } from '$app/stores';
+  import Footer from '$lib/components/Footer.svelte';
+  import Nav from '$lib/components/Nav.svelte';
   import { waitFor } from '$lib/helpers/utils';
   import { theme } from '$lib/stores/theme.store';
   import { onMount } from 'svelte';
-  import Footer from '$lib/components/Footer.svelte';
-  import Nav from '$lib/components/Nav.svelte';
   import '../css/global.scss';
 
   let previousScrollTop = false;
@@ -14,17 +14,6 @@
     await waitFor(200);
 
     document.body.style.setProperty('--transition-duration', '200ms');
-
-    // page.subscribe(() => {
-    //   if (!browser) return;
-
-    //   if (!previousScrollTop) {
-    //     previousScrollTop = true;
-    //     return;
-    //   }
-
-    //   return void document.body.scrollTo({ top: 0, behavior: 'smooth' });
-    // });
   });
 </script>
 

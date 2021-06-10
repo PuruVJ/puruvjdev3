@@ -1,14 +1,11 @@
-// @ts-check
-import { promises } from 'fs';
+import { promises as fsp } from 'fs';
 import twemoji from 'twemoji';
 import fm from 'front-matter';
 import { ASSETS_ROOT_PATH, BLOG_POSTS_MD_PATH } from './constants.js';
 
-const { readdir, readFile, writeFile } = promises;
-
 (async () => {
   // Let's get all the files list
-  const filesList = (await readdir(BLOG_POSTS_MD_PATH)).filter((file) => file.endsWith('.md'));
+  const filesList = (await fsp.readdir(BLOG_POSTS_MD_PATH)).filter((file) => file.endsWith('.md'));
 
   /**
    * @type {{[blogID: string] : {id: string, date: Date}[]}}
@@ -19,7 +16,7 @@ const { readdir, readFile, writeFile } = promises;
     const filePath = `${BLOG_POSTS_MD_PATH}/${file}`;
 
     // Data
-    const data = await readFile(filePath, 'utf-8');
+    const data = await fsp.readFile(filePath, 'utf-8');
 
     const fileName = file.split('.')[0];
 
@@ -48,7 +45,7 @@ const { readdir, readFile, writeFile } = promises;
     const filePath = `${BLOG_POSTS_MD_PATH}/${file}`;
 
     // Data
-    const data = await readFile(filePath, 'utf-8');
+    const data = await fsp.readFile(filePath, 'utf-8');
 
     const fileName = file.split('.')[0];
 
@@ -64,6 +61,8 @@ const { readdir, readFile, writeFile } = promises;
 
       seriesIndex = seriesPosts.findIndex(({ id }) => id === fileName) + 1;
     }
+
+    console.log(title);
 
     // Let's push
     published &&
@@ -88,7 +87,7 @@ const { readdir, readFile, writeFile } = promises;
   });
 
   // Write data
-  await writeFile(`${ASSETS_ROOT_PATH}/data/blogs-list.json`, JSON.stringify(finaldata));
+  await fsp.writeFile(`${ASSETS_ROOT_PATH}/data/blogs-list.json`, JSON.stringify(finaldata));
 
   console.log('---------- Generated ------------');
 })();

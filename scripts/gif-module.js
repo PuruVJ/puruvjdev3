@@ -1,24 +1,7 @@
-// @ts-check
-import fs from 'fs';
-import { resolve } from 'path';
-import _cloudinary from 'cloudinary';
+import { promises as fsp } from 'fs';
 import fetch from 'node-fetch';
-import dotenv from 'dotenv';
+import { cloudinary } from './cloudinary.js';
 import { ASSETS_ROOT_PATH, RELATIVE_ASSETS_PATH } from './constants.js';
-
-const { mkdir, writeFile } = fs.promises;
-
-dotenv.config({
-  path: '../.env',
-});
-
-const cloudinary = _cloudinary.v2;
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET_KEY,
-});
 
 /**
  * This function converts gif to video and returns the necessary markup
@@ -29,7 +12,7 @@ async function optimizeGif(fileName) {
   const gifPath = `${folderPath}.gif`;
 
   try {
-    await mkdir(folderPath);
+    await fsp.mkdir(folderPath);
   } catch (e) {
     // console.log(e);
   }
@@ -48,7 +31,7 @@ async function optimizeGif(fileName) {
 
   const buffer = await fetch(res.url).then((res) => res.buffer());
 
-  await writeFile(folderPath + '/vidgif.mp4', buffer);
+  await fsp.writeFile(folderPath + '/vidgif.mp4', buffer);
 
   console.log(`Starting gif conversion: ${fileName}`);
 
@@ -56,17 +39,4 @@ async function optimizeGif(fileName) {
   console.log();
 }
 
-function gifMarkup(fileName) {
-  const baseForMarkup = `${RELATIVE_ASSETS_PATH}/media/${fileName}`;
-
-  return `
-  <div class="gif-vid-container">
-    <video autoplay loop muted playsinline>
-      <source src="${baseForMarkup}/vidgif.mp4" type="video/mp4">
-      Your browser doesn't support HTML5 video playback. <a href="${baseForMarkup}.gif" target="_blank" rel="noopener">See the gif here</a>
-    </video>
-  </div>
-  `;
-}
-
-export { optimizeGif, gifMarkup };
+export { optimizeGif };

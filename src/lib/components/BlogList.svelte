@@ -3,13 +3,16 @@
   import { formatDate } from '../helpers/format-date';
   import type { IBlog } from '../interfaces/blog.interface';
   import Icon from './Icon.svelte';
+  import { page } from '$app/stores';
 
   export let blogsList: IBlog[];
   export let seeMore: boolean = false;
+
+  $: console.log($page);
 </script>
 
 {#each blogsList as { title, id, description, date, series }}
-  <a class="blog-link" rel="prefetch" href="/blog/{id}" aria-label={title}>
+  <a class="blog-link" sveltekit:prefetch href="blog/{id}" aria-label={title}>
     <span class="series">
       {#if series}
         <mark>SERIES</mark> {series}

@@ -1,4 +1,3 @@
-// @ts-check
 import { optimizeBlogImages } from '../optimize-images.js';
 
 /**

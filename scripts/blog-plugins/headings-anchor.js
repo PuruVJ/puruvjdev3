@@ -1,4 +1,3 @@
-// @ts-check
 import slugify from 'slugify';
 import { htmlToText } from 'html-to-text';
 

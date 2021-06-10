@@ -1,4 +1,3 @@
-// @ts-check
 import { promises } from 'fs';
 import yaml from 'yaml';
 import { ASSETS_ROOT_PATH, SRC_FOLDER_PATH } from './constants.js';
@@ -10,19 +9,7 @@ const { readFile, writeFile } = promises;
   const worksFilePath = await readFile(`${SRC_FOLDER_PATH}/works.yml`, 'utf-8');
 
   /**
-   * @type {
-   {
-      title: string; 
-      url: string; 
-      stack: string; 
-      description: string;
-      image: unknown;
-      repo: {
-        url: string;
-        type: string
-      }
-    }[]
-  }
+   * @type {import('./scripts.js').Work[]}
    */
   const works = yaml.parse(worksFilePath);
 
@@ -30,6 +17,7 @@ const { readFile, writeFile } = promises;
 
   for (let work of works) {
     const { image } = work;
+    // @ts-ignore
     work.image = await optimizeBlogImages(`../static/works/${image}`, false);
 
     dataToCreate.push(work);

@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Find <p>{{ series-links }}</p> and replaces them with relevant markup
  * @param {Document} document

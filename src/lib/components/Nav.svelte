@@ -24,15 +24,21 @@
 <nav class:dark={$theme === 'dark'} class:shadow={scrollY > 2}>
   <ul>
     <li>
-      <a sveltekit:prefetch aria-current={page === '/' && 'page'} href="/"> HOME </a>
+      <a sveltekit:prefetch aria-current={page === '/' ? 'page' : 'false'} href="/"> HOME </a>
     </li>
     <li>
-      <a sveltekit:prefetch aria-current={page?.startsWith('/blog') && 'page'} href="/blog">
+      <a
+        sveltekit:prefetch
+        aria-current={page?.startsWith('/blog') ? 'page' : 'false'}
+        href="/blog"
+      >
         BLOG
       </a>
     </li>
     <li>
-      <a sveltekit:prefetch aria-current={page === '/works' && 'page'} href="/works"> WORKS </a>
+      <a sveltekit:prefetch aria-current={page === '/works' ? 'page' : 'false'} href="/works">
+        WORKS
+      </a>
     </li>
   </ul>
   <div class="brand">

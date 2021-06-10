@@ -1,4 +1,3 @@
-// @ts-check
 import { htmlToText } from 'html-to-text';
 
 /**

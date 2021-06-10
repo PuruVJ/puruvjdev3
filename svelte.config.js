@@ -7,9 +7,12 @@ const config = {
   kit: {
     target: '#svelte',
     adapter: staticAdapter({}),
-    paths: { base: '/', assets: '/static' },
+    paths: { base: '', assets: '/static' },
     prerender: {
-      // force: true,
+      crawl: true,
+      enabled: true,
+      force: false,
+      pages: ['*'],
     },
   },
 

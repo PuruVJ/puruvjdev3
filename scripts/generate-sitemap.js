@@ -1,8 +1,5 @@
-// @ts-check
-import { promises } from 'fs';
+import { promises as fsp } from 'fs';
 import glob from 'glob-promise';
-
-const { writeFile } = promises;
 
 (async function () {
   const files = await glob(
@@ -22,5 +19,5 @@ ${urls}
 `;
 
   // Write the file
-  await writeFile('../__sapper__/export/sitemap.xml', sitemapContent, 'utf-8');
+  await fsp.writeFile('../__sapper__/export/sitemap.xml', sitemapContent, 'utf-8');
 })();

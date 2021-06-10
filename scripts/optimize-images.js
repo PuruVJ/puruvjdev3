@@ -1,24 +1,9 @@
-// @ts-check
-import _cloudinary from 'cloudinary';
-import dotenv from 'dotenv';
-import fs from 'fs';
+import { promises as fsp } from 'fs';
 import fetch from 'node-fetch';
+import { cloudinary } from './cloudinary.js';
 import { ASSETS_ROOT_PATH, RELATIVE_ASSETS_PATH } from './constants.js';
-import { gifMarkup, optimizeGif } from './gif-module.js';
-
-const { access, mkdir, readdir, readFile, writeFile } = fs.promises;
-
-dotenv.config({
-  path: '../.env',
-});
-
-const cloudinary = _cloudinary.v2;
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET_KEY,
-});
+import { optimizeGif } from './gif-module.js';
+import { imageMarkup, gifMarkup } from './markup.js';
 
 /**
  * Optimize the image and create its different versions
@@ -29,22 +14,34 @@ export async function optimizeBlogImages(src, returnMarkup = true) {
   // Start measuring
   console.log('Starting to retrieve/create image/data');
 
-  // First off, don't optimize this image and save us some CPU time if it
-  // already exists
+  // First off, don't optimize this image and save us some CPU time if it already exists
   // First get the filename
   const [filePath, baseFolder] = src.split('/').reverse();
   const [fileName] = filePath.split('.');
 
   const [format] = filePath.split('.').reverse();
+
+  /*
+   * The vars are of this pattern:
+   * /{baseFolder}/{fileName}.{format}
+   */
+
   const folderPath = `${ASSETS_ROOT_PATH}/${baseFolder}/${fileName}`;
 
-  // The list of file paths to return
+  /** @param {'large' | 'small'} size */
+  const getOrgPath = (size) =>
+    `${RELATIVE_ASSETS_PATH}/${baseFolder}/${fileName}/${size}.${format}`;
+
+  /**
+   * The list of file paths to return
+   * @type {import('./scripts.js').ExportedImagesMetaData}
+   */
   const list = {
     large: {
-      org: `${RELATIVE_ASSETS_PATH}/${baseFolder}/${fileName}/large.${format}`,
+      org: getOrgPath('large'),
     },
     small: {
-      org: `${RELATIVE_ASSETS_PATH}/${baseFolder}/${fileName}/small.${format}`,
+      org: getOrgPath('small'),
     },
     aspectHTW: 1,
   };
@@ -53,16 +50,16 @@ export async function optimizeBlogImages(src, returnMarkup = true) {
 
   // Check if this folder exists
   try {
-    await access(folderPath);
+    await fsp.access(folderPath);
     shouldOptimize = false;
 
-    if (!shouldOptimize && (await readdir(folderPath)).includes('data.json') && format !== 'gif') {
+    if ((await fsp.readdir(folderPath)).includes('data.json') && format !== 'gif') {
       // The data file exists. Get the aspect ratio from there
-      const { aspectHTW } = JSON.parse(await readFile(`${folderPath}/data.json`, 'utf-8'));
+      const { aspectHTW } = JSON.parse(await fsp.readFile(`${folderPath}/data.json`, 'utf-8'));
 
       list.aspectHTW = aspectHTW;
     }
-  } catch (e) {}
+  } catch {}
 
   // The markup
 
@@ -71,7 +68,7 @@ export async function optimizeBlogImages(src, returnMarkup = true) {
     // Log the time
     console.log(`Finished.`);
     console.log();
-    return returnMarkup ? markup(list, format) : list;
+    return returnMarkup ? imageMarkup(list, format) : list;
   }
 
   // Optimize if GIF
@@ -87,57 +84,43 @@ export async function optimizeBlogImages(src, returnMarkup = true) {
   // The image is optimizable. That means work, boys!
   // Let's try make the folder
   try {
-    await mkdir(`${ASSETS_ROOT_PATH}/${baseFolder}/${fileName}`);
+    await fsp.mkdir(`${ASSETS_ROOT_PATH}/${baseFolder}/${fileName}`);
   } catch (e) {}
 
-  const bigOriginalP = cloudinary.uploader.upload(`${folderPath}.${format}`, {
-    format,
-    folder: 'media',
-    transformation: [
-      {
-        quality: 80,
-        width: 1200,
-        crop: 'scale',
-      },
-    ],
-    use_filename: true,
-    overwrite: true,
-  });
+  /** @param {number} width */
+  const upload = (width) =>
+    cloudinary.uploader.upload(`${folderPath}.${format}`, {
+      format,
+      folder: 'media',
+      transformation: [
+        {
+          quality: 80,
+          width,
+          crop: 'scale',
+        },
+      ],
+      use_filename: true,
+      overwrite: true,
+    });
 
-  const smallOriginalP = cloudinary.uploader.upload(`${folderPath}.${format}`, {
-    format,
-    folder: 'media',
-    transformation: [
-      {
-        quality: 80,
+  /** @param {string} path */
+  const fetchImg = (path) => fetch(path).then((res) => res.buffer());
 
-        width: 600,
-        crop: 'scale',
-      },
-    ],
-    use_filename: true,
-    overwrite: true,
-  });
-
-  const [bigOriginal, smallOriginal] = await Promise.all([bigOriginalP, smallOriginalP]);
-
-  const bigOriginalBufferP = fetch(bigOriginal.url).then((res) => res.buffer());
-  const smallOriginalBufferP = fetch(smallOriginal.url).then((res) => res.buffer());
-
+  const [bigOriginal, smallOriginal] = await Promise.all([upload(1200), upload(600)]);
   const [bigOriginalBuffer, smallOriginalBuffer] = await Promise.all([
-    bigOriginalBufferP,
-    smallOriginalBufferP,
+    fetchImg(bigOriginal.url),
+    fetchImg(smallOriginal.url),
   ]);
 
   // get aspect ratio
   list.aspectHTW = bigOriginal.height / bigOriginal.width;
 
   // Write inside the folder
-  await writeFile(`${folderPath}/large.${format}`, bigOriginalBuffer);
-  await writeFile(`${folderPath}/small.${format}`, smallOriginalBuffer);
+  await fsp.writeFile(`${folderPath}/large.${format}`, bigOriginalBuffer);
+  await fsp.writeFile(`${folderPath}/small.${format}`, smallOriginalBuffer);
 
   // Also write the data.json
-  await writeFile(
+  await fsp.writeFile(
     `${folderPath}/data.json`,
     JSON.stringify({
       aspectHTW: list.aspectHTW,
@@ -149,32 +132,7 @@ export async function optimizeBlogImages(src, returnMarkup = true) {
   console.log();
 
   // Return the list
-  return returnMarkup ? markup(list, format) : list;
+  return returnMarkup ? imageMarkup(list, format) : list;
 }
 
-try {
-  optimizeBlogImages('../../static/media/deep-dive-preact-source--wait-what.gif', false);
-} catch (e) {
-  console.log(e);
-}
-function markup(list, format) {
-  return `
-  <figure style="width: 100%;padding-top: ${list.aspectHTW * 100}%;">
-    <picture>
-      <source
-        type="image/${format}"
-        media="(min-width: 501px)"
-        data-srcset="${list.large.org}"
-      ></source>
-      <source
-        type="image/${format}"
-        media="(max-width: 500px)"
-        data-srcset="${list.small.org}"
-      ></source>
-      <img alt="Placeholder"
-      data-src="${list.large.org}"
-      class="lazyload blog-img" />
-    </picture>
-  </figure>
-  `;
-}
+//   optimizeBlogImages('../../static/media/deep-dive-preact-source--wait-what.gif', false);

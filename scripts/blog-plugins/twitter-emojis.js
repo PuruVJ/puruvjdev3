@@ -1,4 +1,3 @@
-// @ts-check
 import twemoji from 'twemoji';
 
 /**

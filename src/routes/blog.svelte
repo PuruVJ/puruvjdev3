@@ -1,6 +1,8 @@
 <script context="module" lang="ts">
   import BlogList from '$lib/components/BlogList.svelte';
   import { fadeIn, fadeOut } from '$lib/fade';
+  import type { IBlog } from '$lib/interfaces/blog.interface';
+  import type { Load } from '@sveltejs/kit';
   import { onMount } from 'svelte';
 
   export const load: Load = async ({ fetch }) => {
@@ -9,18 +11,16 @@
 
     return { props: { blogsList: data } };
   };
+
+  export const prerender = true;
 </script>
 
 <script lang="ts">
-  import type { IBlog } from '$lib/interfaces/blog.interface';
-  import type { Load } from '@sveltejs/kit';
   onMount(() => {
     document.body.classList.add('background');
   });
 
   export let blogsList: IBlog[];
-
-  export const prerender = true;
 </script>
 
 <svelte:head>

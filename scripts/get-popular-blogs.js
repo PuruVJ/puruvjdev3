@@ -1,17 +1,14 @@
-// @ts-check
 import { promises as fsp } from 'fs';
 import fm from 'front-matter';
 import fetch from 'node-fetch';
 import { ASSETS_ROOT_PATH, SRC_FOLDER_PATH } from './constants.js';
-
-const { readdir, readFile, writeFile } = fsp;
 
 const URL = `https://puruvj.dev/api/get-emos?blogID=`;
 const MAX_COUNT = 6;
 
 async function main() {
   // Read all the blog posts
-  const blogPostFiles = (await readdir(`${SRC_FOLDER_PATH}/blog/`)).filter((str) =>
+  const blogPostFiles = (await fsp.readdir(`${SRC_FOLDER_PATH}/blog/`)).filter((str) =>
     str.endsWith('.md')
   );
 
@@ -19,7 +16,7 @@ async function main() {
   const datesList = [];
 
   for (let file of blogPostFiles) {
-    const content = await readFile(`${SRC_FOLDER_PATH}/blog/${file}`, 'utf8');
+    const content = await fsp.readFile(`${SRC_FOLDER_PATH}/blog/${file}`, 'utf8');
 
     // @ts-ignore
     const metadata = fm(content).attributes;
@@ -49,7 +46,7 @@ async function main() {
   // Now let's get the data from the already generated metadata in blogs-list.js
   /** @type {any[]} */
   const finalMetaData = JSON.parse(
-    await readFile(`${ASSETS_ROOT_PATH}/data/blogs-list.json`, 'utf8')
+    await fsp.readFile(`${ASSETS_ROOT_PATH}/data/blogs-list.json`, 'utf8')
   );
 
   // Get data and write to file
@@ -58,7 +55,10 @@ async function main() {
   rankedData.length = MAX_COUNT;
 
   // Write to the file
-  await writeFile(`${ASSETS_ROOT_PATH}/data/homepage-blogs-list.json`, JSON.stringify(rankedData));
+  await fsp.writeFile(
+    `${ASSETS_ROOT_PATH}/data/homepage-blogs-list.json`,
+    JSON.stringify(rankedData)
+  );
 }
 
 /**

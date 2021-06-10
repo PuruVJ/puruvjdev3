@@ -1,5 +1,4 @@
 <script>
-  import { dev } from '$app/env';
   import NotFoundSvg from '$lib/components/NotFoundSVG.svelte';
   import { fadeIn, fadeOut } from '$lib/fade';
   import { onMount } from 'svelte';

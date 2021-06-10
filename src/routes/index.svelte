@@ -9,19 +9,24 @@
   import { onMount } from 'svelte';
 
   export const load: Load = async ({ fetch }) => {
-    const res = await fetch('./data/homepage-blogs-list.json');
+    const res = await fetch('/data/homepage-blogs-list.json');
     const data = await res.json();
 
     return { props: { blogsList: data } };
   };
+
+  export const prerender = true;
 </script>
 
 <script lang="ts">
+  import { navigating } from '$app/stores';
+  import { goto, prefetch } from '$app/navigation';
+
   export let blogsList: IBlog[];
   export const prerender = true;
 
   onMount(async () => {
-    await import('lazysizes');
+    import('lazysizes');
 
     document.body.classList.add('background', 'animated');
   });
@@ -45,6 +50,7 @@
 </svelte:head>
 
 <main in:fadeIn out:fadeOut>
+  <button on:click={() => prefetch('/blog/')}>Got to blog</button>
   <br />
   <br /><br />
   <section class="puru-intro">

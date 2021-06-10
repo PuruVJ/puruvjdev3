@@ -1,24 +1,21 @@
-// @ts-check
-import { promises } from 'fs';
+import fm from 'front-matter';
+import { promises as fsp } from 'fs';
+import { JSDOM } from 'jsdom';
 import markdown from 'markdown-it';
+import readingTime from 'reading-time';
 import { getHighlighter } from 'shiki';
 import twemoji from 'twemoji';
-import fm from 'front-matter';
-import { JSDOM } from 'jsdom';
-import readingTime from 'reading-time';
-import { imageOptimMarkupPlugin } from './blog-plugins/image-optim-markup.js';
-import { headingsWithAnchorsPlugin } from './blog-plugins/headings-anchor.js';
-import { convertToTwitterEmojisPlugin } from './blog-plugins/twitter-emojis.js';
-import { seriesLinksPlugin } from './blog-plugins/series-links.js';
 import { generateTOC } from './blog-plugins/generate-toc.js';
+import { headingsWithAnchorsPlugin } from './blog-plugins/headings-anchor.js';
+import { imageOptimMarkupPlugin } from './blog-plugins/image-optim-markup.js';
+import { seriesLinksPlugin } from './blog-plugins/series-links.js';
+import { convertToTwitterEmojisPlugin } from './blog-plugins/twitter-emojis.js';
 import { ASSETS_ROOT_PATH, BLOG_POSTS_MD_PATH, RELATIVE_ASSETS_PATH } from './constants.js';
-
-const { readdir, readFile, writeFile } = promises;
 
 (async () => {
   // Shiki instance
   const highlighter = await getHighlighter({
-    theme: 'material-theme-palenight',
+    theme: JSON.parse(await fsp.readFile('./theme.json', 'utf-8')),
   });
 
   // Prepare md for shiki
@@ -37,6 +34,7 @@ const { readdir, readFile, writeFile } = promises;
     if (aIndex < 0) {
       tokens[idx].attrPush(['target', '_blank']); // add new attribute
     } else {
+      // @ts-ignore
       tokens[idx].attrs[aIndex][1] = '_blank'; // replace value of existing attr
     }
 
@@ -54,7 +52,7 @@ const { readdir, readFile, writeFile } = promises;
   };
 
   // get all blogs in directory
-  const filesAbs = (await readdir(BLOG_POSTS_MD_PATH)).filter((file) => file.endsWith('.md'));
+  const filesAbs = (await fsp.readdir(BLOG_POSTS_MD_PATH)).filter((file) => file.endsWith('.md'));
 
   const files = filesAbs.map((absFile) => `${BLOG_POSTS_MD_PATH}/${absFile}`);
 
@@ -70,7 +68,7 @@ const { readdir, readFile, writeFile } = promises;
     const fileName = filesAbs[i].split('.')[0];
 
     // Let's get the contents of the file
-    const fileData = await readFile(filePath, 'utf-8');
+    const fileData = await fsp.readFile(filePath, 'utf-8');
 
     // Get the metadata inside the markdown
     const { attributes } = fm(fileData);
@@ -103,7 +101,7 @@ const { readdir, readFile, writeFile } = promises;
     console.log(filePath);
 
     // Let's get the contents of the file
-    const fileData = await readFile(filePath, 'utf-8');
+    const fileData = await fsp.readFile(filePath, 'utf-8');
 
     // Get the metadata inside the markdown
     const { attributes, body } = fm(fileData);
@@ -136,9 +134,7 @@ const { readdir, readFile, writeFile } = promises;
     ({ document } = await headingsWithAnchorsPlugin(document, fileName));
 
     if (series) {
-      /**
-       * @type {Array}
-       */
+      /** @type {Array}*/
       let seriesPostsList = seriesList[series].sort((p1, p2) => p1.date - p2.date);
 
       ({ document } = await seriesLinksPlugin(document, seriesPostsList, series, fileName));
@@ -160,7 +156,7 @@ const { readdir, readFile, writeFile } = promises;
       folder: 'svg',
     });
 
-    await writeFile(
+    await fsp.writeFile(
       `${ASSETS_ROOT_PATH}/blog/${fileName}.json`,
       JSON.stringify({
         ...attributes,
