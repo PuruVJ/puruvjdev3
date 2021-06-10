@@ -13,7 +13,7 @@ async function headingsWithAnchorsPlugin(document, fileName) {
     const headingVal = heading.innerHTML;
     const slug = slugify(htmlToText(headingVal));
 
-    heading.innerHTML = `<a class="heading-link" href="blog/${fileName}#${slug}">#</a>${headingVal}`;
+    heading.innerHTML = `<a class="heading-link" href="/blog/${fileName}#${slug}">#</a>${headingVal}`;
     heading.id = slug;
   }
 

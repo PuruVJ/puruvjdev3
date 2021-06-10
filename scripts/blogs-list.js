@@ -3,7 +3,7 @@ import twemoji from 'twemoji';
 import fm from 'front-matter';
 import { ASSETS_ROOT_PATH, BLOG_POSTS_MD_PATH } from './constants.js';
 
-(async () => {
+export async function generateBlogsList() {
   // Let's get all the files list
   const filesList = (await fsp.readdir(BLOG_POSTS_MD_PATH)).filter((file) => file.endsWith('.md'));
 
@@ -90,4 +90,4 @@ import { ASSETS_ROOT_PATH, BLOG_POSTS_MD_PATH } from './constants.js';
   await fsp.writeFile(`${ASSETS_ROOT_PATH}/data/blogs-list.json`, JSON.stringify(finaldata));
 
   console.log('---------- Generated ------------');
-})();
+}

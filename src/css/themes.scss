@@ -66,3 +66,22 @@ body[data-theme='dark'] {
 
   --app-color-shell: #222428;
 }
+
+body[data-theme='radioactive'] {
+  --app-color-primary: #1fff9e;
+  --app-color-primary-rgb: 31, 255, 158;
+  --app-color-primary-shade: #62ffbb;
+  --app-color-primary-tint: #10804f;
+  --app-color-primary-contrast: #031910;
+  --app-color-dark: #f4f5f8;
+  --app-color-dark-rgb: 244, 245, 248;
+  --app-color-dark-contrast: #000000;
+  --app-color-dark-contrast-rgb: 0, 0, 0;
+  --app-color-medium: #989aa2;
+  --app-color-medium-rgb: 152, 154, 162;
+  --app-color-medium-contrast: #000000;
+  --app-color-light: #222428;
+  --app-color-light-rgb: 34, 36, 40;
+  --app-color-light-contrast: #ffffff;
+  --app-color-shell: #13132a;
+}

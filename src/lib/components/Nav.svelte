@@ -1,27 +1,20 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { throttle } from 'throttle-debounce';
+  import IntersectionObserver from 'svelte-intersection-observer';
   import ThemeSwitcher from '../components/ThemeSwitcher.svelte';
   import { theme } from '../stores/theme.store';
   import SiteLogo from './SiteLogo.svelte';
 
-  // The scroll from above
-  let scrollY = 0;
-
-  function handleScroll() {
-    scrollY = document.body.scrollTop;
-  }
-
-  onMount(() => {
-    handleScroll();
-  });
+  let intersecting: boolean;
+  let smigget: HTMLDivElement;
 
   export let page: string;
 </script>
 
-<svelte:body on:scroll={throttle(50, false, handleScroll)} />
-
-<nav class:dark={$theme === 'dark'} class:shadow={scrollY > 2}>
+<nav
+  class:dark={$theme === 'dark'}
+  class:radioactive={$theme === 'radioactive'}
+  class:shadow={!intersecting}
+>
   <ul>
     <li>
       <a sveltekit:prefetch aria-current={page === '/' ? 'page' : 'false'} href="/"> HOME </a>
@@ -51,6 +44,10 @@
   </span>
 </nav>
 
+<IntersectionObserver element={smigget} bind:intersecting>
+  <div bind:this={smigget} class="smigget" />
+</IntersectionObserver>
+
 <style lang="scss">
   nav {
     display: grid;
@@ -78,9 +75,22 @@
       background-color: #383a3e;
     }
 
+    &.radioactive.shadow {
+      background-color: #202046;
+    }
+
     &.shadow {
       box-shadow: 0 3.4px 6.3px rgba(0, 0, 0, 0.099), 0 27px 50px rgba(0, 0, 0, 0.1);
     }
+  }
+
+  .smigget {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
   }
 
   ul {
@@ -204,11 +214,11 @@
 
   @media screen and (max-width: 600px) {
     .brand {
-      display: none;
+      display: none !important;
     }
 
     nav {
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: auto 0 1fr auto;
     }
   }
 

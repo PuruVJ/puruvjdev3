@@ -1,17 +1,3 @@
-.emoji {
-  /* display: inline-block; */
-
-  height: 1em;
-  width: 1em;
-
-  margin: 0 0.05em 0 0.1em;
-  vertical-align: -0.1em;
-
-  /* margin: 0; */
-
-  vertical-align: middle;
-}
-
 pre.shiki {
   --font-size: 1rem;
   border-radius: 0.6rem;
@@ -25,6 +11,7 @@ pre.shiki {
 
   code {
     font-size: inherit;
+    font-weight: 400;
     border-radius: inherit;
     overflow: inherit;
     background-color: inherit;
@@ -118,6 +105,10 @@ code {
     font-family: 'JetBrains Mono', monospace;
     border-radius: 0 8px 8px 0;
     background-color: rgba(var(--app-color-dark-rgb), 0.05);
+
+    a[href] {
+      font-weight: 500 !important;
+    }
   }
 
   .picture-container {
@@ -125,9 +116,15 @@ code {
   }
 
   figure {
+    --bgcolor: var(--app-color-primary);
+
+    padding-top: var(--padding-top);
     margin: 0;
+
     position: relative;
     border-radius: 0.5rem;
+
+    background-color: var(--bgcolor);
 
     picture {
       border-radius: inherit;
@@ -135,6 +132,7 @@ code {
 
     img {
       width: 100%;
+
       position: absolute;
       height: auto;
       top: 0;
@@ -153,6 +151,8 @@ code {
     --opacity: 0.35;
     --duration: 100ms;
     --easing: ease-in-out;
+
+    font-weight: 600 !important;
 
     padding: 0 0.25rem;
 
@@ -175,6 +175,7 @@ code {
       background-position: 0 100%;
 
       color: var(--app-color-primary-contrast);
+      font-weight: 600 !important;
 
       border-radius: 0.25rem;
 

@@ -7,7 +7,7 @@
 <!-- hehe -->
 <footer>
   <div class="copy-area">
-    Made with&nbsp;<img src="emojis/love.svg" alt="❤" />&nbsp;by Puru Vijay
+    Made with&nbsp;<img src="/emojis/love.svg" alt="❤" />&nbsp;by Puru Vijay
   </div>
   <div class="social-links">
     <a

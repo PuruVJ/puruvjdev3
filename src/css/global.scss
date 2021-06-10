@@ -1,4 +1,4 @@
-@import './themes.css';
+@import './themes';
 
 body {
   margin: 0;
@@ -15,7 +15,7 @@ body {
   background-color: var(--app-color-shell);
   color: var(--app-color-dark);
 
-  overflow-y: scroll;
+  overflow-y: hidden;
 
   display: flex;
   flex-direction: column;
@@ -25,6 +25,8 @@ body {
 
 html {
   height: 100%;
+
+  overflow-y: scroll;
 }
 
 html,
@@ -35,7 +37,7 @@ body {
 }
 
 body.background {
-  background-image: url(../art/background.svg);
+  background-image: url(/art/background.svg);
   background-repeat: repeat;
   background-size: cover;
 }
@@ -61,7 +63,7 @@ h3 {
   color: var(--app-color-dark);
   line-height: 1.3;
 
-  font-weight: 700;
+  font-weight: 600;
 
   transition: color 200ms ease-in;
 }
@@ -100,7 +102,7 @@ h2 {
 
 a[href] {
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
 
   color: var(--app-color-primary);
   transition: color 200ms ease-out;
@@ -112,7 +114,7 @@ a[href]:hover {
 
 #svelte {
   width: 61.8%;
-  height: 100vh;
+  min-height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -127,7 +129,7 @@ mark {
   background-color: var(--app-color-primary);
   padding: 0.1rem 0.3rem;
   border-radius: 4px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 1100px) {
@@ -145,4 +147,18 @@ mark {
   ::-webkit-scrollbar-thumb:hover {
     display: none;
   }
+}
+
+.emoji {
+  /* display: inline-block; */
+
+  height: 1em;
+  width: 1em;
+
+  margin: 0 0.05em 0 0.1em;
+  vertical-align: -0.1em;
+
+  /* margin: 0; */
+
+  vertical-align: middle;
 }

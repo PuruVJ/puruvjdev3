@@ -8,7 +8,7 @@
 
   export const load: Load = async ({ fetch }) => {
     try {
-      const res = await fetch(`./data/works.json`);
+      const res = await fetch(`/data/works.json`);
 
       const data = await res.json();
 
@@ -32,7 +32,7 @@
 <main in:fadeIn out:fadeOut>
   {#each works as { title, image, url, repo }}
     <section>
-      <div class="img-preview"><img src={image.small.webp} alt={title} /></div>
+      <div class="img-preview"><img src={image.small.org} alt={title} /></div>
       <div class="info-section">
         <div class="title">{title}</div>
         <div class="icons">

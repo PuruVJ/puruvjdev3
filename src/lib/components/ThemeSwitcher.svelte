@@ -4,9 +4,15 @@
   import { theme } from '../stores/theme.store';
   import Icon from './Icon.svelte';
   import Moon from './Moon.svelte';
+  import RadioactiveSvg from './RadioactiveSVG.svelte';
 
   // List of themes
-  const themes: ('light' | 'midday' | 'dark')[] = ['light', 'midday', 'dark'];
+  const themes: ('light' | 'midday' | 'dark' | 'radioactive')[] = [
+    'light',
+    'midday',
+    'dark',
+    'radioactive',
+  ];
   let currentThemeIndex = 0;
 
   function nextTheme() {
@@ -33,7 +39,7 @@
 <svelte:head>
   <meta
     name="theme-color"
-    content={currentThemeIndex === 0 ? 'white' : currentThemeIndex === 1 ? '#f9dec9' : '#222428'}
+    content={['white', '#f9dec9', '#222428', '#13132a'][currentThemeIndex]}
   />
 </svelte:head>
 
@@ -42,8 +48,10 @@
     <Icon path={mdiWhiteBalanceSunny} />
   {:else if currentThemeIndex === 1}
     <Icon path={mdiMoonFull} />
-  {:else}
+  {:else if currentThemeIndex === 2}
     <Moon />
+  {:else}
+    <RadioactiveSvg />
   {/if}
 </button>
 

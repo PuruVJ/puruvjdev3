@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+  import { prefetch } from '$app/navigation';
   import BlogList from '$lib/components/BlogList.svelte';
   import ContactMeLink from '$lib/components/ContactMeLink.svelte';
   import ContactMeSvg from '$lib/components/ContactMeSVG.svelte';
@@ -19,9 +20,6 @@
 </script>
 
 <script lang="ts">
-  import { navigating } from '$app/stores';
-  import { goto, prefetch } from '$app/navigation';
-
   export let blogsList: IBlog[];
   export const prerender = true;
 
@@ -50,7 +48,6 @@
 </svelte:head>
 
 <main in:fadeIn out:fadeOut>
-  <button on:click={() => prefetch('/blog/')}>Got to blog</button>
   <br />
   <br /><br />
   <section class="puru-intro">

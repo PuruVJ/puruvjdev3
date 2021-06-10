@@ -12,7 +12,7 @@ import { seriesLinksPlugin } from './blog-plugins/series-links.js';
 import { convertToTwitterEmojisPlugin } from './blog-plugins/twitter-emojis.js';
 import { ASSETS_ROOT_PATH, BLOG_POSTS_MD_PATH, RELATIVE_ASSETS_PATH } from './constants.js';
 
-(async () => {
+export async function blogMDHtml() {
   // Shiki instance
   const highlighter = await getHighlighter({
     theme: JSON.parse(await fsp.readFile('./theme.json', 'utf-8')),
@@ -164,9 +164,9 @@ import { ASSETS_ROOT_PATH, BLOG_POSTS_MD_PATH, RELATIVE_ASSETS_PATH } from './co
         id: fileName,
         reading_time,
         toc,
-      })
+      }),
     );
 
     console.log('\n');
   }
-})();
+}

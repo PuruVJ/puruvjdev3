@@ -1,7 +1,7 @@
 import { browser } from '$app/env';
 import { writable } from 'svelte/store';
 
-const theme = writable<'light' | 'midday' | 'dark'>('light');
+const theme = writable<'light' | 'midday' | 'dark' | 'radioactive'>('light');
 
 export { theme };
 
