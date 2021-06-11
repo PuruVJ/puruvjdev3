@@ -4,14 +4,14 @@ description: CSS Modules are extremely powerful. Find out why in this article.
 date: 14 June, 2021
 ---
 
-CSS Modules are one of the best ways of styling in React. We have libraries that people consider better than CSS Modules, but CSS Modules have stood the test of time and are still one of the most universal ways of styling React. They give you superpowers, and are simple enough that even beginners can grasp it.
+CSS Modules are one of the best ways of styling in React. We have libraries that people consider better than CSS Modules, but CSS Modules have stood the test of time and are still one of the most universal ways of styling React. They give you superpowers, and are simple enough that anyone can grasp it quickly.
 
 # Advantages
 
 1. **Scoped** - CSS modules are scoped when you use them the right way.
 2. **Highly composable** - You can compose different styles in a lot of ways
-3. **Tree shakable** - Styles you don't use are removed, just like modern JS tooling.
-4. **Very easy to pick up** - CSS Modules are very easy to understand and takes almost no effort to start using.
+3. **Tree shakable** - Styles you don't use are removed, just like JavaScript with modern JS tooling.
+4. **Very easy to pick up** - CSS Modules are very easy to understand and take almost no effort to start using.
 5. **It's just CSS!!** - CSS Modules are just CSS that you write with some specific rules in mind. You get the great tooling from your IDE, and IDEs are really good at plain ol' CSS.
 6. **PostCSS tooling just works** - Because CSS Modules are just CSS, all of your PostCSS tooling will work flawlessly.
 

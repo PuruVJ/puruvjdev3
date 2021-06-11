@@ -124,6 +124,7 @@
 
     mark {
       font-family: 'Quicksand', sans-serif;
+      font-weight: 700 !important;
     }
   }
 </style>
