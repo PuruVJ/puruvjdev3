@@ -1,0 +1,11 @@
+name: Rebuild blog for homepage ranking
+on:
+  schedule:
+    # https://crontab.guru/every-hour
+    - cron: 0 */6 * * *
+
+jobs:
+  merge_schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'curl https://api.vercel.com/v1/integrations/deploy/QmcHW3D4437BYMZZe5SaNaVvv1HnzxMpkFVYBowkBTZSXY/6LLTuj8Rzz'
