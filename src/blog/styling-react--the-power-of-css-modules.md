@@ -21,7 +21,7 @@ CSS Modules are one of the best ways of styling in React. We have libraries that
 - Have worked with React before.
 - Hungry to learn 😋.
 
-So we have seen the advantages and why you should learn CSS Modules. Now let's actually look at the syntax
+So we have seen the advantages and why you should learn CSS Modules. Let's have a look at the syntax.
 
 # The syntax
 
@@ -34,7 +34,7 @@ This will be our directory structure 👇
 |- Card.module.css
 ```
 
-Notice we're naming our CSS file a `*.module.css`. This is a convention that is good to follow, and in a lot of build tools, is actually necessary, if you want the file to be processed as a CSS Module file.
+Notice we're naming our CSS file `*.module.css`. This is a convention that is good to follow, and in a lot of build tools, is actually necessary, if you want the file to be processed as a CSS Module file.
 
 Now let's look at the CSS file.
 
