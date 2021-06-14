@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "scripts": {
     "start": "svelte-kit dev",
-    "build": "svelte-kit build",
     "prebuild": "cd scripts && node prebuild.js",
+    "build": "svelte-kit build",
+    "postbuild": "cd scripts && node postbuild.js",
     "g:works": "cd scripts && node generate-works-list.js",
     "g:sitemap": "cd scripts && node generate-sitemap.js && curl http://www.google.com/ping?sitemap=https://puruvj.dev/sitemap.xml",
     "preview": "svelte-kit preview"
