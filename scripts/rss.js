@@ -1,5 +1,6 @@
 import { getBlogData } from './blog-data.js';
 import { promises as fsp } from 'fs';
+import { ASSETS_ROOT_PATH } from './constants.js';
 
 /**
  * @param {Object} param0
@@ -37,5 +38,5 @@ export async function rss({ blogData }) {
   </rss>`;
 
   // Now write it out to the directory
-  await fsp.writeFile('../build/rss.xml', render);
+  await fsp.writeFile(`${ASSETS_ROOT_PATH}/rss.xml`, render);
 }
