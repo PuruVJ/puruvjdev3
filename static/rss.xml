@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>Puru's Blog</title>
+    <link>https://puruvj.dev</link>
+    <description>Blog posts on Puru's Blog</description>
+    <image>
+      <url>https://puruvj.dev/icons/logo-512.png</url>
+      <title>Puru's Blog</title>
+      <link>https://puruvj.dev</link>
+    </image>
+    
+          <item>
+            <title>Get the most out of CSS Modules with TypeScript in 5 minutes // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/css-modules-typescript-intellisense</link>
+            <description>If you're a TypeScript Dev, here are a few things you can do to get that sweet, sweet CSS class intellisense</description>
+            <pubDate>Thu, 13 May 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>The Zen of Preact's source code // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/deep-dive-into-preact-source-code</link>
+            <description>Dive into Preact's source code and explore its simplicity</description>
+            <pubDate>Fri, 30 Apr 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Why I moved from Styled Components to (S)CSS modules // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/move-to-css-modules-from-styled-components</link>
+            <description>A little writeup of my reasons behind moving from Styled Components to SCSS modules, and the benefits I got out of this.</description>
+            <pubDate>Thu, 15 Apr 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Amazing macOS Dock animation in Svelte // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/macos-dock-animation-svelte</link>
+            <description>Let's make the beautiful macOS Dock animation using Svelte</description>
+            <pubDate>Thu, 01 Apr 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Mindblowing 🤯 TypeScript tricks // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/get-to-know-typescript--mindblowing-typescript-tricks</link>
+            <description>There's a lot about TypeScript that most people don't know. I'll surface some of the "unknown" stuff in this blog post.</description>
+            <pubDate>Thu, 18 Mar 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Moving React app to Preact ⚛ in 10 minutes with Vite // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/moving-macos-from-react-to-preact-vite</link>
+            <description>How I moved my 40+ components app from React to Preact in under 10 minutes</description>
+            <pubDate>Mon, 08 Mar 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>React TypeScript Hooks issue when returning array // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/get-to-know-typescript--react-hooks-return-array-issue</link>
+            <description>React and TypeScript make up a great pair. But when you're trying to make your own hooks, and returning an array, TypeScript yells at your. Find out why.</description>
+            <pubDate>Thu, 18 Feb 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Using TypeScript without TypeScript 😎 // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/get-to-know-typescript--using-typescript-without-typescript</link>
+            <description>Wanna use TypeScript but don't want all the compiler and tooling overhead? Read on to know how.</description>
+            <pubDate>Thu, 11 Feb 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>An Ode ❤ to TypeScript  // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/get-to-know-typescript-an-ode-to-typescript</link>
+            <description>TypeScript is cool. Super cool. It's made us Web Dev's life super easy. Read me being a total fanboy about it.</description>
+            <pubDate>Sun, 31 Jan 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Bye bye Callbacks, hello Promises in NodeJS // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/promisify-callbacks-in-nodejs</link>
+            <description>Completely get rid of callbacks in NodeJS and replace them with the great Promises.</description>
+            <pubDate>Sun, 24 Jan 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>NodeJS Create folder if not exists in 3 lines - No dependencies // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/create-folder-if-not-exists</link>
+            <description>The simplest and dependency-free way to create a folder in NodeJS if it doesn't exist</description>
+            <pubDate>Sun, 17 Jan 2021 21:08:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Simple code with fs.promises and async await // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/fs-promises</link>
+            <description>If you've spent some time with Node's fs API, you know how huge a pain its callback based pattern can get. Read out how to flatten your code using promises and async await syntax</description>
+            <pubDate>Mon, 11 Jan 2021 06:37:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Top level Await is AWESOME!! 😍 // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/top-level-await</link>
+            <description>Top level await is literally the GOAT (Greatest of All Time). In every way. Read on to know why, how to use it, and its implications</description>
+            <pubDate>Mon, 28 Dec 2020 03:21:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Free Github pro and Perks for Students // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/get-free-github-pro-and-perks</link>
+            <description>Are you a student? Then you better enroll yourself into getting the Github Student Developer Pack. So many great perks. Find out more about it.</description>
+            <pubDate>Sun, 20 Dec 2020 03:58:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Setting up auto-formatting in VSCode in 5 minutes // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/setup-prettier-vscode</link>
+            <description>Set up auto formatting in VSCode in just 5 minutes.</description>
+            <pubDate>Mon, 14 Dec 2020 11:41:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>BLOG. EVERY. SINGLE. WEEK!! // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/blog-every-week-rant</link>
+            <description>Just some random rant to make myself blog every week</description>
+            <pubDate>Wed, 09 Dec 2020 14:00:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Cleaning up tag-along git commits in Pull Requests // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/git-pr-clean-commits</link>
+            <description>It's easy to submit dirty PRs with unnecessary number of stowaway commits. Learn how to clean this up.</description>
+            <pubDate>Mon, 07 Dec 2020 10:13:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Async Await usage and pitfalls in Array.prototype.map() and chaining // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/chaining-promises-array-methods</link>
+            <description>Using async await in array methods is quite tricky. But it gets even trickier when you chain multiple array methods. Find out how.</description>
+            <pubDate>Tue, 29 Sep 2020 10:05:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Simplify code by promisifying `setTimeout` // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/flatten-settimeout</link>
+            <description>Simplify and clean your codebase by making setTimeout more idiomatic using Promises</description>
+            <pubDate>Mon, 28 Sep 2020 09:04:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Split Array into `n` number of chunks // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/split-array-chunks</link>
+            <description>Split an array into `n` number of multiple arrays with JavaScript</description>
+            <pubDate>Sun, 27 Sep 2020 05:15:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>GIF to MP4 conversion for web using NodeJS // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/gif-to-mp4-ffmpeg-fluent-web</link>
+            <description>GIF to MP4 conversion for performance is all the rage nowadays. But doing so in practice is really difficult, especially for cross-browser compatibility. Learn how to do it right</description>
+            <pubDate>Thu, 24 Sep 2020 19:39:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Image Optimization Automation with Incremental builds // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/how-i-created-personal-site-part-3</link>
+            <description>In this post, I delve deep into how I automated image optimization on my blog.</description>
+            <pubDate>Mon, 29 Jun 2020 04:20:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Blogging with Markdown // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/how-i-created-personal-site-part-2</link>
+            <description>In this post, I delve into the details of how I built the blogging with markdown system</description>
+            <pubDate>Sun, 28 Jun 2020 04:20:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Tech Stack &amp; Design // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/how-i-created-personal-site-part-1</link>
+            <description>In this post, I delve into the details of the design part of how I built my personal site with StencilJS and what did I use to do so.</description>
+            <pubDate>Sat, 27 Jun 2020 04:20:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Safeguarding target=_blank links // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/link-noopener</link>
+            <description>Do you know adding a link with target=_blank has the potential of crashing your page and is very insecure? Find out how and its prevention.</description>
+            <pubDate>Tue, 09 Jun 2020 03:11:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Performantly loading Google Fonts based on Data Saver // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/google-fonts-prefetch</link>
+            <description>Efficiently and Asynchronously load Google Fonts based on Data Saver mode</description>
+            <pubDate>Fri, 05 Jun 2020 05:00:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Web Workers: Intro and Basic Usage // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/web-workers-intro-basic-usage</link>
+            <description>Have you ever heard this term "Web Workers" mentioned somewhere and wondered what the hell is this new thing? let me introduce you to this great tech.</description>
+            <pubDate>Thu, 04 Jun 2020 20:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>StencilJS Route Change events - Without any dependencies // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/stencil-router-events</link>
+            <description>How to detect route changes in StencilJS Router using the core StencilJS APIs. No dependencies.</description>
+            <pubDate>Tue, 02 Jun 2020 20:16:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>Pitfalls when using Stencil Helmet during Prerendering // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/pitfalls-stencil-helmet-prerendering</link>
+            <description>Stencil Helmet can break the whole app really bad on some occasions, some so random that you might never find out why</description>
+            <pubDate>Mon, 01 Jun 2020 20:54:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
+            <title>My First Blog post // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/my-first-blog</link>
+            <description>My very first blog post on my very first functional site</description>
+            <pubDate>Sat, 30 May 2020 18:30:00 GMT</pubDate>
+          </item>
+        
+  </channel>
+</rss>

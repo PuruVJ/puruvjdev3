@@ -12,7 +12,7 @@ export async function rss({ blogData }) {
     title.replace(/<img.*?alt="(.*?)"[^\>]+>/g, '$1').replace('&', '&amp;');
 
   const render = `<?xml version="1.0" encoding="UTF-8" ?>
-  <rss version="2.0">
+<rss version="2.0">
   <channel>
     <title>Puru's Blog</title>
     <link>https://puruvj.dev</link>
@@ -35,7 +35,7 @@ export async function rss({ blogData }) {
       )
       .join('\n')}
   </channel>
-  </rss>`;
+</rss>`;
 
   // Now write it out to the directory
   await fsp.writeFile(`${ASSETS_ROOT_PATH}/rss.xml`, render);
