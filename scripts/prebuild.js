@@ -3,6 +3,7 @@ import { blogMDHtml } from './blog-md-html.js';
 import { generateBlogsList } from './blogs-list.js';
 import { generateWorksList } from './generate-works-list.js';
 import { getPopularBlogPosts } from './get-popular-blogs.js';
+import { rss } from './rss.js';
 
 async function main() {
   const data = await getBlogData();
@@ -12,6 +13,7 @@ async function main() {
     getPopularBlogPosts(),
     generateBlogsList(data),
     blogMDHtml(data),
+    rss(data),
   ]);
 }
 

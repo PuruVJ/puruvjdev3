@@ -57,24 +57,12 @@
 
 <style>
   button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-
     width: 2.3rem;
     height: 2.3rem;
 
-    overflow: hidden;
-
-    background: transparent;
     fill: var(--app-color-dark);
 
-    border: none;
     border-radius: 50%;
-
-    cursor: pointer;
   }
 
   button:hover,
