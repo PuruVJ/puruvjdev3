@@ -4,10 +4,10 @@ import { optimizeBlogImages } from '../optimize-images.js';
  * Optimizes images and returns the markup
  * @param {Document} document
  */
-async function imageOptimMarkupPlugin(document) {
+export async function imageOptimMarkupPlugin(document) {
   // Get all the image tags
   /** @type {NodeListOf<HTMLImageElement>} */
-  const imgs = document.querySelectorAll('img.feature-image');
+  const imgs = document.querySelectorAll('img');
 
   for (let img of imgs) {
     // Lets collect values of `src`
@@ -31,7 +31,5 @@ async function imageOptimMarkupPlugin(document) {
     img.after(divContainer);
   }
 
-  return { document };
+  return document;
 }
-
-export { imageOptimMarkupPlugin };

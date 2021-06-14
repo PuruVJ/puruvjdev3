@@ -20,8 +20,29 @@ export type Work = {
   image: ExportedImagesMetaData;
 };
 
+export declare type BlogData = {
+  id: string;
+  title: string;
+  description: string;
+  date: Date;
+  series?: string;
+  seriesIndex: number;
+
+  cover_image: string;
+
+  body: string;
+};
+
+export type Series = {
+  [key: string]: {
+    id: string;
+    date: Date;
+    title: string;
+  }[];
+};
+
 export function optimizeBlogImages(src: string, returnMarkup: true): Promise<string>;
 export function optimizeBlogImages(
   src: string,
-  returnMarkup: false
+  returnMarkup: false,
 ): Promise<ExportedImagesMetaData>;
