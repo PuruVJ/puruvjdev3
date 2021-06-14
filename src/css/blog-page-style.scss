@@ -82,6 +82,10 @@ code {
     visibility: hidden;
   }
 
+  .heading-link {
+    user-select: none;
+  }
+
   .gif-vid-container {
     width: 100%;
     display: flex;
