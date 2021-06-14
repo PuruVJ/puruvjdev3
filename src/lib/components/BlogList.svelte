@@ -76,7 +76,7 @@
     color: var(--app-color-primary);
     font-family: 'JetBrains Mono', monospace;
     margin-top: 0.3rem;
-    font-weight: bold;
+    font-weight: 500;
   }
 
   .blog-link {
