@@ -1,8 +1,4 @@
-import { rss } from './rss.js';
-
-function main() {
-  Promise.all([rss()]);
-}
+function main() {}
 
 try {
   main();

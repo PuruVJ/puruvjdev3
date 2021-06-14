@@ -1,9 +1,11 @@
 import { getBlogData } from './blog-data.js';
 import { promises as fsp } from 'fs';
 
-export async function rss() {
-  const { blogData } = await getBlogData();
-
+/**
+ * @param {Object} param0
+ * @param {import('./scripts.js').BlogData[]} param0.blogData
+ */
+export async function rss({ blogData }) {
   /** @param {string} title */
   const sanitizeTitle = (title) =>
     title.replace(/<img.*?alt="(.*?)"[^\>]+>/g, '$1').replace('&', '&amp;');
