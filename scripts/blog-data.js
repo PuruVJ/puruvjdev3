@@ -47,7 +47,6 @@ export async function getBlogData() {
 
     let seriesIndex = 0;
 
-    console.log(series);
     if (series) {
       let seriesPosts = seriesList[series].sort((a, b) => +a.date - +b.date);
 

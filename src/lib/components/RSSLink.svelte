@@ -19,7 +19,9 @@
     padding-left: 0.2rem;
     padding-bottom: 0.2rem;
 
-    transition: background-color 150ms ease-in;
+    fill: var(--app-color-dark);
+
+    transition: background-color 150ms ease-in !important;
 
     height: 2.3rem;
     width: 2.3rem;
