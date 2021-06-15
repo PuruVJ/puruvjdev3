@@ -59,7 +59,7 @@ export async function blogMDHtml({ blogData, seriesList }) {
     // Calculate reading time
     const reading_time = readingTime(html, { wordsPerMinute: 400 }).minutes;
 
-    await fsp.writeFile(
+    fsp.writeFile(
       `${ASSETS_ROOT_PATH}/blog/${id}.json`,
       JSON.stringify({
         cover_image,
