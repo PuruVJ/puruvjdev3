@@ -11,10 +11,10 @@
     </image>
     
           <item>
-            <title>Get the most out of CSS Modules with TypeScript in 5 minutes // Puru Vijay</title>
-            <link>https://puruvj.dev/blog/css-modules-typescript-intellisense</link>
-            <description>If you're a TypeScript Dev, here are a few things you can do to get that sweet, sweet CSS class intellisense</description>
-            <pubDate>Thu, 13 May 2021 18:30:00 GMT</pubDate>
+            <title>The power of CSS Modules 💪 // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/styling-react--the-power-of-css-modules</link>
+            <description>CSS Modules are extremely powerful. Find out why in this article.</description>
+            <pubDate>Sun, 13 Jun 2021 18:30:00 GMT</pubDate>
           </item>
         
 

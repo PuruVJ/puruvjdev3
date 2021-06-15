@@ -23,6 +23,7 @@
     "@types/throttle-debounce": "^2.1.0",
     "cloudinary": "^1.26.0",
     "dotenv": "^8.5.1",
+    "esmo": "^0.7.3",
     "front-matter": "^4.0.2",
     "html-to-text": "^8.0.0",
     "jsdom": "^16.6.0",
