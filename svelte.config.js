@@ -6,7 +6,9 @@ import staticAdapter from '@sveltejs/adapter-static';
 const config = {
   kit: {
     target: '#svelte',
-    adapter: staticAdapter({}),
+    adapter: staticAdapter({
+      fallback: '/404.html',
+    }),
     prerender: {
       crawl: true,
       enabled: true,

@@ -1,23 +1,20 @@
 import { promises as fsp } from 'fs';
-import glob from 'glob-promise';
+import { ASSETS_ROOT_PATH } from './constants.js';
 
-(async function () {
-  const files = await glob(
-    '../__sapper__/export/**/index.html'
-    // '!../__sapper__/export/{art,blog,client,css,data,icons,media,photos}'
-  );
-
-  const urls = files
-    .map((file) => file.replace('../__sapper__/export/', '').replace('index.html', ''))
-    .map((url) => `<url><loc>https://puruvj.dev/${url}</loc></url>`)
-    .join('\n');
-
-  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+/**
+ * @param {Object} obj
+ * @param {import('./scripts').BlogData[]} obj.blogData
+ * @param {import('./scripts').Series} obj.seriesList
+ */
+export async function generateSitemap({ blogData }) {
+  const render = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
+  <url><loc>https://puruvj.dev/</loc></url>
+  <url><loc>https://puruvj.dev/blog</loc></url>
+  <url><loc>https://puruvj.dev/works</loc></url>
+  ${blogData.map(({ id }) => `  <url><loc>https://puruvj.dev/blog/${id}</loc></url>`).join('\n')}
 </urlset>
-`;
+  `;
 
-  // Write the file
-  await fsp.writeFile('../__sapper__/export/sitemap.xml', sitemapContent, 'utf-8');
-})();
+  fsp.writeFile(`${ASSETS_ROOT_PATH}/sitemap.xml`, render);
+}

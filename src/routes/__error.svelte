@@ -3,7 +3,7 @@
   import { fadeIn, fadeOut } from '$lib/fade';
   import { onMount } from 'svelte';
 
-  onMount(() => void document.body.classList.add('background'));
+  onMount(() => document.body.classList.add('background'));
 </script>
 
 <svelte:head>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import IntersectionObserver from 'svelte-intersection-observer';
   import ThemeSwitcher from '../components/ThemeSwitcher.svelte';
+  import RssLink from '../components/RSSLink.svelte';
   import { theme } from '../stores/theme.store';
   import SiteLogo from './SiteLogo.svelte';
 
@@ -40,6 +41,7 @@
   </div>
   <span class="flex" />
   <span class="theme-switcher">
+    <RssLink />
     <ThemeSwitcher />
   </span>
 </nav>
