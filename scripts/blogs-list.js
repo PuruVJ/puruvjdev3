@@ -12,7 +12,7 @@ export async function generateBlogsList({ blogData }) {
   const finalData = blogData.map(({ body, cover_image, ...data }) => data);
 
   // Write data
-  await fsp.writeFile(`${ASSETS_ROOT_PATH}/data/blogs-list.json`, JSON.stringify(finalData));
+  fsp.writeFile(`${ASSETS_ROOT_PATH}/data/blogs-list.json`, JSON.stringify(finalData));
 
   console.log('---------- Generated ------------');
 }

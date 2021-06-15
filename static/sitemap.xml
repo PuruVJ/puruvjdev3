@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://puruvj.dev/</loc></url>
+  <url><loc>https://puruvj.dev/blog</loc></url>
+  <url><loc>https://puruvj.dev/works</loc></url>
+    <url><loc>https://puruvj.dev/blog/css-modules-typescript-intellisense</loc></url>
+  <url><loc>https://puruvj.dev/blog/deep-dive-into-preact-source-code</loc></url>
+  <url><loc>https://puruvj.dev/blog/move-to-css-modules-from-styled-components</loc></url>
+  <url><loc>https://puruvj.dev/blog/macos-dock-animation-svelte</loc></url>
+  <url><loc>https://puruvj.dev/blog/get-to-know-typescript--mindblowing-typescript-tricks</loc></url>
+  <url><loc>https://puruvj.dev/blog/moving-macos-from-react-to-preact-vite</loc></url>
+  <url><loc>https://puruvj.dev/blog/get-to-know-typescript--react-hooks-return-array-issue</loc></url>
+  <url><loc>https://puruvj.dev/blog/get-to-know-typescript--using-typescript-without-typescript</loc></url>
+  <url><loc>https://puruvj.dev/blog/get-to-know-typescript-an-ode-to-typescript</loc></url>
+  <url><loc>https://puruvj.dev/blog/promisify-callbacks-in-nodejs</loc></url>
+  <url><loc>https://puruvj.dev/blog/create-folder-if-not-exists</loc></url>
+  <url><loc>https://puruvj.dev/blog/fs-promises</loc></url>
+  <url><loc>https://puruvj.dev/blog/top-level-await</loc></url>
+  <url><loc>https://puruvj.dev/blog/get-free-github-pro-and-perks</loc></url>
+  <url><loc>https://puruvj.dev/blog/setup-prettier-vscode</loc></url>
+  <url><loc>https://puruvj.dev/blog/blog-every-week-rant</loc></url>
+  <url><loc>https://puruvj.dev/blog/git-pr-clean-commits</loc></url>
+  <url><loc>https://puruvj.dev/blog/chaining-promises-array-methods</loc></url>
+  <url><loc>https://puruvj.dev/blog/flatten-settimeout</loc></url>
+  <url><loc>https://puruvj.dev/blog/split-array-chunks</loc></url>
+  <url><loc>https://puruvj.dev/blog/gif-to-mp4-ffmpeg-fluent-web</loc></url>
+  <url><loc>https://puruvj.dev/blog/how-i-created-personal-site-part-3</loc></url>
+  <url><loc>https://puruvj.dev/blog/how-i-created-personal-site-part-2</loc></url>
+  <url><loc>https://puruvj.dev/blog/how-i-created-personal-site-part-1</loc></url>
+  <url><loc>https://puruvj.dev/blog/link-noopener</loc></url>
+  <url><loc>https://puruvj.dev/blog/google-fonts-prefetch</loc></url>
+  <url><loc>https://puruvj.dev/blog/web-workers-intro-basic-usage</loc></url>
+  <url><loc>https://puruvj.dev/blog/stencil-router-events</loc></url>
+  <url><loc>https://puruvj.dev/blog/pitfalls-stencil-helmet-prerendering</loc></url>
+  <url><loc>https://puruvj.dev/blog/my-first-blog</loc></url>
+</urlset>
+  

@@ -55,10 +55,7 @@ export async function getPopularBlogPosts() {
   rankedData.length = MAX_COUNT;
 
   // Write to the file
-  await fsp.writeFile(
-    `${ASSETS_ROOT_PATH}/data/homepage-blogs-list.json`,
-    JSON.stringify(rankedData),
-  );
+  fsp.writeFile(`${ASSETS_ROOT_PATH}/data/homepage-blogs-list.json`, JSON.stringify(rankedData));
 }
 
 /**
