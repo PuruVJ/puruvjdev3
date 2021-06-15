@@ -37,9 +37,6 @@ export async function blogMDHtml({ blogData, seriesList }) {
     // The dom representation
     let { document } = new JSDOM(html).window;
 
-    // Now get the TOCs
-    const toc = generateTOC(document);
-
     document = linkNoOpenerPlugin(document);
     document = await imageOptimMarkupPlugin(document);
     document = headingsWithAnchorsPlugin(document);
@@ -52,6 +49,8 @@ export async function blogMDHtml({ blogData, seriesList }) {
     }
 
     document = twemojiPlugin(document);
+
+    const toc = generateTOC(document);
 
     // Finally
     html = document.body.innerHTML;
