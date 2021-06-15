@@ -4,14 +4,14 @@ description: CSS Modules are extremely powerful. Find out why in this article.
 date: 14 June, 2021
 ---
 
-CSS Modules are one of the best ways of styling in React. We have libraries that people consider better than CSS Modules, but CSS Modules have stood the test of time and are still one of the most universal ways of styling React. They give you superpowers, and are simple enough that anyone can grasp it quickly.
+CSS Modules are one of the best ways of styling in React. We have libraries that people consider better than CSS Modules, but CSS Modules have stood the test of time and are still one of the most universal ways of styling React. They give you superpowers, and are simple enough that even beginners can grasp it.
 
 # Advantages
 
 1. **Scoped** - CSS modules are scoped when you use them the right way.
 2. **Highly composable** - You can compose different styles in a lot of ways
-3. **Tree shakable** - Styles you don't use are removed, just like JavaScript with modern JS tooling.
-4. **Very easy to pick up** - CSS Modules are very easy to understand and take almost no effort to start using.
+3. **Tree shakable** - Styles you don't use are removed, just like modern JS tooling.
+4. **Very easy to pick up** - CSS Modules are very easy to understand and takes almost no effort to start using.
 5. **It's just CSS!!** - CSS Modules are just CSS that you write with some specific rules in mind. You get the great tooling from your IDE, and IDEs are really good at plain ol' CSS.
 6. **PostCSS tooling just works** - Because CSS Modules are just CSS, all of your PostCSS tooling will work flawlessly.
 
@@ -21,7 +21,7 @@ CSS Modules are one of the best ways of styling in React. We have libraries that
 - Have worked with React before.
 - Hungry to learn 😋.
 
-So we have seen the advantages and why you should learn CSS Modules. Let's have a look at the syntax.
+So we have seen the advantages and why you should learn CSS Modules. Now let's actually look at the syntax
 
 # The syntax
 
@@ -34,7 +34,7 @@ This will be our directory structure 👇
 |- Card.module.css
 ```
 
-Notice we're naming our CSS file `*.module.css`. This is a convention that is good to follow, and in a lot of build tools, is actually necessary, if you want the file to be processed as a CSS Module file.
+Notice we're naming our CSS file a `*.module.css`. This is a convention that is good to follow, and in a lot of build tools, is actually necessary, if you want the file to be processed as a CSS Module file.
 
 Now let's look at the CSS file.
 
@@ -83,7 +83,7 @@ This looks good! This is how we generally style our components in React, just im
 
 **Wrong** ❌❌
 
-This not how we use CSS Modules. For the advantages of CSS Modules, we gotta change how we write out `className`s.
+This not how we use CSS Modules. For the advantages of CSS Modules, we gotta change how we write out our`className`s.
 
 Here's how we'd use our CSS Module actually 👇
 
@@ -252,7 +252,7 @@ body.dark .header {
 }
 ```
 
-This works pretty well, you don't need any globalising here. But say, you're using SCSS, and your `.header` is nested in another selectors 👇
+This works pretty well, you don't need any globalising here. But say, you're using SCSS, and your `.header` is nested in other selectors 👇
 
 ```scss
 .container {
@@ -373,7 +373,7 @@ OFC, these variables aren't live. As in, during compile time, these variables ar
 
 # Playing nice with TypeScript
 
-CSS Modules are great, but only 1 little issue with them: **VSCode Intellisense**.
+CSS Modules are great, but only one little issue with them: **VSCode Intellisense**.
 
 First off, if you're using TypeScript, you simply can't do
 
@@ -416,7 +416,7 @@ declare module '*.module.styl' {
 
 As you can see, this will make VSCode interpret your CSS Modules as basically a key value pair. So you'll get no warnings when using `css.*` anywhere, as VSCode knows it returns a string.
 
-But it is not the best experience ever. For example, when type `css.`, you don't get a list of classes you declared. You're basically typing in blind. One typo, and the program breaks, until you look very closely and find the source of the issue.
+But it is not the best experience ever. For example, when you type `css.`, you don't get a list of classes you declared. You're basically typing blind(So to speak 😉). One typo, and the program breaks, until you look at every single line closely and find the source of the issue.
 
 But there are tricks to get that sweet, sweet, list intellisense and strict name checking, just like this 👇
 
@@ -462,7 +462,7 @@ Open up your `tsconfig.json`, and add to the `compilerOptions` property this one
 
 This one is superrrrrr important. The TypeScript version your VSCode uses should be the local version(The one installed in your project locally), otherwise this whole song and dance of installing plugins and setting config will be worthless.
 
-Open a `.ts` or `.tsx` file in VSCode, On bottom left you'll see this little option 👇
+Open a `.ts` or `.tsx` file in VSCode, On bottom right you'll see this little option 👇
 
 ![TS version in bottom right corner of VSCode](../assets/media/css-modules--typescript-version-photo-1.png)
 
@@ -470,11 +470,11 @@ This is your TypeScript version. Click on it, and a list popup will open on the 
 
 ![Choose TypeScript version](../assets/media/css-modules--typescript-version-photo-2.png)
 
-Click on Select TypeScript Version. That will show these options 👇
+Click on **Select TypeScript Version**. That will show these options 👇
 
 ![Select Workspace version](../assets/media/css-modules--typescript-version-photo-3.png)
 
-As you can see, I have Use VS Code's Version selected(Look at the white dot before). Click on Use Workspace Version, and you are all set.
+As you can see, I have **Use VS Code's Version** selected(Look at the white dot before it). Click on **Use Workspace Version**, and you are all set.
 
 And here's your setup. In less than 5 minutes. Super simple, right?
 
@@ -490,15 +490,15 @@ Here are some more methods that are... OK, I guess 😅. I used these, and they 
 
 So, there are a few VSCode extensions out there that provide similar level of intellisense. Notice I used the word similar, not same, because
 
-1. They were a little slower - They slowed down VSCode a little bit. On my fast laptop, it negligible, but on my other older laptop, it was noticeably slow.
+1. **They were a little slower** - They slowed down VSCode a little bit. On my current laptop, which is pretty fast, it is negligible, but on my older laptop, it was noticeably slow.
 
-1. Choppy Intellisense - The intellisense wasn't always accurate, and sometimes had some noise in it like units(9px, 3rem) when you typed styles., which was definitely a bit weird.
+1. **Choppy Intellisense** - The intellisense wasn't always accurate, and sometimes had some noise in it like units(9px, 3rem) when you typed styles., which was definitely a bit weird.
 
-1. I dislike extensions - I am an extreme minimalist. My hunger to reduce things and have only the things necessary is super big. I only have 7 VSCode extensions, and only 2-3 are enabled for each workspace at a time. I worked on a super old and slow computer for 4 years, so it's habit to keep these 3rd party things as low as possible(even though I'm on a super fast computer one now 😅)
+1. **I dislike extensions** - I am an extreme minimalist. My hunger to reduce things and have only the things necessary is super big.
 
-But still, this extension is good enough if you can't get The Best Method above working.
+But still, this extension is good enough if you can't get <mark>The Best Method</mark> above working.
 
-Oh, and as for the extension itself, I won't drop a link. There are so many coming out and some are better, some aren't, and its in constant flux. It's recommended to just do a search. The keywords: CSS Modules should give good results.
+Oh, and the extension I recommend: [CSS Modules by clinyong](https://marketplace.visualstudio.com/items?itemName=clinyong.vscode-css-modules)
 
 ### `typings-for-css-modules-loader`
 
@@ -510,13 +510,13 @@ As I have no experience in Webpack, I can't explain the usage. I recommend you t
 
 There's a CLI out there that will generate `d.ts` files for your CSS modules. Check it out here: [typed-css-modules](https://github.com/Quramy/typed-css-modules).
 
-It has a watch mode, so you won't have to run it again everytime you edit your CSS files. Thats handy.
+It has a watch mode, so you won't have to run it again everytime you edit your CSS files. That's handy.
 
 Though OFC, it only works on plain CSS files, not `SCSS` or `SASS` or `STYL`. Plus there's that hiccup of remembering to run this command in a parallel terminal, or using a script to turn it on automatically along with your Web server.
 
 #### For Sass
 
-Its again a CLI and inspired from `typed-css-modules` CLI: [typed-scss-modules](https://github.com/skovy/typed-scss-modules). Its a really good tool.
+It's again a CLI and inspired from `typed-css-modules` CLI: [typed-scss-modules](https://github.com/skovy/typed-scss-modules). Its a really good tool.
 
 > This approach is good, but the biggest drawback I see is the d.ts files generated. it sort off clutters your workspace and Git commits.
 
@@ -527,6 +527,8 @@ The last method is manually adding in the typings yourselves.
 God forbid if you have to resort to this! 😱😱
 
 It involves making a `d.ts` file next to your CSS modules file, and defining modules and putting in the class names yourselves. Its a really bad method. If you add a class to you CSS module, you have to add it to the `d.ts` too. If you change something, and the project is too big, you're basically screwed, cuz you won't remember to change it in the d.ts most probably.
+
+I personally would rather have no type information than set up my own `d.ts` for every single CSS file. Too much maintenance 😫.
 
 # Bonus material
 
@@ -571,8 +573,10 @@ Now its much more cleaner, literally no noise now. Really good. And that's not a
 
 This is another way!
 
-`clsx` is a very very versatile library, and any time I jump onto a new React/Preact package, I always install it in the very beginning, even if I don't use it very much. It being <mark>228 Bytes</mark> doesn't really make this a regret, as far as bundle size is concerned.
+`clsx` is a very, very versatile library, and any time I jump onto a new React/Preact package, I always install it in the very beginning, even if I don't use it very much. It being <mark>228 Bytes</mark> doesn't really make this a regret, as far as bundle size is concerned.
 
 # Conclusion
 
-I hope you find this article helpful. CSS Modules are truly amazing, once you start using, you'll fall in love with them
+This article is just a little glimpse what you can do with CSS Modules. There's so much more out there in the wild by the community. Explore it, you'll fall in love with it!!
+
+Thank you for reading this article. Hope it helped!!
