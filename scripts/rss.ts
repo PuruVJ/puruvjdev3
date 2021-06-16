@@ -1,14 +1,9 @@
-import { getBlogData } from './blog-data.js';
 import { promises as fsp } from 'fs';
-import { ASSETS_ROOT_PATH } from './constants.js';
+import { ASSETS_ROOT_PATH } from './constants';
+import { BlogData } from './types';
 
-/**
- * @param {Object} param0
- * @param {import('./scripts.js').BlogData[]} param0.blogData
- */
-export async function rss({ blogData }) {
-  /** @param {string} title */
-  const sanitizeTitle = (title) =>
+export async function rss({ blogData }: { blogData: BlogData[] }) {
+  const sanitizeTitle = (title: string) =>
     title.replace(/<img.*?alt="(.*?)"[^\>]+>/g, '$1').replace('&', '&amp;');
 
   const render = `<?xml version="1.0" encoding="UTF-8" ?>
@@ -38,5 +33,5 @@ export async function rss({ blogData }) {
 </rss>`;
 
   // Now write it out to the directory
-  await fsp.writeFile(`${ASSETS_ROOT_PATH}/rss.xml`, render);
+  fsp.writeFile(`${ASSETS_ROOT_PATH}/rss.xml`, render);
 }

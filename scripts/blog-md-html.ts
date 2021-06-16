@@ -3,6 +3,7 @@ import { JSDOM } from 'jsdom';
 import markdown from 'markdown-it';
 import readingTime from 'reading-time';
 import { getHighlighter } from 'shiki';
+import { getBlogData } from './blog-data';
 import {
   generateTOC,
   headingsWithAnchorsPlugin,
@@ -10,15 +11,19 @@ import {
   linkNoOpenerPlugin,
   seriesLinksPlugin,
   twemojiPlugin,
-} from './blog-plugins/index.js';
-import { ASSETS_ROOT_PATH } from './constants.js';
+} from './blog-plugins/index';
+import { ASSETS_ROOT_PATH } from './constants';
+import { UnwrapPromise } from './types';
 
 /**
  * @param {Object} obj
- * @param {import('./scripts').BlogData[]} obj.blogData
- * @param {import('./scripts').Series} obj.seriesList
+ * @param {import('./types').BlogData[]} obj.blogData
+ * @param {import('./types').Series} obj.seriesList
  */
-export async function blogMDHtml({ blogData, seriesList }) {
+export async function blogMDHtml({
+  blogData,
+  seriesList,
+}: UnwrapPromise<ReturnType<typeof getBlogData>>) {
   const highlighter = await getHighlighter({
     theme: 'material-theme-palenight',
   });

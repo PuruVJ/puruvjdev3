@@ -1,13 +1,11 @@
-import { optimizeBlogImages } from '../optimize-images.js';
+import { optimizeBlogImages } from '../optimize-images';
 
 /**
  * Optimizes images and returns the markup
- * @param {Document} document
  */
-export async function imageOptimMarkupPlugin(document) {
+export async function imageOptimMarkupPlugin(document: Document) {
   // Get all the image tags
-  /** @type {NodeListOf<HTMLImageElement>} */
-  const imgs = document.querySelectorAll('img');
+  const imgs: NodeListOf<HTMLImageElement> = document.querySelectorAll('img');
 
   for (let img of imgs) {
     // Lets collect values of `src`

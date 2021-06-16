@@ -1,12 +1,8 @@
 import { promises as fsp } from 'fs';
-import { ASSETS_ROOT_PATH } from './constants.js';
+import { ASSETS_ROOT_PATH } from './constants';
+import type { BlogData } from './types';
 
-/**
- * @param {Object} obj
- * @param {import('./scripts').BlogData[]} obj.blogData
- * @param {import('./scripts').Series} obj.seriesList
- */
-export async function generateBlogsList({ blogData }) {
+export async function generateBlogsList({ blogData }: { blogData: BlogData[] }) {
   console.log('--------- Generating blogs list -----------');
 
   const finalData = blogData.map(({ body, cover_image, ...data }) => data);

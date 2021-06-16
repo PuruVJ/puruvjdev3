@@ -1,7 +1,8 @@
-import fm from 'front-matter';
+import fm, { FrontMatterResult } from 'front-matter';
 import { promises as fsp } from 'fs';
 import twemoji from 'twemoji';
-import { BLOG_POSTS_MD_PATH, RELATIVE_ASSETS_PATH } from './constants.js';
+import { BLOG_POSTS_MD_PATH, RELATIVE_ASSETS_PATH } from './constants';
+import { BlogData, Series } from './types';
 
 export async function getBlogData() {
   // get all blogs in directory
@@ -10,21 +11,18 @@ export async function getBlogData() {
 
   const ids = filesAbs.map((fileAbs) => fileAbs.split('.')[0]);
 
-  /** @type {import('./scripts').BlogData[]} */
-  const finalData = [];
+  const finalData: BlogData[] = [];
 
-  /** @type {import('front-matter').FrontMatterResult[]} */
-  const frontMatterData = [];
+  const frontMatterData: FrontMatterResult<any>[] = [];
 
   for (const filePath of filePaths) {
     const fileData = await fsp.readFile(filePath, 'utf-8');
 
     // Get the metadata inside the markdown
-    frontMatterData.push(fm(fileData));
+    frontMatterData.push(fm(fileData) as FrontMatterResult<any>);
   }
 
-  /** @type {import('./scripts').Series}  */
-  let seriesList = {};
+  let seriesList: Series = {};
 
   for (let [idx, fmData] of Object.entries(frontMatterData))
     seriesList = getSeries(seriesList, fmData.attributes, ids[+idx]);
@@ -68,12 +66,7 @@ export async function getBlogData() {
   return { blogData: finalData.sort((a, b) => +b.date - +a.date), seriesList };
 }
 
-/**
- * @param {import('./scripts').Series} seriesList
- * @param {any} attributes
- * @param {string} id
- */
-function getSeries(seriesList, attributes, id) {
+function getSeries(seriesList: Series, attributes: any, id: string) {
   let { date, title } = attributes;
 
   date = new Date(date);
