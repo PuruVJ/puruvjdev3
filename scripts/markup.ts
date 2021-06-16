@@ -1,10 +1,7 @@
-import { RELATIVE_ASSETS_PATH } from './constants.js';
+import { RELATIVE_ASSETS_PATH } from './constants';
+import { ExportedImagesMetaData } from './types';
 
-/**
- * @param {import('./scripts.js').ExportedImagesMetaData} list
- * @param {string} format
- */
-export function imageMarkup(list, format) {
+export function imageMarkup(list: ExportedImagesMetaData, format: string) {
   return `
   <figure style="width: 100%;--padding-top: ${list.aspectHTW * 100}%;">
     <picture>
@@ -26,10 +23,7 @@ export function imageMarkup(list, format) {
   `;
 }
 
-/**
- * @param {string} fileName
- */
-export function gifMarkup(fileName) {
+export function gifMarkup(fileName: string) {
   const baseForMarkup = `${RELATIVE_ASSETS_PATH}/media/${fileName}`;
 
   return `

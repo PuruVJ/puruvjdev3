@@ -1,7 +1,4 @@
-/**
- * @param {Document} document
- */
-export function linkNoOpenerPlugin(document) {
+export function linkNoOpenerPlugin(document: Document) {
   const anchors = document.querySelectorAll('a');
 
   for (const anchor of anchors) {

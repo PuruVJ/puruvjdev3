@@ -1,21 +1,18 @@
 import { promises as fsp } from 'fs';
 import fetch from 'node-fetch';
 import { cloudinary } from './cloudinary.js';
-import { ASSETS_ROOT_PATH, RELATIVE_ASSETS_PATH } from './constants.js';
+import { ASSETS_ROOT_PATH } from './constants';
 
 /**
- * This function converts gif to video and returns the necessary markup
- * @param {string} fileName without extension
+ * Converts gif to video and returns the necessary markup
  */
-async function optimizeGif(fileName) {
+export async function optimizeGif(fileName: string) {
   const folderPath = `${ASSETS_ROOT_PATH}media/${fileName}`;
   const gifPath = `${folderPath}.gif`;
 
   try {
     await fsp.mkdir(folderPath);
-  } catch (e) {
-    // console.log(e);
-  }
+  } catch {}
 
   const res = await cloudinary.uploader.upload(gifPath, {
     format: 'mp4',
@@ -38,5 +35,3 @@ async function optimizeGif(fileName) {
   console.log(`Done with GIF: ${fileName}`);
   console.log();
 }
-
-export { optimizeGif };

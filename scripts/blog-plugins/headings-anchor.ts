@@ -3,9 +3,8 @@ import { htmlToText } from 'html-to-text';
 
 /**
  * Adds the hash links to the headings
- * @param {Document} document
  */
-export function headingsWithAnchorsPlugin(document) {
+export function headingsWithAnchorsPlugin(document: Document) {
   const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
   for (let heading of headings) {

@@ -1,15 +1,16 @@
 /**
  * Find <p>{{ series-links }}</p> and replaces them with relevant markup
- * @param {Document} document
- * @param {{id: string; title: string; date: Date}[]} seriesPosts
- * @param {string} currentID
- * @param {string} seriesName
  */
-export function seriesLinksPlugin(document, seriesPosts, seriesName, currentID) {
+export function seriesLinksPlugin(
+  document: Document,
+  seriesPosts: { id: string; title: string; date: Date }[],
+  seriesName: string,
+  currentID: string,
+) {
   // Find <p> with content {{ series-link }}
   // Find all <p>
   const paragraphs = document.querySelectorAll('p');
-  let targetParagraphs = [];
+  let targetParagraphs: HTMLParagraphElement[] = [];
 
   for (let p of paragraphs) {
     if (p.innerHTML.includes('{{ series-links }}')) {

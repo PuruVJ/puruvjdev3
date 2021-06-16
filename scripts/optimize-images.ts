@@ -1,16 +1,16 @@
 import { promises as fsp } from 'fs';
 import fetch from 'node-fetch';
 import { cloudinary } from './cloudinary.js';
-import { ASSETS_ROOT_PATH, RELATIVE_ASSETS_PATH } from './constants.js';
-import { optimizeGif } from './gif-module.js';
-import { imageMarkup, gifMarkup } from './markup.js';
+import { ASSETS_ROOT_PATH, RELATIVE_ASSETS_PATH } from './constants';
+import { optimizeGif } from './gif-module';
+import { imageMarkup, gifMarkup } from './markup';
+import { ExportedImagesMetaData } from './types';
 
 /**
  * Optimize the image and create its different versions
  * Assuming the image is media folder in assets
- * @param {string} src
  */
-export async function optimizeBlogImages(src, returnMarkup = true) {
+export async function optimizeBlogImages(src: string, returnMarkup = true) {
   // Start measuring
   console.log('Starting to retrieve/create image/data');
 
@@ -28,15 +28,13 @@ export async function optimizeBlogImages(src, returnMarkup = true) {
 
   const folderPath = `${ASSETS_ROOT_PATH}/${baseFolder}/${fileName}`;
 
-  /** @param {'large' | 'small'} size */
-  const getOrgPath = (size) =>
+  const getOrgPath = (size: 'large' | 'small') =>
     `${RELATIVE_ASSETS_PATH}/${baseFolder}/${fileName}/${size}.${format}`;
 
   /**
    * The list of file paths to return
-   * @type {import('./scripts.js').ExportedImagesMetaData}
    */
-  const list = {
+  const list: ExportedImagesMetaData = {
     large: {
       org: getOrgPath('large'),
     },
@@ -87,8 +85,7 @@ export async function optimizeBlogImages(src, returnMarkup = true) {
     await fsp.mkdir(`${ASSETS_ROOT_PATH}/${baseFolder}/${fileName}`);
   } catch (e) {}
 
-  /** @param {number} width */
-  const upload = (width) =>
+  const upload = (width: number) =>
     cloudinary.uploader.upload(`${folderPath}.${format}`, {
       format,
       folder: 'media',
@@ -103,8 +100,7 @@ export async function optimizeBlogImages(src, returnMarkup = true) {
       overwrite: true,
     });
 
-  /** @param {string} path */
-  const fetchImg = (path) => fetch(path).then((res) => res.buffer());
+  const fetchImg = (path: string) => fetch(path).then((res) => res.buffer());
 
   const [bigOriginal, smallOriginal] = await Promise.all([upload(1200), upload(600)]);
   const [bigOriginalBuffer, smallOriginalBuffer] = await Promise.all([
@@ -124,7 +120,7 @@ export async function optimizeBlogImages(src, returnMarkup = true) {
     `${folderPath}/data.json`,
     JSON.stringify({
       aspectHTW: list.aspectHTW,
-    })
+    }),
   );
 
   // Log the time

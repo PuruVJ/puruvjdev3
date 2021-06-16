@@ -46,3 +46,9 @@ export function optimizeBlogImages(
   src: string,
   returnMarkup: false,
 ): Promise<ExportedImagesMetaData>;
+
+type UnwrapPromise<T> = T extends (props: any) => PromiseLike<infer U>
+  ? U
+  : T extends PromiseLike<infer K>
+  ? K
+  : T;
