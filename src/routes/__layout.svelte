@@ -9,6 +9,8 @@
   import '../css/global.scss';
 
   onMount(async () => {
+    import('../css/fonts.scss');
+
     await waitFor(200);
 
     document.body.style.setProperty('--transition-duration', '200ms');
