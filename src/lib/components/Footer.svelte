@@ -45,7 +45,7 @@
       href="https://hashnode.com/@puruvjdev"
       rel="noopener"
       target="_blank"
-      id="devto"
+      id="hashnode"
       aria-label="Puru Vijay's Hashnode Profile"
     >
       <svg width={25} height={25} viewBox="0 0 337 337">
