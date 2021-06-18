@@ -80,10 +80,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    p {
-      white-space: nowrap;
-    }
   }
 
   .social-links {
