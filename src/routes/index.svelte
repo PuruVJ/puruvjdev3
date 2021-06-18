@@ -143,6 +143,7 @@
   mark {
     background-color: transparent;
     color: var(--app-color-primary);
+    font-weight: 500;
   }
 
   h1,
