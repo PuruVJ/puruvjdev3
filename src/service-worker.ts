@@ -5,7 +5,7 @@ import { registerRoute } from 'workbox-routing';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { CacheFirst } from 'workbox-strategies';
 
-precacheAndRoute(build);
+precacheAndRoute(build.map((url) => ({ url, revision: null })));
 
 registerRoute(
   ({ request }) => request.destination === 'image',
