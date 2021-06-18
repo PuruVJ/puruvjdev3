@@ -91,7 +91,7 @@
     border-radius: 1rem;
     padding: 1rem 0.5rem;
 
-    font-weight: 400;
+    // font-weight: 400;
 
     &.show-more {
       --bgc-opacity: 0.15;
