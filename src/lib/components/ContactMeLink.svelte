@@ -3,7 +3,12 @@
   import Icon from './Icon.svelte';
 </script>
 
-<a href="https://bh0r2vt8n2f.typeform.com/to/tVdjlnjE" target="_blank" rel="noopener noreferrer">
+<a
+  aria-label="Contact Me"
+  href="https://bh0r2vt8n2f.typeform.com/to/tVdjlnjE"
+  target="_blank"
+  rel="noopener noreferrer"
+>
   <span>Contact Me</span>
   <Icon path={mdiOpenInNew} />
 </a>
@@ -26,9 +31,8 @@
 
     font-family: 'Quicksand', sans-serif;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--app-color-primary);
-
     fill: var(--app-color-primary);
 
     transition: background-color var(--transition-duration) ease-out,

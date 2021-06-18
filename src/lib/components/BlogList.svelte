@@ -26,8 +26,8 @@
 
 {#if seeMore}
   <br />
-  <a class="blog-link show-more" rel="prefetch" href="blog" aria-label="See more blog posts">
-    <h2 class="title end">See more <Icon size={40} path={mdiChevronRight} /></h2>
+  <a aria-label="See More Blog Posts" class="blog-link show-more" rel="prefetch" href="blog">
+    <p aria-hidden="true" class="title end">See more <Icon size={40} path={mdiChevronRight} /></p>
   </a>
 {/if}
 
@@ -54,10 +54,9 @@
   .show-more .title {
     display: flex;
     align-items: center;
-  }
-
-  .end {
     justify-content: center;
+
+    font-size: 1.618rem;
   }
 
   .description {

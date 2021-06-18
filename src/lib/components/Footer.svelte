@@ -2,12 +2,16 @@
   import { mdiDevTo, mdiGithub, mdiTwitter } from '@mdi/js';
 
   import Icon from './Icon.svelte';
+
+  let size = 30;
 </script>
 
 <!-- hehe -->
 <footer>
   <div class="copy-area">
-    Made with&nbsp;<img src="/emojis/love.svg" width="36" height="36" alt="❤" />&nbsp;by Puru Vijay
+    <p>Made with</p>
+    <img src="/emojis/love.svg" width="36" height="36" alt="❤" />
+    <p>by Puru Vijay</p>
   </div>
   <div class="social-links">
     <a
@@ -17,7 +21,7 @@
       id="twitter"
       aria-label="Puru Vijay's Twitter Profile"
     >
-      <Icon path={mdiTwitter} />
+      <Icon {size} path={mdiTwitter} />
     </a>
     <a
       href="https://github.com/puruvj"
@@ -26,7 +30,7 @@
       id="github"
       aria-label="Puru Vijay's Github Profile"
     >
-      <Icon path={mdiGithub} />
+      <Icon {size} path={mdiGithub} />
     </a>
     <a
       href="https://dev.to/puruvj"
@@ -35,7 +39,7 @@
       id="devto"
       aria-label="Puru Vijay's Dev.to Profile"
     >
-      <Icon path={mdiDevTo} />
+      <Icon {size} path={mdiDevTo} />
     </a>
     <a
       href="https://hashnode.com/@puruvjdev"
@@ -44,7 +48,7 @@
       id="devto"
       aria-label="Puru Vijay's Hashnode Profile"
     >
-      <svg width="20" height="20" viewBox="0 0 337 337">
+      <svg width={25} height={25} viewBox="0 0 337 337">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -76,6 +80,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    p {
+      white-space: nowrap;
+    }
   }
 
   .social-links {
@@ -101,6 +109,10 @@
     }
   }
   @media screen and (max-width: 600px) {
+    footer {
+      padding: 0.5rem;
+    }
+
     .copy-area {
       font-size: 0.7rem;
     }
