@@ -7,7 +7,6 @@
   import { theme } from '$lib/stores/theme.store';
   import { onMount } from 'svelte';
   import '../css/global.scss';
-  import '../css/fonts.scss';
 
   onMount(async () => {
     await waitFor(200);
