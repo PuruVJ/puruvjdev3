@@ -7,10 +7,9 @@
   import { theme } from '$lib/stores/theme.store';
   import { onMount } from 'svelte';
   import '../css/global.scss';
+  import '../css/fonts.scss';
 
   onMount(async () => {
-    import('../css/fonts.scss');
-
     await waitFor(200);
 
     document.body.style.setProperty('--transition-duration', '200ms');
