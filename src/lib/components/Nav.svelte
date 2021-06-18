@@ -172,7 +172,7 @@
 
   .brand {
     font-family: 'JetBrains Mono', monospace;
-    font-weight: 800;
+    font-weight: 600;
     color: var(--app-color-primary);
     font-size: 1.5rem;
 

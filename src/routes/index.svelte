@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-  import { prefetch } from '$app/navigation';
   import BlogList from '$lib/components/BlogList.svelte';
   import ContactMeLink from '$lib/components/ContactMeLink.svelte';
   import ContactMeSvg from '$lib/components/ContactMeSVG.svelte';
@@ -53,7 +52,14 @@
   <section class="puru-intro">
     <!-- svelte-ignore a11y-img-redundant-alt -->
     <div class="photo-area">
-      <figure><img src="./photos/puru-profile.jpg" alt="Puru Vijay Profile Photo" /></figure>
+      <figure>
+        <img
+          src="/photos/puru-profile.jpg"
+          alt="Puru Vijay Profile Photo"
+          width="100"
+          height="100"
+        />
+      </figure>
     </div>
 
     <div id="written">
@@ -137,6 +143,7 @@
   mark {
     background-color: transparent;
     color: var(--app-color-primary);
+    font-weight: 500;
   }
 
   h1,
