@@ -1,8 +1,7 @@
 import { build } from '$service-worker';
-
+import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { ExpirationPlugin } from 'workbox-expiration';
 import { CacheFirst } from 'workbox-strategies';
 
 precacheAndRoute(build.map((url) => ({ url, revision: null })));
