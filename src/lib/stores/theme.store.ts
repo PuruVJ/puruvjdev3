@@ -1,9 +1,9 @@
 import { browser } from '$app/env';
 import { writable } from 'svelte/store';
 
-const theme = writable<'light' | 'midday' | 'dark' | 'radioactive'>('light');
+export type Theme = 'light' | 'midday' | 'dark' | 'radioactive';
 
-export { theme };
+export const theme = writable<Theme>('light');
 
 let initVal = '';
 theme.subscribe((val) => {
@@ -15,9 +15,9 @@ theme.subscribe((val) => {
     return;
   }
 
-  const body = document.body;
+  const { dataset } = document.body;
 
-  body.dataset.theme = val;
+  dataset.theme = val;
 
   localStorage.setItem('theme', val);
 
