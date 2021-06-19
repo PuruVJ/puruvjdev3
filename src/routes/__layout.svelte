@@ -16,13 +16,7 @@
 </script>
 
 <svelte:head>
-  <!-- As this component is omnipresent, the script for different favicons will live here -->
-
-  {#if dev}
-    <link rel="icon" href="/icons/favicon-dev.svg" />
-  {:else}
-    <link rel="icon" href="/icons/favicon-{$theme}.png" />
-  {/if}
+  <link rel="icon" href="/icons/favicon-{dev ? 'dev' : $theme}.png" />
 </svelte:head>
 
 <Nav page={$page.path} />

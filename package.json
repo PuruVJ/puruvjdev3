@@ -44,6 +44,10 @@
     "twemoji": "^13.1.0",
     "typescript": "^4.3.2",
     "vite": "^2.3.7",
+    "workbox-expiration": "^6.1.5",
+    "workbox-precaching": "^6.1.5",
+    "workbox-routing": "^6.1.5",
+    "workbox-strategies": "^6.1.5",
     "yaml": "^1.10.2"
   },
   "type": "module"
