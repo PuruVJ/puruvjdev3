@@ -29,7 +29,7 @@ Jotai is very very different from redux and [React Context API](https://reactjs.
 
 Redux stores are monolithic, but Jotai is atomic.
 
-As in, in Redux, it's a pattern to store all the needed store in the app in one single big object
+As in, in Redux, it's a pattern to store all the needed global state in the app in one single big object. In Jotai, it is opposite. You break your state into atoms, that is, one store for one single store, or for closely related state.
 
 # Getting started with Jotai
 
