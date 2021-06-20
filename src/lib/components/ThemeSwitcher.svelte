@@ -2,17 +2,13 @@
   import { mdiMoonFull, mdiWhiteBalanceSunny } from '@mdi/js';
   import { onMount } from 'svelte';
   import { theme } from '../stores/theme.store';
+  import type { Theme } from '../stores/theme.store';
   import Icon from './Icon.svelte';
   import Moon from './Moon.svelte';
   import RadioactiveSvg from './RadioactiveSVG.svelte';
 
   // List of themes
-  const themes: ('light' | 'midday' | 'dark' | 'radioactive')[] = [
-    'light',
-    'midday',
-    'dark',
-    'radioactive',
-  ];
+  const themes: Theme[] = ['light', 'midday', 'dark', 'radioactive'];
   let currentThemeIndex = 0;
 
   function nextTheme() {

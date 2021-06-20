@@ -16,7 +16,7 @@
 </script>
 
 <svelte:head>
-  <link rel="icon" href="/icons/favicon-{dev ? 'dev' : $theme}.png" />
+  <link rel="icon" href="/icons/favicon-{dev ? 'dev' : $theme}.{dev ? 'svg' : 'png'}" />
 </svelte:head>
 
 <Nav page={$page.path} />
