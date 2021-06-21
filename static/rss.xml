@@ -249,5 +249,13 @@
             <pubDate>Sat, 30 May 2020 18:30:00 GMT</pubDate>
           </item>
         
+
+          <item>
+            <title>Highly Performant React theming with CSS variables(With Intellisense 😉) // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/react-theming-css-vars</link>
+            <description>Break the performance barrier</description>
+            <pubDate>Invalid Date</pubDate>
+          </item>
+        
   </channel>
 </rss>
