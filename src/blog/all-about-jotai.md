@@ -33,7 +33,7 @@ As in, in Redux, it's a pattern to store all the needed global state in the app 
 
 # Getting started with Jotai
 
-Installing Jotai is fairly easy 👇
+## Installing Jotai
 
 ```bash
 npm install jotai
@@ -41,3 +41,102 @@ npm install jotai
 # Or if you're a yarn person
 yarn add jotai
 ```
+
+## Setting it up in the app
+
+Jotai requires a provider to be present in the parent of the current component it is being used. The simplest way to do would be to wrap whole app in the Provider, like this 👇
+
+```js
+// index.jsx (or index.tsx)
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { App } from './App';
+
+// Jotai provider
+import { Provider } from 'jotai';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root'),
+);
+```
+
+Now you can use jotai anywhere in your app!
+
+# Basic syntax
+
+Now that our basic setup is done, let's have a look at the basic syntax!
+
+## Creating your first atom
+
+~~Atoms are the building blocks of universe and clump together into mole--~~
+
+No not that atom 😅.
+
+Jotai atoms are small isolated pieces of state. One atom contains ideally, very small data(Though it's just a convention, you could still put all your state in one atom, thought that would be very slow).
+
+So here's how you create your first atom 👇
+
+```js
+import { atom } from 'jotai';
+
+const themeAtom = atom('light');
+```
+
+And that's it! You have your very first piece of state in!!
+
+> Notice I sufficed my atom name with `Atom`, as in `themeAtom`. It's not a rule or an official convention, I simply choose to name my atoms like this, for clarity in a big project. You can name it just `theme` rather than `themeAtom` 🙂.
+
+Now, how to use it? Well, using it is a cross between the `useState` and `useContext` hooks.
+
+```js
+import { useAtom } from 'jotai';
+
+export const ThemeSwitcher = () => {
+  const [theme, setTheme] = useAtom(themeAtom);
+
+  return <main>{theme}</main>;
+};
+```
+
+See? Exactly like `useState`, just we pass `useAtom` the atom we created. useAtom returns an array of size 2, where 1st element is a value. 2nd element is a function, to set the value of the atom, which makes all the components relying on this atom update and re-render.
+
+So if we put it all together, the complete code would look like this 👇
+
+```js
+import { atom, useAtom } from 'jotai';
+
+const themeAtom = atom('light');
+
+export const ThemeSwitcher = () => {
+  const [theme, setTheme] = useAtom(themeAtom);
+
+  return <main>{theme}</main>;
+};
+```
+
+And notice the `setTheme` isn't used yet. Let's change that 👇
+
+```js
+import { atom, useAtom } from 'jotai';
+
+const themeAtom = atom('light');
+
+export const ThemeSwitcher = () => {
+  const [theme, setTheme] = useAtom(themeAtom);
+
+  return (
+    <main>
+      <p>Theme is {theme}</p>
+
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>Toggle Theme</button>
+    </main>
+  );
+};
+```
+
+![Jotai toggling theme atom button](../../static/media/all-about-jotai--jotai-basic-theme-toggle-example.gif)
