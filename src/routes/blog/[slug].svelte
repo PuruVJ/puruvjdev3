@@ -13,7 +13,7 @@
     const { slug } = page.params;
 
     try {
-      const res = await fetch(`/blog/${slug}.json`);
+      const res = await fetch(`/data/blog/${slug}.json`);
 
       const data = await res.json();
 

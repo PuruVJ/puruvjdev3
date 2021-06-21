@@ -15,11 +15,6 @@ import {
 import { ASSETS_ROOT_PATH } from './constants';
 import { UnwrapPromise } from './types';
 
-/**
- * @param {Object} obj
- * @param {import('./types').BlogData[]} obj.blogData
- * @param {import('./types').Series} obj.seriesList
- */
 export async function blogMDHtml({
   blogData,
   seriesList,
@@ -64,7 +59,7 @@ export async function blogMDHtml({
     const reading_time = readingTime(html, { wordsPerMinute: 400 }).minutes;
 
     fsp.writeFile(
-      `${ASSETS_ROOT_PATH}/blog/${id}.json`,
+      `${ASSETS_ROOT_PATH}/data/blog/${id}.json`,
       JSON.stringify({
         cover_image,
         title,
