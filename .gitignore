@@ -7,9 +7,7 @@ node_modules
 
 .DS_Store
 /node_modules/
-/src/node_modules/@sapper/
-yarn-error.log
-/__sapper__/
+/.vercel_build_output/
 .env
 
 .vercel

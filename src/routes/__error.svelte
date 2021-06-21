@@ -11,6 +11,7 @@
 </svelte:head>
 
 <main in:fadeIn out:fadeOut>
+  <br /><br />
   <h1>
     <span style="color: var(--app-color-primary)">404</span> - Not Found
   </h1>
