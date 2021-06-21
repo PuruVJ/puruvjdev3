@@ -12,7 +12,6 @@
     { "src": "/view-source", "status": 307, "dest": "https://github.com/puruvj/puruvjdev3" },
     { "src": "/twitter", "status": 307, "dest": "https://twitter.com/puruvjdev" },
     { "src": "/github", "status": 307, "dest": "https://github.com/puruvj" },
-    { "src": "/devto", "status": 307, "dest": "https://dev.to/puruvj" },
-    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
+    { "src": "/devto", "status": 307, "dest": "https://dev.to/puruvj" }
   ]
 }
