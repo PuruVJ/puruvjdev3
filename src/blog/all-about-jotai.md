@@ -140,3 +140,5 @@ export const ThemeSwitcher = () => {
 ```
 
 ![Jotai toggling theme atom button](../../static/media/all-about-jotai--jotai-basic-theme-toggle-example.gif)
+
+Check it out @ [CodeSandbox](https://codesandbox.io/s/white-glade-38c6l?file=/src/ThemeSwitcher.js)
