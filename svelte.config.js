@@ -1,12 +1,12 @@
 // @ts-check
 import preprocess from 'svelte-preprocess';
-import vercel from '@sveltejs/adapter-vercel';
+import staticAdapter from '@sveltejs/adapter-static';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
     target: '#svelte',
-    adapter: vercel(),
+    adapter: staticAdapter(),
     prerender: {
       crawl: true,
       enabled: true,
