@@ -11,6 +11,14 @@
     </image>
     
           <item>
+            <title>Highly Performant React theming with CSS variables(With Intellisense 😉) // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/react-theming-css-vars</link>
+            <description>Theme your React app with confidence, while also keeping the performance high</description>
+            <pubDate>Sun, 04 Jul 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
             <title>Get the most out of CSS Modules with TypeScript in 5 minutes // Puru Vijay</title>
             <link>https://puruvj.dev/blog/css-modules-typescript-intellisense</link>
             <description>If you're a TypeScript Dev, here are a few things you can do to get that sweet, sweet CSS class intellisense</description>
@@ -247,14 +255,6 @@
             <link>https://puruvj.dev/blog/my-first-blog</link>
             <description>My very first blog post on my very first functional site</description>
             <pubDate>Sat, 30 May 2020 18:30:00 GMT</pubDate>
-          </item>
-        
-
-          <item>
-            <title>Highly Performant React theming with CSS variables(With Intellisense 😉) // Puru Vijay</title>
-            <link>https://puruvj.dev/blog/react-theming-css-vars</link>
-            <description>Break the performance barrier</description>
-            <pubDate>Invalid Date</pubDate>
           </item>
         
   </channel>
