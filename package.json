@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.13",
+    "@sveltejs/adapter-vercel": "^1.0.0-next.22",
     "@sveltejs/kit": "^1.0.0-next.115",
     "@types/html-to-text": "^8.0.0",
     "@types/jsdom": "^16.2.11",
