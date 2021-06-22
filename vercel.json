@@ -23,7 +23,11 @@
       "permanent": false,
       "destination": "https://github.com/puruvj"
     },
-    { "source": "/devto", "permanent": false, "destination": "https://dev.to/puruvj" }
+    {
+      "source": "/devto",
+      "permanent": false,
+      "destination": "https://dev.to/puruvj"
+    }
   ],
 
   "rewrites": [{ "source": "/(.*)", "destination": "/404.html" }]
