@@ -142,3 +142,121 @@ export const ThemeSwitcher = () => {
 ![Jotai toggling theme atom button](../../static/media/all-about-jotai--jotai-basic-theme-toggle-example.gif)
 
 Check it out @ [CodeSandbox](https://codesandbox.io/s/white-glade-38c6l?file=/src/ThemeSwitcher.js)
+
+This, my friend, is just the beginning. Jotai can do way so much more!
+
+But this alone doesn't give much perspective. What's special about a button that toggles value 🙄? And I agree. This example is pretty boring. Let's use Jotai to make an actual theme switcher.
+
+# Jotai In Practice: Theme Switcher hook
+
+Theme Switching is nowadays needed in every single app, website, and heck, even blog sites(Esp blogs). And it can be quite a headache to make theme switching. First you have to set up your CSS Variables. Then you have to start with a theme Then you have to make a button that actually switches the theme. Then you have to make sure to remember the preference using `localstorage` API. But that brings you full circle to picking up the right value when the page loads, and also not messing with SSR and prerendering and...
+
+![A tired little girl drops head on a table and says kill me now](../../static/media/all-about-jotai--kill-me-now.gif)
+
+Yeah, it's pretty complicated. A problem any developer would shiver before attempting(I did 👀).
+
+So, that's the best kind of thing to make, and let's use Jotai to do it. You'll be astonished at how simpler Jotai can make it.
+
+So, here are our goals.
+
+- Works on server side(As in not referring to `document` or `window` without protection).
+- Picks up locally stored value in `localstorage`.
+- If no local value, tries to get the device preference, whether device theme is `light` or `dark`.
+- Current `theme` should be available as a state that re-renders components it is being used in.
+- Changing the state should update localstorage accordingly.
+
+So now our list is complete, let's look at the code 👇
+
+```js
+import { atom, useAtom } from 'jotai';
+import { useEffect, useLayoutEffect, useRef } from 'react';
+
+const browser = typeof window !== 'undefined';
+
+const localValue = (browser ? localStorage.getItem('theme') : 'morning');
+const systemTheme =
+  browser && matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'morning';
+
+// The atom to hold the value goes here
+const themeAtom = atom(localValue || systemTheme);
+
+// This is needed here
+let initialized = true;
+
+/** Sitewide theme */
+export function useTheme() {
+  const [theme, setTheme] = useAtom(themeAtom);
+
+  if (typeof window === 'undefined') return [theme, setTheme] as const;
+
+  useEffect(() => {
+    if (!initialized) return;
+
+    setTheme(localValue || systemTheme);
+    initialized = false;
+  }, []);
+
+  /**
+   * Don't use `useLayoutEffect` here, as it runs before `useEffect`, so it persists to the initial value of
+   * the `theme` atom provided, and by the time the onMount useEffect runs, `initialized` is already false,
+   * hence initial theme is not set
+   */
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
+  }, [theme]);
+
+  return [theme, setTheme] as const;
+}
+```
+
+And I got my TypeScript kin covered too 😉👇
+
+```ts
+import { atom, useAtom } from 'jotai';
+import { useEffect, useLayoutEffect, useRef } from 'react';
+
+export type Theme = 'light' | 'dark';
+
+const browser = typeof window !== 'undefined';
+
+const localValue = (browser ? localStorage.getItem('theme') : 'morning') as Theme;
+const systemTheme: Theme =
+  browser && matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'morning';
+
+// The atom to hold the value goes here
+const themeAtom = atom<Theme>(localValue || systemTheme);
+
+// This is needed here
+let initialized = true;
+
+/** Sitewide theme */
+export function useTheme() {
+  const [theme, setTheme] = useAtom(themeAtom);
+
+  if (typeof window === 'undefined') return [theme, setTheme] as const;
+
+  useEffect(() => {
+    if (!initialized) return;
+
+    setTheme(localValue || systemTheme);
+    initialized = false;
+  }, []);
+
+  /**
+   * Don't use `useLayoutEffect` here, as it runs before `useEffect`, so it persists to the initial value of
+   * the `theme` atom provided, and by the time the onMount useEffect runs, `initialized` is already false,
+   * hence initial theme is not set
+   */
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
+  }, [theme]);
+
+  return [theme, setTheme] as const;
+}
+```
