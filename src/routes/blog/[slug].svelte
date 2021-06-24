@@ -68,7 +68,7 @@
   <link rel="canonical" href="https://puruvj.dev/blog/{id}" />
 </svelte:head>
 
-<main class="" in:fadeIn out:fadeOut>
+<main in:fadeIn out:fadeOut>
   <LikeButton blogID={id} />
   <div class="progress" aria-roledescription="progress">
     <div class="indicator" style="transform: scaleX({$readingProgress})" />
