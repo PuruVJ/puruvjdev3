@@ -23,15 +23,14 @@
 
 <script lang="ts">
   export let blogData: IBlog;
-  let { title, body, date, description, cover_image, id, reading_time, series } = blogData;
+  const { title, body, date, description, cover_image, id, reading_time, series } = blogData;
 
   const browserTitle = title.replace(/<img.*?alt="(.*?)"[^\>]+>/g, '$1');
 
   function handleProgressBar() {
-    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const currentY = document.documentElement.scrollTop;
+    const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
 
-    $readingProgress = currentY / height;
+    $readingProgress = scrollTop / (scrollHeight - clientHeight);
   }
 
   let throttledHandler: () => void;
