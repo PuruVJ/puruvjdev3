@@ -37,13 +37,12 @@
   let throttledHandler: () => void;
 
   onMount(() => {
-    throttledHandler = throttle(50, false, handleProgressBar);
     document.body.classList.remove('background');
-
+    
     import('lazysizes');
-
+    
+    throttledHandler = throttle(50, false, handleProgressBar);
     document.addEventListener('scroll', throttledHandler);
-
     return () => document.removeEventListener('scroll', throttledHandler);
   });
 
