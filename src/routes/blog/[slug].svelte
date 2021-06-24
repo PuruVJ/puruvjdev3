@@ -14,13 +14,10 @@
 
     try {
       const res = await fetch(`/data/blog/${slug}.json`);
-
       const data = await res.json();
 
       return { props: { blogData: data } };
-    } catch (e) {
-      return;
-    }
+    } catch {}
   };
 </script>
 
@@ -33,7 +30,6 @@
   function handleProgressBar() {
     let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const currentY = document.documentElement.scrollTop;
-    // console.log({ currentY, height, sh: document.body.scrollHeight });
 
     $readingProgress = currentY / height;
   }
@@ -135,7 +131,4 @@
       font-family: 'Quicksand', sans-serif;
     }
   }
-
-  // :global(#blog-content a:not(.heading-link)) {
-  // }
 </style>
