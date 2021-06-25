@@ -41,13 +41,7 @@ export type Series = {
   }[];
 };
 
-export function optimizeBlogImages(src: string, returnMarkup: true): Promise<string>;
-export function optimizeBlogImages(
-  src: string,
-  returnMarkup: false,
-): Promise<ExportedImagesMetaData>;
-
-type UnwrapPromise<T> = T extends (props: any) => PromiseLike<infer U>
+declare type UnwrapPromise<T> = T extends (props: any) => PromiseLike<infer U>
   ? U
   : T extends PromiseLike<infer K>
   ? K
