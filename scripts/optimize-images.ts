@@ -112,11 +112,11 @@ export async function optimizeBlogImages(src: string, returnMarkup = true) {
   list.aspectHTW = bigOriginal.height / bigOriginal.width;
 
   // Write inside the folder
-  await fsp.writeFile(`${folderPath}/large.${format}`, bigOriginalBuffer);
-  await fsp.writeFile(`${folderPath}/small.${format}`, smallOriginalBuffer);
+  fsp.writeFile(`${folderPath}/large.${format}`, bigOriginalBuffer);
+  fsp.writeFile(`${folderPath}/small.${format}`, smallOriginalBuffer);
 
   // Also write the data.json
-  await fsp.writeFile(
+  fsp.writeFile(
     `${folderPath}/data.json`,
     JSON.stringify({
       aspectHTW: list.aspectHTW,
