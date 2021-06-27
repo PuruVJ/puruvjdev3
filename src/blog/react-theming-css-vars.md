@@ -47,3 +47,50 @@ body.dark {
 ```
 
 Theming using CSS variables is extremely fast. It's as if you're reaching into the internals of browser and manually repainting the DOM, without the tediousness that a process as complex as manually repainting requires. All you have to do is change the variables, and the whole page repaints itself extremely fast, totally jank-free.
+
+But one drawback here is the fact that you have to remember these variables' names, because at the time of writing, VSCode doesn't autocomplete variables from other files, you're basically typing blind, without any support from the editor.
+
+## Using React Context(AKA JS only approach)
+
+The other way is using React Context to change themes, so you have a big JS object containing your colors:
+
+```ts
+const themes = {
+  light: {
+    primary: {
+      main: 'blue',
+      rgb: '0, 0, 255',
+      contrast: 'white',
+    },
+    light: {
+      main: 'white',
+      rgb: '255, 255, 255',
+      contrast: 'black',
+    },
+    dark: {
+      main: 'black',
+      rgb: '0, 0, 0',
+      contrast: 'white',
+    },
+  },
+  dark: {
+    primary: {
+      main: 'blue',
+      rgb: '0, 0, 255',
+      contrast: 'white',
+    },
+    light: {
+      main: 'black',
+      rgb: '0, 0, 0',
+      contrast: 'white',
+    },
+    dark: {
+      main: 'white',
+      rgb: '255, 255, 255',
+      contrast: 'black',
+    },
+  },
+};
+```
+
+Then you basically put together Context and Providers, and have theme switching working. There's more boilerplate here, but the developer experience ultimately is really good. If you're using Context for theming, you're most probably using CSS-in-JS, so you'd be using these values like this
