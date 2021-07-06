@@ -282,7 +282,7 @@ We can move the logic of syncing to localstorage completely, both from inside th
 
 `atomWithStorage` is a special kind of atom that automatically syncs the value provided to it with `localstorage` or `sessionStorage` (Or `AsyncStorage`, if used with React Native), and picks the value up on first load automatically! It's available in the `jotai/utils` module, and adds some bytes other than the `2.4KB` of Jotai Core.
 
-So here's how we would rewrite:
+So here's how we would rewrite it:
 
 ```ts
 import { useAtom } from 'jotai';
@@ -311,3 +311,69 @@ export function useTheme() {
   return [theme, setTheme];
 }
 ```
+
+As you can see, we've completely got rid of `localstorage` from the code, and we have a new thing `atomWithStorage`. First argument is the key to store it in `localstorage`. As in, if you specified `theme` as value here, you would retrieve it from localstorage using `localstorage.getItem('theme')`.
+
+As you can see, the code itself isn't much smaller in terms on lines of code. It's just 20% smaller, which isn't a big number in case of this already-small file. The main part here is that we got to hide the complexity away thanks to `atomWithStorage`. Now we don't have to keep the local value storage in mind, just have to focus on our main logic and remember that this value is synchronized locally, and that's it.
+
+And using this hook ultimately is super simple,
+
+```js
+import { useTheme } from './use-theme';
+
+export const ThemeSwitcher = () => {
+  const [theme, setTheme] = useTheme();
+
+  return (
+    <main>
+      <p>Theme is {theme}</p>
+
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>Toggle Theme</button>
+    </main>
+  );
+};
+```
+
+And it just works!! 🪄
+
+# More about Jotai
+
+So this was the basic intro to Jotai. I added in the `atomWithStorage` utility function to show how powerful and simple it can make your code. I will touch these utilities later on. For now, let's explore more about the basic `atom` and `useAtom` and how it gives you superpowers.
+
+## Derived atoms
+
+Sometimes you want to make an atom rely on another atom(s), as in you wanna compose multiple atoms together into one big computed atom. That is extremely simple with Jotai.
+
+You have seen this atom until now 👇
+
+```js
+const store = atom('someValue');
+```
+
+But guess what, atom can take a function as a parameter 👇
+
+```js
+const store = atom((get) => get(someAtomDefinedSomewhere));
+```
+
+Here, it's function, with the first parameter named `get`. `get` is a helper function that you pass an atom to, and it gets the atom's value as aa raw value that you can do operations on just like any other variable.
+
+# The Best of Utils
+
+If you loved `atomWithStorage` and your head is spinning with all the possibilities it could unlock, I got many more awesome Jotai utils for you.
+
+## atomWithDefault
+
+Let's begin with `atomWithDefault`
+
+## atomWithReset
+
+## selectAtom
+
+## freezeAtom
+
+## splitAtom
+
+## waitForAll
+
+And these are only half of all utils provided by Jotai. There are so many, I'd rather write a whole book about them rather than this meager blog post that you're reading 😉. Head over to [Jotai Documentation](https://docs.pmnd.rs/jotai/api/utils) to learn about all of them
