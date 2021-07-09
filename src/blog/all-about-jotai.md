@@ -344,6 +344,20 @@ So this was the basic intro to Jotai. I added in the `atomWithStorage` utility f
 
 Sometimes you want to make an atom rely on another atom(s), as in you wanna compose multiple atoms together into one big computed atom. That is extremely simple with Jotai.
 
+### Readonly atoms
+
+Readonly atoms are derived atoms that rely on other atoms, and we can't change their values directly.
+
+For example, these atoms' usage would be like this 👇
+
+```js
+const [derivedValue] = useAtom(derivedAtom);
+```
+
+There's no `setDerivedValue` here, no setter function. We can only read this atom. Changing the atoms it is derived from will automatically update this value.
+
+But enough talk! Now let's see how to create these derived atom.
+
 You have seen this atom until now 👇
 
 ```js
@@ -356,7 +370,90 @@ But guess what, atom can take a function as a parameter 👇
 const store = atom((get) => get(someAtomDefinedSomewhere));
 ```
 
-Here, it's function, with the first parameter named `get`. `get` is a helper function that you pass an atom to, and it gets the atom's value as aa raw value that you can do operations on just like any other variable.
+Here, it's function, with the first parameter named `get`. `get` is a helper function that you pass an atom to, and it gets the atom's value as a raw value that you can do operations on just like any other variable.
+
+And you can do a hell lot more with this. For example, one simple example would be to have a list of all the keys of an object match a specific criteria to be in an array.
+
+Here's the object
+
+```js
+export const appsStateStore = atom({
+  finder: false,
+  launchpad: false,
+  safari: false,
+  messages: false,
+  mail: true,
+  maps: true,
+  photos: false,
+  facetime: true,
+  calendar: false,
+});
+```
+
+Define the atom that will hold the open apps in an array 👇
+
+```js
+const openAppsStore = atom((get) => {
+  const apps = get(openAppsStore); // Gives the raw value { finder: false, launchpad: false, ...
+
+  // Filter out the values who are marked as false
+  const openAppsList = Object.keys(apps).filter((appName) => apps[appName]);
+
+  return openAppsList;
+});
+```
+
+And this is it!! As you tweak the values in the `appStateStore`, setting them to `true` and `false`, the `openAppsStore` will reflect the changes and the components using this store will also be updated with new values.
+
+You can also compose together many different atoms together 👇
+
+```js
+const xCoordinateAtom = atom(0);
+const yCoordinateAtom = atom(0);
+
+// Compose 'em all
+const distanceFromOriginAtom = atom((get) =>
+  Math.sqrt(get(xCoordinateAtom) ** 2 + get(yCoordinateAtom)),
+);
+```
+
+You can tweak the `xCoordinateAtom` atom and `yCoordinateAtom`,and the `distanceFromOriginAtom` will update with the new values!! To me, a super math geek 🤓, this feels very magical and close to the raw math(Don't know how to explain, it just does ¯\\\_(ツ)\_/¯)
+
+> It's a mathematical formula to calculate distance of a point from origin (0, 0). If you didn't get it, no worries, I just wanna get the point across that you can compose together different atoms seamlessly. That's it! 🙂
+
+### Readable & Writable atoms
+
+These are atoms that are derived from other atoms, but can also be modified on their own by the user.
+
+```ts
+const readWriteAtom = atom(
+  (get) => get(priceAtom) * 2,
+  (get, set, newPrice) => {
+    set(priceAtom, newPrice / 2);
+    // you can set as many atoms as you want at the same time
+  },
+);
+```
+
+This atom, when you set its value, triggers the custom `write` function we provide, and can modify the atoms it relies on. It's basically **two-way data binding**. You change `priceAtom`, this `readWriteAtom` gets updated. You update `readWriteAtom`, `priceAtom` gets updated!! Mindblowing, right 🤯🤯?!?
+
+> Beware though: As magical as this seems, it's two-way data binding. There have been controversies in past about it, and rightfully so, as debugging and keeping the flow of data sane becomes extremely hard with these. That's why React itself has only one-way data binding. So use this atom carefully.
+
+### Writable only atom!
+
+These are atom that you can't read at all, these exist solely to update other atoms.
+
+What is the point of the these? Lemme show you with an example:
+
+Let's say we wanna update many atoms at once when some state changes. Let's assume we have these regular atoms 👇
+
+```js
+const oneAtom = atom(1);
+const twoAtom = atom(2);
+const threeAtom = atom(3);
+```
+
+Now in a component, let's change these all
 
 # The Best of Utils
 
