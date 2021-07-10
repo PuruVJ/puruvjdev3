@@ -18,5 +18,6 @@ export type IWork = {
     };
     aspectHTW: number;
     color: number[];
+    format: 'jpg' | 'png';
   };
 };

@@ -6,6 +6,7 @@ export type ExportedImagesMetaData = {
     org: string;
   };
   aspectHTW: number;
+  format: 'png' | 'jpg';
 };
 
 export type Work = {

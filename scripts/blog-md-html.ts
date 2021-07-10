@@ -20,7 +20,7 @@ export async function blogMDHtml({
   seriesList,
 }: UnwrapPromise<ReturnType<typeof getBlogData>>) {
   const highlighter = await getHighlighter({
-    theme: 'material-theme-palenight',
+    theme: 'material-palenight',
   });
 
   const md = markdown({ html: true, highlight: highlighter.codeToHtml });

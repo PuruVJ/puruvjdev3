@@ -1,7 +1,7 @@
 import { RELATIVE_ASSETS_PATH } from './constants';
 import { ExportedImagesMetaData } from './types';
 
-export function imageMarkup(list: ExportedImagesMetaData, format: string) {
+export function imageMarkup(list: ExportedImagesMetaData, format: string, altText: string) {
   return `
   <figure style="width: 100%;--padding-top: ${list.aspectHTW * 100}%;">
     <picture>
@@ -15,7 +15,7 @@ export function imageMarkup(list: ExportedImagesMetaData, format: string) {
         media="(max-width: 500px)"
         data-srcset="${list.small.org}"
       ></source>
-      <img alt="Placeholder"
+      <img alt="${altText}"
       data-src="${list.large.org}"
       class="lazyload blog-img" />
     </picture>
