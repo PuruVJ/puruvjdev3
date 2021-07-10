@@ -23,7 +23,7 @@ export async function imageOptimMarkupPlugin(document: Document) {
 
     // Let's add the main stuff to this picture
     // @ts-ignore
-    containerDiv.innerHTML = await optimizeBlogImages(src);
+    containerDiv.innerHTML = await optimizeBlogImages(src, img.alt);
 
     // Put it after the img
     img.after(containerDiv);
