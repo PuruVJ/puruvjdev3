@@ -189,7 +189,8 @@
       line-height: 1 !important;
     }
 
-    :global(path, rect) {
+    :global(path),
+    :global(rect) {
       transition: fill 200ms ease-in;
       // transition-delay: -100ms;
     }
