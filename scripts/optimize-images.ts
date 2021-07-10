@@ -42,6 +42,7 @@ export async function optimizeBlogImages(src: string, altText: string, returnMar
       org: getOrgPath('small'),
     },
     aspectHTW: 1,
+    format: format as 'jpg' | 'png',
   };
 
   let shouldOptimize = true;

@@ -1,25 +1,22 @@
 - title: puruvj.dev
   url: https://puruvj.dev
-  stack: svelte, sapper, html, css, js, nodejs, web
+  stack: svelte, sveltekit, web
   description: >
-    This current website you are viewing 😁. Built in September 2020, it's the second revision.
-    It has JPG, PNG -> WebP conversion, generation of responsive images, and fallback mechanisms
-    ([Read about it here](https://puruvj.dev/blog/how-i-created-personal-site-part-3)),
-    conversion of GIFs to MP4s for performance([Read about it here](https://)). 
-    The content is stored as markdown files locally in the `src/blogs` folder, 
-    and converted to html and undergoes loads of modifications using [JSDOM](https://www.npmjs.com/package/jsdom)
-    to appear as good as it looks. Thumbnails are generated using Puppeteer every day in Github Actions.
+    My little corner of the internet, my humble personal site. Built with [SvelteKit](https://https://kit.svelte.dev/).
+    Blog posts in markdown, processed by 600+ lines of TypeScript code to give the polished look you see on
+    any of the blog posts. Designed entirely by hand, no templates used, just the lil designer in my brain 😉
+
   repo:
-    url: https://github.com/puruvj/puruvjdev2
+    url: https://github.com/puruvj/puruvjdev3
     type: github
   image: puruvjdev2.png
 
 - title: MacOS Web
   url: https://macos.now.sh
-  stack: react, snowpack, framer motion, material UI, html, css, js, nodejs, web
+  stack: preact, vitejs, framer motion, web
   description: >
-    I love MacOS extremely. Especially it's super awesome interactive dock. So I've embarked on this long 
-    journey to recreate the basic Desktop using React and friends. 
+    I love MacOS extremely. Especially its super awesome interactive dock. So this is my little experiment to scratch
+    my itch of having a macOS!
   repo:
     url: https://github.com/puruvj/macos-web
     type: github
@@ -27,13 +24,13 @@
 
 - title: Microsoft Todo Clone
   url: https://ms-todo.vercel.app
-  stack: stenciljs, html, css, js, web
+  stack: stenciljs, web
   description: >
     A clone of the amazing Microsoft Todo App for Windows. Built with StencilJS. 100% Keyboard accessible with
-    roving tabindexes(ex. Navigating a list with arrow keys after tabbing to it and retaining the last tabbed position)
-    \n
+    roving tabindices
+    <br />
     Basic CRUD Operations, Reactivity, data is stored in IndexedDB using a Web Worker to minimize the blocking nature of IndexedDB. 
-    Has a lot of themes, both gradients and beautiful optimized background images, which transition smoothly when changed.
+    Themes, both gradients and beautiful background images, with smooth transition.
   repo:
     url: https://github.com/puruvj/ms-todo-clone
     type: github
