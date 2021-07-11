@@ -439,35 +439,109 @@ This atom, when you set its value, triggers the custom `write` function we provi
 
 > Beware though: As magical as this seems, it's two-way data binding. There have been controversies in past about it, and rightfully so, as debugging and keeping the flow of data sane becomes extremely hard with these. That's why React itself has only one-way data binding. So use this atom carefully.
 
-### Writable only atom!
-
-These are atom that you can't read at all, these exist solely to update other atoms.
-
-What is the point of the these? Lemme show you with an example:
-
-Let's say we wanna update many atoms at once when some state changes. Let's assume we have these regular atoms 👇
-
-```js
-const oneAtom = atom(1);
-const twoAtom = atom(2);
-const threeAtom = atom(3);
-```
-
-Now in a component, let's change these all
-
-############### TYODO 👆
-
 # The Best of Utils
 
 If you loved `atomWithStorage` and your head is spinning with all the possibilities it could unlock, I got many more awesome Jotai utils for you.
 
-## atomWithDefault
+## atomWithStorage
 
-Let's begin with `atomWithDefault`
+I covered this one in the very beginning of the article, when I refactored the `useTheme` hook to use this special atom. It accepts a key(With which it is stored in localstorage), and the initial value. Then you change this atom, and its value will be persisted locally, and picked up after the page reloads.
+
+```js
+import { atomWithStorage } from 'jotai/utils';
+
+const darkModeAtom = atomWithStorage('darkMode', false);
+```
+
+This atom is also SSR friendly, so you can SSR your app away with absolutely no issues!
+
+Not only that, this atom can store value in `sessionStorage` too, so the atom's value will be persisted until the browser is closed. Handy if you're building a banking web app, where having short sessions is preferable.
+
+It also works with React Native, so it's much pretty much universal 😉
 
 ## atomWithReset
 
+Sometimes you need to reset your state to what it was originally. Traditionally, the way to do that has been to store initial value in a variable, create state with that variable as the value, and when needed, `setState` back to that initial value! The code would look like this 👇
+
+```js
+import { atom, useAtom } from 'jotai';
+
+const initialValue = 'light';
+
+const themeAtom = atom(initialValue);
+
+function ThemeSwitcher() {
+  const [theme, setTheme] = useAtom(themeAtom);
+
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+  const resetTheme = () => setTheme(initialValue);
+
+  return (
+    <>
+      <button onClick={toggleTheme}>Toggle theme</button>
+
+      <button onClick={resetTheme}>Reset theme</button>
+    </>
+  );
+}
+```
+
+This is fairly easy, but here's a more Jotai-ish way of doing the same thing 👇
+
+```js
+import { useAtom } from 'jotai';
+import { atomWithReset, useResetAtom } from 'jotai/utils';
+
+const themeAtom = atomWithReset('light');
+
+function ThemeSwitcher() {
+  const [theme, setTheme] = useAtom(themeAtom);
+  const reset = useResetAtom(themeAtom);
+
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+
+  return (
+    <>
+      <button onClick={toggleTheme}>Toggle theme</button>
+
+      <button onClick={reset}>Reset theme</button>
+    </>
+  );
+}
+```
+
+As you can see, we simplified our component a little. Not much, in this case, as it's a very simple example. But I personally have used this reset atom in my apps with full blown complex logic based components, and it just makes the code much more sane and idiomatic and bug-free. Yes, this simple atom which only resets to its initial value.
+
 ## selectAtom
+
+If there was a coolness counter for libraries and frameworks, Jotai alone would've broken it with this little util.
+
+Say you have this big object that many components rely on, but only on different parts of it
+
+```js
+const defaultPerson = {
+  name: {
+    first: 'Jane',
+    last: 'Doe',
+  },
+  birth: {
+    year: 2000,
+    month: 'Jan',
+    day: 1,
+    time: {
+      hour: 1,
+      minute: 1,
+    },
+  },
+};
+
+// Original atom.
+const personAtom = atom(defaultPerson);
+
+// Tracks person.name. Updated when person.name object changes, even
+// if neither name.first nor name.last actually change.
+const nameAtom = selectAtom(personAtom, (person) => person.name);
+```
 
 ## freezeAtom
 
