@@ -28,7 +28,5 @@
       "permanent": false,
       "destination": "https://dev.to/puruvj"
     }
-  ],
-
-  "rewrites": [{ "source": "/(.*)", "destination": "/404.html" }]
+  ]
 }
