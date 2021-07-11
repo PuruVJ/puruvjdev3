@@ -1,8 +1,6 @@
 <script context="module" lang="ts">
-  import Icon from '$lib/components/Icon.svelte';
   import { fadeIn, fadeOut } from '$lib/fade';
   import type { IWork } from '$lib/interfaces/work.interface';
-  import { mdiGithub, mdiWeb } from '@mdi/js';
   import type { Load } from '@sveltejs/kit';
   import { onMount } from 'svelte';
 
@@ -16,6 +14,8 @@
       return;
     }
   };
+
+  export const prerender = true;
 </script>
 
 <script lang="ts">
