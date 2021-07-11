@@ -185,13 +185,17 @@
     section {
       flex-direction: column;
 
-      img {
+      figure {
         width: 100% !important;
       }
     }
 
     .info-section {
       padding: 0;
+    }
+
+    .title {
+      line-height: 1.618;
     }
   }
 </style>
