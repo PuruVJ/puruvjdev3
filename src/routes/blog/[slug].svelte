@@ -17,8 +17,12 @@
       const data = await res.json();
 
       return { props: { blogData: data } };
-    } catch {}
+    } catch(e) {
+      console.log(e)
+    }
   };
+
+  export const prerender = true;
 </script>
 
 <script lang="ts">
@@ -37,9 +41,9 @@
 
   onMount(() => {
     document.body.classList.remove('background');
-    
+
     import('lazysizes');
-    
+
     throttledHandler = throttle(50, false, handleProgressBar);
     document.addEventListener('scroll', throttledHandler);
     return () => document.removeEventListener('scroll', throttledHandler);

@@ -18,7 +18,7 @@ export async function generateWorksList() {
   for (let work of works) {
     const { image, description, title } = work;
     const img = (await optimizeBlogImages(
-      `../static/works/${image}`,
+      `../../static/works-data/${image}`,
       `${title} photo`,
       false,
     )) as ExportedImagesMetaData;

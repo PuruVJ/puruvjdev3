@@ -11,7 +11,7 @@ const config = {
       crawl: true,
       enabled: true,
       force: false,
-      pages: ['*', '/blog', '/works'],
+      pages: ['*'],
     },
   },
 
