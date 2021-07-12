@@ -48,6 +48,8 @@
   <main tabindex="-1" in:fadeIn out:fadeOut>
     <h1>Blog</h1>
 
+    <!-- This is here so sveltekit will prerender the blog pages too. Apparently it's not doing that 
+    if I just mention the BlogList component here -->
     {#each blogsList as { id }}
       <!-- svelte-ignore a11y-missing-content -->
       <a hidden={browser} href="/blog/{id}" />
