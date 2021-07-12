@@ -17,7 +17,9 @@
       const data = await res.json();
 
       return { props: { blogData: data } };
-    } catch {}
+    } catch(e) {
+      console.log(e)
+    }
   };
 
   export const prerender = true;

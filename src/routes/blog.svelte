@@ -16,6 +16,8 @@
 </script>
 
 <script lang="ts">
+  import { browser } from '$app/env';
+
   onMount(() => {
     document.body.classList.add('background');
   });
@@ -46,14 +48,10 @@
   <main tabindex="-1" in:fadeIn out:fadeOut>
     <h1>Blog</h1>
 
+    {#each blogsList as { id }}
+      <!-- svelte-ignore a11y-missing-content -->
+      <a hidden={browser} href="/blog/{id}" />
+    {/each}
     <BlogList {blogsList} />
   </main>
 </div>
-
-<!-- <style lang="scss">
-  h1 {
-    width: 100%;
-    text-align: center;
-    font-size: 2.618rem * 1.618;
-  }
-</style> -->
