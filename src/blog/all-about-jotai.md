@@ -439,6 +439,12 @@ This atom, when you set its value, triggers the custom `write` function we provi
 
 > Beware though: As magical as this seems, it's two-way data binding. There have been controversies in past about it, and rightfully so, as debugging and keeping the flow of data sane becomes extremely hard with these. That's why React itself has only one-way data binding. So use this atom carefully.
 
+# Async Atoms
+
+From this point, we enter very dangerous territory: **Async rendering, aka React Suspense aka Concurrent Mode**.
+
+Sometimes you atoms have to be asynchronous, that is, rather than getting values instantly, they pull from a remote source using `fetch`, which is when you have to suspend the rendering and wait
+
 # The Best of Utils
 
 If you loved `atomWithStorage` and your head is spinning with all the possibilities it could unlock, I got many more awesome Jotai utils for you.
@@ -516,7 +522,7 @@ As you can see, we simplified our component a little. Not much, in this case, as
 
 If there was a coolness counter for libraries and frameworks, Jotai alone would've broken it with this little util.
 
-Say you have this big object that many components rely on, but only on different parts of it
+Say you have this big object.
 
 ```js
 const defaultPerson = {
@@ -537,16 +543,108 @@ const defaultPerson = {
 
 // Original atom.
 const personAtom = atom(defaultPerson);
-
-// Tracks person.name. Updated when person.name object changes, even
-// if neither name.first nor name.last actually change.
-const nameAtom = selectAtom(personAtom, (person) => person.name);
 ```
+
+And say, a lot of components rely on this specific atom, but need only parts of this.
+
+The thing, is when you update this atom, all the components relying on this atom will **rerender**. Even if you change just the `birth.time.minute`, whole thing is gonna count as update and all the components will re-render. This is how React works, unfortunately.
+
+But worry not, for Jotai has a solution for this too! `selectAtom` allows you to create a derived atom with only a subpath of the whole object.
+
+Watch 👇
+
+```js
+const firstNameAtom = selectAtom(personAtom, (person) => person.name.first);
+```
+
+`firstNameAtom` is a **readonly** derived atom, which will only trigger when the `person.name.first` property will change, and it itelf will hold the value of `person.name.first`.
+
+You can update `birth.time.hour` field(By updating whole atom with new values), and the component relying on `firstNameAtom` will remain unchanged. Magical, right?
+
+### Applying on Objects
+
+There arises a problem: If you listen to a field that is an object, `person.birth`, this atom isn't gonna be very efficient. Jotai uses the equality check(`===`) to check if the atom's part is changed or not and should be re-rendered. The thing is, no 2 objects are ever the same. The `===` checks objects by reference, not values. So basically, this atom is pretty useless in that scenario. But not quite!
+
+You can provide a 3rd argument to this `selectAtom`, which is your own version of an equality check. You can write your custom function to check the objects.
+
+```js
+const birthAtom = selectAtom(personAtom, (person) => person.birth, deepEqual);
+```
+
+OFC, writing your own `deepEqual` is hard, so it's recommended to go with `lodash-es`'s `isEqual` function.
+
+```js
+import { isEqual } from 'lodash-es';
+
+const birthAtom = selectAtom(personAtom, (person) => person.birth, isEqual);
+```
+
+> If seeing lodash gives you anxiety about bundle size, I assure you, `isEqual` of `lodash-es` is tree-shakeable, just **4.4KB** minified, and even smaller in gzip/brotli. So no worries 😁
+
+This can take the performance of your app from zero to hero, literally!
 
 ## freezeAtom
 
-## splitAtom
+```js
+import { atom } from 'jotai';
+import { freezeAtom } from 'jotai/utils';
+
+const objAtom = freezeAtom(atom({ count: 0 }));
+```
+
+freezeAtom takes an existing atom and returns a new derived atom. The returned atom is **"frozen"** which means when you use the atom with `useAtom` in components or get in other atoms, the atom value will be deeply frozen with `Object.freeze`. It would be useful to find bugs where you accidentally tried to mutate objects which can lead to unexpected behavior.
+
+This atom is mostly for debugability, for when you mutate an object state(which you aren't supposed to in React, but hey, we're all humans 😁). This is such a common case, that I'm really glad Jotai folks are providing such high quality debugging tools.
 
 ## waitForAll
 
-And these are only half of all utils provided by Jotai. There are so many, I'd rather write a whole book about them rather than this meager blog post that you're reading 😉. Head over to [Jotai Documentation](https://docs.pmnd.rs/jotai/api/utils) to learn about all of them
+Remember the section above about Async atoms? This util is for that, and quite a handy one it is.
+
+```js
+const dogsAtom = atom(async (get) => {
+  const response = await fetch('/dogs');
+  return await response.json();
+});
+
+const catsAtom = atom(async (get) => {
+  const response = await fetch('/cats');
+  return await response.json();
+});
+
+const App = () => {
+  const [dogs] = useAtom(dogsAtom);
+  const [cats] = useAtom(catsAtom);
+  // ...
+};
+```
+
+So you have these 2 async atoms, and you're using them in the app. All fine. But there's a little problem here: The component will wait for first atom `dogsAtom` to go fetch data, return, then it will move to the next atom `catsAtom`. We don't want this. Both these atoms are independent of each other, we should rather fetch them in parallel(Or concurrently, if you are a hardcore JavaScripter 😉)
+
+So, we basically wanna do something like a `await Promise.all(...)` on these atoms. The way to do that is using the `waitForAll` util.
+
+After using, our code becomes something like this 👇
+
+```js
+const dogsAtom = atom(async (get) => {
+  const response = await fetch('/dogs');
+  return await response.json();
+});
+
+const catsAtom = atom(async (get) => {
+  const response = await fetch('/cats');
+  return await response.json();
+});
+
+const App = () => {
+  const [[dogs, cats]] = useAtom(waitForAll([dogsAtom, catsAtom]));
+  // ...
+};
+```
+
+Now it waits for both of them to resolve, and then returns an array of the data returned by both. Kinda like a `await Promise.all`.
+
+Literally, at this point, React should absorb Jotai into itself, it's way too good!!
+
+And these are only half of all utils provided by Jotai. There are so many, I'd could write a whole book about it 🤯. Head over to [Jotai Documentation](https://docs.pmnd.rs/jotai/api/utils) to learn about em.
+
+# Jotai is good with relatives 🤝
