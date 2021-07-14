@@ -413,7 +413,7 @@ const yCoordinateAtom = atom(0);
 
 // Compose 'em all
 const distanceFromOriginAtom = atom((get) =>
-  Math.sqrt(get(xCoordinateAtom) ** 2 + get(yCoordinateAtom)),
+  Math.sqrt(get(xCoordinateAtom) ** 2 + get(yCoordinateAtom) ** 2),
 );
 ```
 
@@ -756,3 +756,11 @@ function UpdateUser() {
 ```
 
 Here, the `setUser` works differently. It's a callback, which passes you the current value of the state. This value is a copy of the original value. You can mutate this copy as much as you want inside the callback, and finally just return it, jotai & immer will automatically reconcile the changes without any of the bugs that come with mutating! So great, right?! 🤩🤩
+
+# Conclusion
+
+Hmmmphh!! That was a big article!! Clap yourself on the back for making it to the end(Skimming through counts too 😉).
+
+This article is just a little glimpse of Jotai!! There's so much more at [Jotai docs](https://docs.pmnd.rs/jotai/introduction), check it out!
+
+Peace out ✌️
