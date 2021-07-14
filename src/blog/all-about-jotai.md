@@ -443,7 +443,36 @@ This atom, when you set its value, triggers the custom `write` function we provi
 
 From this point, we enter very dangerous territory: **Async rendering, aka React Suspense aka Concurrent Mode**.
 
-Sometimes you atoms have to be asynchronous, that is, rather than getting values instantly, they pull from a remote source using `fetch`, which is when you have to suspend the rendering and wait
+Sometimes you atoms have to be asynchronous, that is, rather than getting values instantly, they pull from a remote source using `fetch`, which is when you have to suspend the rendering and wait for the data to come back.
+
+Here's a little code demonstration of using async atom 👇
+
+```js
+const fetchCountAtom = atom(
+  (get) => get(countAtom),
+  async (_get, set, url) => {
+    const response = await fetch(url);
+    set(countAtom, (await response.json()).count);
+  },
+);
+
+function Controls() {
+  const [count, compute] = useAtom(fetchCountAtom);
+  return <button onClick={() => compute('http://count.host.com')}>compute</button>;
+}
+```
+
+But this above won't work if you don't wrap `Controls` in a `Suspense` 👇
+
+```js
+<Suspense fallback={<span />}>
+  <Controls />
+</Suspense>
+```
+
+Async Atoms are extremely useful in building real world apps, cuz these apps are mostly CRUD apps with data fetching added in.
+
+> Note: At the time of writing, the latest React version is v17. React 18 will have a different kind of concurrent mode/Suspense, the usage may differ for you if your world has a React 18 😉
 
 # The Best of Utils
 
@@ -648,3 +677,82 @@ Literally, at this point, React should absorb Jotai into itself, it's way too go
 And these are only half of all utils provided by Jotai. There are so many, I'd could write a whole book about it 🤯. Head over to [Jotai Documentation](https://docs.pmnd.rs/jotai/api/utils) to learn about em.
 
 # Jotai is good with relatives 🤝
+
+Jotai isn't like a lot of other libraries which are like: "You shall only have me in thy `package.json`!!!"
+
+No, Jotai doesn't work like that! Jotai itself is a great state management libraries, but it allows you to seamlessly integrate with other state management libraries!!
+
+Here are all the official integrations that come with jotai:
+
+- Immer
+- Optics
+- React Query
+- XState
+- Valtio
+- Zustand
+- Redux
+- URQL
+
+Now, at this point, the blog post is way too big to cover these integrations too, but I wanna cover `immer`. I absolutely love this library. Why? Because of the biggest pain point with React state: **Immutability**
+
+Immutability is great, and it makes wrapping your head around React State easy, but it can make things very hard when your state is an object. Then you have to do the whole song and dance of spreading the object and merging with the properties you wanna update
+
+```js
+function UpdateUser() {
+  const [user, setUser] = useState({
+    id: 23,
+    name: 'Luke Skywalker',
+    dob: new Date('25 December, 19 BBY'),
+  });
+
+  // Update the dob
+  const updateDob = () => setUser({ ...user, dob: new Date('25 November, 200ABY') });
+
+  return <button onClick={updateDob}>Update DOB</button>;
+}
+```
+
+As you can see in the `updateDob` method, we have to spread original object, and pass the field we wanna update. This is OK. But what if the object is many levels deep and we wanna update an object very deep.
+
+It becomes **soooo** convoluted that I personally never even tried it, I just rearchitechted my state to be shallower in some way and then update that. I can't even write it in this blog posts, don't have the brains for it!!
+
+I am more of a Svelte version than a React person, and in Svelte, you can simply mutate the state and it just works
+
+```js
+user.dob = new Date('25 November, 200ABY');
+```
+
+And it goes extremely deep too!!
+
+```js
+state.depth1.depth2.depth3.depth4 = 'seomthing';
+```
+
+So all the song and dance required in React always feels wrong to me.
+
+But this is where **Immer** comes in. Immer allows you to directly mutate the state, and it just works. Here's how it works 👇
+
+```js
+import { atomWithImmer } from 'jotai/immer';
+
+const userAtom = atomWithImmer({
+  id: 23,
+  name: 'Luke Skywalker',
+  dob: new Date('25 December, 19 BBY'),
+});
+
+function UpdateUser() {
+  const [user, setUser] = useAtom(userAtom);
+
+  // Update the dob
+  const updateDob = () =>
+    setUser((user) => {
+      user.dob = new Date('25 November, 200ABY');
+      return user;
+    });
+
+  return <button onClick={updateDob}>Update DOB</button>;
+}
+```
+
+Here, the `setUser` works differently. It's a callback, which passes you the current value of the state. This value is a copy of the original value. You can mutate this copy as much as you want inside the callback, and finally just return it, jotai & immer will automatically reconcile the changes without any of the bugs that come with mutating! So great, right?! 🤩🤩
