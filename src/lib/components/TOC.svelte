@@ -56,9 +56,7 @@
       margin-left: 0.5rem;
 
       white-space: nowrap;
-
       color: rgba(var(--app-color-dark-rgb), 0.9);
-
       font-weight: 400;
 
       &:hover {

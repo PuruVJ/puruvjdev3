@@ -63,7 +63,7 @@
   font-style: normal;
   font-weight: 400;
   src: local('Atkinson Hyperlegible'),
-    url('../../static/fonts/Atkinson-Hyperlegible-Regular-102a.woff2') format('woff2');
+    url('/fonts/Atkinson-Hyperlegible-Regular-102a.woff2') format('woff2');
   font-display: swap;
 }
 /* quicksand-600 - latin */
@@ -72,6 +72,6 @@
   font-style: normal;
   font-weight: 600;
   src: local('Atkinson Hyperlegible'),
-    url('../../static/fonts/Atkinson-Hyperlegible-Bold-102a.woff2') format('woff2');
+    url('/fonts/Atkinson-Hyperlegible-Bold-102a.woff2') format('woff2');
   font-display: swap;
 }
