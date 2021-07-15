@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
   import LikeButton from '$lib/components/LikeButton.svelte';
+  import Toc from '$lib/components/TOC.svelte';
   import { fadeIn, fadeOut } from '$lib/fade';
   import { formatDate } from '$lib/helpers/format-date';
   import type { IBlog } from '$lib/interfaces/blog.interface';
@@ -9,16 +10,19 @@
   import { throttle } from 'throttle-debounce';
   import '../../css/blog-page-style.scss';
 
-  export const load: Load = async ({ page, fetch }) => {
-    const { slug } = page.params;
-
+  export const load: Load = async ({
+    page: {
+      params: { blogID },
+    },
+    fetch,
+  }) => {
     try {
-      const res = await fetch(`/data/blog/${slug}.json`);
+      const res = await fetch(`/data/blog/${blogID}.json`);
       const data = await res.json();
 
       return { props: { blogData: data } };
-    } catch(e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -27,7 +31,7 @@
 
 <script lang="ts">
   export let blogData: IBlog;
-  const { title, body, date, description, cover_image, id, reading_time, series } = blogData;
+  const { title, body, date, description, cover_image, id, reading_time, series, toc } = blogData;
 
   const browserTitle = title.replace(/<img.*?alt="(.*?)"[^\>]+>/g, '$1');
 
@@ -38,7 +42,6 @@
   }
 
   let throttledHandler: () => void;
-
   onMount(() => {
     document.body.classList.remove('background');
 
@@ -67,6 +70,7 @@
 </svelte:head>
 
 <main in:fadeIn out:fadeOut>
+  <Toc {toc} />
   <LikeButton blogID={id} />
   <div class="progress" aria-roledescription="progress">
     <div class="indicator" style="transform: scaleX({$readingProgress})" />
@@ -96,7 +100,7 @@
 
   #blog-content {
     font-size: 1.3rem;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
   }
 
   div.progress {
@@ -130,7 +134,8 @@
     font-family: 'JetBrains Mono', monospace;
 
     mark {
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Jetbrains Mono', monospace;
+      font-weight: 600;
     }
   }
 </style>
