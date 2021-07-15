@@ -12,7 +12,7 @@ This article aims to marry both the JS and CSS approaches into one single approa
 
 # Elaboration
 
-## About CSS Variables method
+## CSS Variables method
 
 This is how you would theme your site using just CSS variables
 
@@ -50,7 +50,7 @@ Theming using CSS variables is extremely fast. It's as if you're reaching into t
 
 But one drawback here is the fact that you have to remember these variables' names, because at the time of writing, VSCode doesn't autocomplete variables from other files, you're basically typing blind, without any support from the editor.
 
-## Using React Context(AKA JS only approach)
+## React Context(AKA JS only approach)
 
 The other way is using React Context to change themes, so you have a big JS object containing your colors:
 
