@@ -15,17 +15,12 @@ import {
 import { ASSETS_ROOT_PATH } from './constants';
 import { UnwrapPromise } from './types';
 
-/**
- * @param {Object} obj
- * @param {import('./types').BlogData[]} obj.blogData
- * @param {import('./types').Series} obj.seriesList
- */
 export async function blogMDHtml({
   blogData,
   seriesList,
 }: UnwrapPromise<ReturnType<typeof getBlogData>>) {
   const highlighter = await getHighlighter({
-    theme: 'material-theme-palenight',
+    theme: 'material-palenight',
   });
 
   const md = markdown({ html: true, highlight: highlighter.codeToHtml });
@@ -64,7 +59,7 @@ export async function blogMDHtml({
     const reading_time = readingTime(html, { wordsPerMinute: 400 }).minutes;
 
     fsp.writeFile(
-      `${ASSETS_ROOT_PATH}/blog/${id}.json`,
+      `${ASSETS_ROOT_PATH}/data/blog/${id}.json`,
       JSON.stringify({
         cover_image,
         title,

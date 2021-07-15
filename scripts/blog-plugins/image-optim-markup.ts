@@ -18,15 +18,15 @@ export async function imageOptimMarkupPlugin(document: Document) {
     console.log(src);
 
     // Now lets put the picture tag in there
-    const divContainer = document.createElement('div');
-    divContainer.classList.add('picture-container');
+    const containerDiv = document.createElement('div');
+    containerDiv.classList.add('picture-container');
 
     // Let's add the main stuff to this picture
     // @ts-ignore
-    divContainer.innerHTML = await optimizeBlogImages(src);
+    containerDiv.innerHTML = await optimizeBlogImages(src, img.alt);
 
     // Put it after the img
-    img.after(divContainer);
+    img.after(containerDiv);
   }
 
   return document;

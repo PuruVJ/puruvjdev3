@@ -13,41 +13,39 @@
     const { slug } = page.params;
 
     try {
-      const res = await fetch(`/blog/${slug}.json`);
-
+      const res = await fetch(`/data/blog/${slug}.json`);
       const data = await res.json();
 
       return { props: { blogData: data } };
-    } catch (e) {
-      return;
+    } catch(e) {
+      console.log(e)
     }
   };
+
+  export const prerender = true;
 </script>
 
 <script lang="ts">
   export let blogData: IBlog;
-  let { title, body, date, description, cover_image, id, reading_time, series } = blogData;
+  const { title, body, date, description, cover_image, id, reading_time, series } = blogData;
 
   const browserTitle = title.replace(/<img.*?alt="(.*?)"[^\>]+>/g, '$1');
 
   function handleProgressBar() {
-    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const currentY = document.documentElement.scrollTop;
-    // console.log({ currentY, height, sh: document.body.scrollHeight });
+    const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
 
-    $readingProgress = currentY / height;
+    $readingProgress = scrollTop / (scrollHeight - clientHeight);
   }
 
   let throttledHandler: () => void;
 
   onMount(() => {
-    throttledHandler = throttle(50, false, handleProgressBar);
     document.body.classList.remove('background');
 
     import('lazysizes');
 
+    throttledHandler = throttle(50, false, handleProgressBar);
     document.addEventListener('scroll', throttledHandler);
-
     return () => document.removeEventListener('scroll', throttledHandler);
   });
 
@@ -68,7 +66,7 @@
   <link rel="canonical" href="https://puruvj.dev/blog/{id}" />
 </svelte:head>
 
-<main class="" in:fadeIn out:fadeOut>
+<main in:fadeIn out:fadeOut>
   <LikeButton blogID={id} />
   <div class="progress" aria-roledescription="progress">
     <div class="indicator" style="transform: scaleX({$readingProgress})" />
@@ -135,7 +133,4 @@
       font-family: 'Quicksand', sans-serif;
     }
   }
-
-  // :global(#blog-content a:not(.heading-link)) {
-  // }
 </style>

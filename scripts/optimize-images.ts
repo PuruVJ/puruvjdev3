@@ -10,7 +10,7 @@ import { ExportedImagesMetaData } from './types';
  * Optimize the image and create its different versions
  * Assuming the image is media folder in assets
  */
-export async function optimizeBlogImages(src: string, returnMarkup = true) {
+export async function optimizeBlogImages(src: string, altText: string, returnMarkup = true) {
   // Start measuring
   console.log('Starting to retrieve/create image/data');
 
@@ -42,6 +42,7 @@ export async function optimizeBlogImages(src: string, returnMarkup = true) {
       org: getOrgPath('small'),
     },
     aspectHTW: 1,
+    format: format as 'jpg' | 'png',
   };
 
   let shouldOptimize = true;
@@ -66,7 +67,7 @@ export async function optimizeBlogImages(src: string, returnMarkup = true) {
     // Log the time
     console.log(`Finished.`);
     console.log();
-    return returnMarkup ? imageMarkup(list, format) : list;
+    return returnMarkup ? imageMarkup(list, format, altText) : list;
   }
 
   // Optimize if GIF
@@ -112,11 +113,11 @@ export async function optimizeBlogImages(src: string, returnMarkup = true) {
   list.aspectHTW = bigOriginal.height / bigOriginal.width;
 
   // Write inside the folder
-  await fsp.writeFile(`${folderPath}/large.${format}`, bigOriginalBuffer);
-  await fsp.writeFile(`${folderPath}/small.${format}`, smallOriginalBuffer);
+  fsp.writeFile(`${folderPath}/large.${format}`, bigOriginalBuffer);
+  fsp.writeFile(`${folderPath}/small.${format}`, smallOriginalBuffer);
 
   // Also write the data.json
-  await fsp.writeFile(
+  fsp.writeFile(
     `${folderPath}/data.json`,
     JSON.stringify({
       aspectHTW: list.aspectHTW,
@@ -128,7 +129,7 @@ export async function optimizeBlogImages(src: string, returnMarkup = true) {
   console.log();
 
   // Return the list
-  return returnMarkup ? imageMarkup(list, format) : list;
+  return returnMarkup ? imageMarkup(list, format, altText) : list;
 }
 
 //   optimizeBlogImages('../../static/media/deep-dive-preact-source--wait-what.gif', false);
