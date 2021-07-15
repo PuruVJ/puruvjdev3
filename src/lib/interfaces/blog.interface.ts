@@ -8,4 +8,12 @@ export interface IBlog {
   reading_time?: number;
   series?: string;
   seriesIndex?: number;
+  toc: TOC[];
 }
+
+export type TOC = {
+  indent: number;
+  id: string;
+  title: string;
+  length: number;
+};
