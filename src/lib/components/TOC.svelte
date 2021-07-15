@@ -57,7 +57,7 @@
 
       white-space: nowrap;
 
-      color: rgba(var(--app-color-dark-rgb), 0.7);
+      color: rgba(var(--app-color-dark-rgb), 0.9);
 
       font-weight: 400;
 
