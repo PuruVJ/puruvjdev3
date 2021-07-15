@@ -48,9 +48,9 @@ export async function blogMDHtml({
       document = seriesLinksPlugin(document, seriesPostsList, series, id);
     }
 
-    document = twemojiPlugin(document);
-
     const toc = generateTOC(document);
+
+    document = twemojiPlugin(document);
 
     // Finally
     html = document.body.innerHTML;

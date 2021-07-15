@@ -11,6 +11,14 @@
     </image>
     
           <item>
+            <title>Jotai: The ultimate React State Management // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/all-about-jotai</link>
+            <description>Jotai is a very new way of State management, and probably the best.</description>
+            <pubDate>Thu, 01 Jul 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
             <title>Get the most out of CSS Modules with TypeScript in 5 minutes // Puru Vijay</title>
             <link>https://puruvj.dev/blog/css-modules-typescript-intellisense</link>
             <description>If you're a TypeScript Dev, here are a few things you can do to get that sweet, sweet CSS class intellisense</description>

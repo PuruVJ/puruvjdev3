@@ -1,4 +1,5 @@
 import { htmlToText } from 'html-to-text';
+import twemoji from 'twemoji';
 
 type TOC = {
   indent: number;
@@ -19,10 +20,20 @@ export function generateTOC(document: Document) {
   for (let heading of headingEls) {
     const indent = heading.tagName === 'H1' ? 0 : heading.tagName === 'H2' ? 1 : 2;
     const id = heading.id;
-    const title = htmlToText(heading.innerHTML);
+    const title = htmlToText(heading.innerHTML).replace('#', '');
     const length = title.length;
 
-    TOCdata.push({ indent, id, title, length });
+    console.log({ title });
+
+    TOCdata.push({
+      indent,
+      id,
+      title: twemoji.parse(title, {
+        ext: '.svg',
+        folder: 'svg',
+      }),
+      length,
+    });
   }
 
   return TOCdata;

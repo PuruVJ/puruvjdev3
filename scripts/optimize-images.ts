@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import { cloudinary } from './cloudinary.js';
 import { ASSETS_ROOT_PATH, RELATIVE_ASSETS_PATH } from './constants';
 import { optimizeGif } from './gif-module';
-import { imageMarkup, gifMarkup } from './markup';
+import { imageMarkup, gifMarkup } from './img-markup';
 import { ExportedImagesMetaData } from './types';
 
 /**

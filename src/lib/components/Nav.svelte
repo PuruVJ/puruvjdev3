@@ -56,7 +56,7 @@
     align-items: center;
     grid-template-columns: 1fr auto 0 1fr;
 
-    font-family: 'Quicksand', monospace;
+    font-family: 'Jetbrains Mono', monospace;
     font-size: 1.2rem;
 
     background: var(--app-color-shell);
@@ -122,7 +122,7 @@
     padding: 0rem 0.3rem;
     margin: 0.5rem 0.5rem;
 
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color) !important;
 
     position: relative;

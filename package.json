@@ -2,7 +2,7 @@
   "name": "puruvjdev3",
   "version": "0.0.1",
   "scripts": {
-    "start": "svelte-kit dev",
+    "start": "svelte-kit dev --port 1211",
     "prebuild": "cd scripts && esmo prebuild.ts",
     "build": "svelte-kit build",
     "postbuild": "cd scripts && node postbuild.js & npm run notify:sitemap",
