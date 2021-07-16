@@ -23,8 +23,6 @@ export function generateTOC(document: Document) {
     const title = htmlToText(heading.innerHTML).replace('#', '');
     const length = title.length;
 
-    console.log({ title });
-
     TOCdata.push({
       indent,
       id,
