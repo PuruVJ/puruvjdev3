@@ -5,7 +5,7 @@
 
 <a
   aria-label="Contact Me"
-  href="https://bh0r2vt8n2f.typeform.com/to/tVdjlnjE"
+  href="mailto:devpuruvj@gmail.com"
   target="_blank"
   rel="noopener noreferrer"
 >
