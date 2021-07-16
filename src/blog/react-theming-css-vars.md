@@ -101,4 +101,78 @@ This can make the user experience feel suboptimal!
 
 Summarising both approaches 👇
 
-![SUmmary of both CSS and JS approaches](../../static/media/react-theming-css-vars--css-way-vs-js-way.png)
+![Summary of both CSS and JS approaches](../../static/media/react-theming-css-vars--css-way-vs-js-way.png)
+
+But it doesn't have to be this way! If you use CSS Variables and JavaScript in the right way, you can get blazing fast performance out of them, ans still have superb Developer experience.
+
+![Arms meme applied to CSS variables and JavaScript](../../static/media/react-theming-css-vars--arms-meme.png)
+
+# Setting up the CSS Variables
+
+Let's set up the basic CSS variables first. These are just the ones defined in the **CSS Modules Elaboration** section above
+
+```css
+body.light {
+  --app-color-primary: blue;
+  --app-color-primary-rgb: 0, 0, 255;
+  --app-color-primary-contrast: white;
+
+  --app-color-light: white;
+  --app-color-light-rgb: 255, 255, 255;
+  --app-color-light-contrast: black;
+
+  --app-color-dark: black;
+  --app-color-dark-rgb: 0, 0, 0;
+  --app-color-dark-contrast: white;
+}
+
+body.dark {
+  --app-color-primary: blue;
+  --app-color-primary-rgb: 0, 0, 255;
+  --app-color-primary-contrast: white;
+
+  --app-color-light: black;
+  --app-color-light-rgb: 0, 0, 0;
+  --app-color-light-contrast: white;
+
+  --app-color-dark: black;
+  --app-color-dark-rgb: 0, 0, 0;
+  --app-color-dark-contrast: white;
+}
+```
+
+> If this theming system's way of changing the `light` variable to a dark color feels counter-intuitive to you, you can create your own system too. I have personally used this theming system on half a dozen apps and it's extremely effective. Just my opinion 🙂
+
+# Setting them up in a JS Object
+
+Now, we'll do the same thing we did in the JS object, referencing colors, but this time we'll store the CSS Variable references here.
+
+Create a separate `themes.js` or `themes.ts` file and put this in there
+
+```ts
+const theme = {
+  colors: {
+    primary: {
+      main: 'var(--app-color-primary)',
+      rgb: 'var(--app-color-primary-rgb)',
+      contrast: 'var(--app-color-primary-contrast)',
+    },
+    light: {
+      main: 'var(--app-color-light)',
+      rgb: 'var(--app-color-light-rgb)',
+      contrast: 'var(--app-color-light-contrast)',
+    },
+    dark: {
+      main: 'var(--app-color-dark)',
+      rgb: 'var(--app-color-dark-rgb)',
+      contrast: 'var(--app-color-dark-light)',
+    },
+  },
+};
+```
+
+> ATTENTION 🛑: Do not make this object in a component or context or anywhere! It has to be in a separate JavaScript object, entirely out of React's clutches.
+
+# Putting into practise!
+
+# No theme switching without a theme switcher, eh?
