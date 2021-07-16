@@ -1,7 +1,7 @@
 ---
 title: Highly Performant React theming with CSS variables(With Intellisense 😉)
 description: Theme your React app with confidence, while also keeping the performance high
-date: 5 July, 2021
+date: 23 July, 2021
 ---
 
 Theming in React is an enigma. You'll find a thousand articles on different ways of theming in React. Some suggest going full JavaScript, using the context API. Some suggest going full CSS with just CSS Variables. All these are really great approaches in some very fine articles. So why another article on this topic then?
@@ -93,4 +93,12 @@ const themes = {
 };
 ```
 
-Then you basically put together Context and Providers, and have theme switching working. There's more boilerplate here, but the developer experience ultimately is really good. If you're using Context for theming, you're most probably using CSS-in-JS, so you'd be using these values like this
+Then you basically put together Context and Providers, and have theme switching working. There's more boilerplate here, but the developer experience ultimately is really good. If you're using Context for theming, you're most probably using CSS-in-JS.
+
+But the drawback here: Not-so-good User experience. JavaScript is a single threaded language. When you switch your theme, all components relying on the values will re-render, that is quite a bit of their DOM will be nuked and re-created with new values. Combine this with the fact that browser will try to relayout, and repaint at the same time as the re-rendering will be going on, this whole process can actually make the theme switching animation jankier: The user's mouse might stop moving, the animation itself won't happen in 60fps, elements might become un-interactive for a moment.
+
+This can make the user experience feel suboptimal!
+
+Summarising both approaches 👇
+
+![SUmmary of both CSS and JS approaches](../../static/media/react-theming-css-vars--css-way-vs-js-way.png)
