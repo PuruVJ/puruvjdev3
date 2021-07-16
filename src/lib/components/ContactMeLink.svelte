@@ -29,7 +29,7 @@
 
     background-color: rgba(var(--app-color-primary-rgb), 0.15);
 
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Comfortaa', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--app-color-primary);
@@ -45,7 +45,7 @@
     &:hover,
     &:focus {
       background-color: rgba(var(--app-color-primary-rgb), 0.3);
-      color: var(--app-color-primary);
+      color: var(--app-color-primary) !important;
     }
 
     &:focus-visible {
