@@ -122,7 +122,7 @@
     font-family: 'JetBrains Mono', monospace;
 
     mark {
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Atkinson Hyperlegible', sans-serif;
     }
   }
 </style>
