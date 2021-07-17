@@ -95,15 +95,15 @@ const themes = {
 
 Then you basically put together Context and Providers, and have theme switching working. There's more boilerplate here, but the developer experience ultimately is really good. If you're using Context for theming, you're most probably using CSS-in-JS.
 
-But the drawback here: Not-so-good User experience. JavaScript is a single threaded language. When you switch your theme, all components relying on the values will re-render, that is quite a bit of their DOM will be nuked and re-created with new values. Combine this with the fact that browser will try to relayout, and repaint at the same time as the re-rendering will be going on, this whole process can actually make the theme switching animation jankier: The user's mouse might stop moving, the animation itself won't happen in 60fps, elements might become un-interactive for a moment.
+But the drawback here: Not-so-good User experience. JavaScript is a single threaded language. When you switch your theme, all components relying on the values will re-render, that is quite a bit of their DOM will be nuked and re-created with new values. Combine this with the fact that browser will try to re-layout, and repaint at the same time as the re-rendering will be going on, this whole process can actually make the theme switching animation jankier: The user's mouse might stop moving, the animation itself won't happen in 60fps, elements might become un-interactive for a moment.
 
 This can make the user experience feel suboptimal!
 
-Summarising both approaches 👇
+Summarizing both approaches 👇
 
 ![Summary of both CSS and JS approaches](../../static/media/react-theming-css-vars--css-way-vs-js-way.png)
 
-But it doesn't have to be this way! If you use CSS Variables and JavaScript in the right way, you can get blazing fast performance out of them, ans still have superb Developer experience.
+But it doesn't have to be this way! If you use CSS Variables and JavaScript in the right way, you can get blazing fast performance out of them, and still have superb Developer experience.
 
 ![Arms meme applied to CSS variables and JavaScript](../../static/media/react-theming-css-vars--arms-meme.png)
 
@@ -177,6 +177,104 @@ const theme = {
 
 Now, here's the best part: Using our theme config JS variable!
 
-Here's a demo of using it in 2 of very famous CSS in JS libraries
+Here's a demo of using it in two of very famous CSS in JS libraries: **Styled Components** & **JSS**
 
-# No theme switching without a theme switcher, eh?
+## Styled Components
+
+Say you have a button element 👇
+
+```js
+import styled from 'styled-components';
+
+const Button = styled.button`
+  display: flex;
+
+  font-size: 1rem;
+`;
+```
+
+We wanna give it the primary color. That's as simple as 👇
+
+```js
+import styled from 'styled-components';
+import { theme } from './theme';
+
+const Button = styled.button`
+  display: flex;
+
+  font-size: 1rem;
+
+  background-color: ${theme.colors.primary.main};
+`;
+```
+
+## JSS
+
+Same example as Styled components in JSS 👇
+
+```js
+import { createUseStyles } from 'react-jss';
+import { theme } from './theme';
+
+const useStyles = createUseStyles({
+  button: {
+    display: 'flex',
+    fontSize: '1rem',
+    backgroundColor: theme.colors.primary.main,
+  },
+});
+```
+
+The usage is pretty consistent across different CSS in JS libraries.
+
+Ultimately the final CSS that reaches the browser is
+
+```css
+.button-[HASH] {
+  display: flex;
+  font-size: 1rem;
+  background-color: var(--app-color-primary);
+}
+```
+
+We're only passing references to the CSS variables in our `theme.colors.primary.main` JS expressions. Because this object lives out of React, and is ultimately never changed, the theme switching triggers no re-renders. All the repainting is taken care of smoothly by the browser, because we change the CSS variables directly based on `body.[class]`, no JavaScript required other changing the class.
+
+And as you type out the `theme.colors.*` part, VSCode auto fills it in for you, so you simply **can't** mistype a variable at all. Simply not possible.
+
+# Where it falls apart...
+
+The main focus here is on the intellisense provided by the editor. But that is simply not possible if you're using something like **CSS Modules**, where it's just **plain CSS**. There, you'll have to remember CSS variables names and hope you don't mess em up 🤐.
+
+# Bonus: Theme Switcher hook
+
+All this is good enough, but it's nothing without a handy theme switcher hook. So I'll drop a simple TypeScript hook that uses [Jotai](https://github.com/pmndrs/jotai) for maintaining global store value, switching themes, storing in localstorage, picks up user's device theme to start and SSR compliant.
+
+```js
+import { atom, useAtom } from 'jotai';
+import { useEffect } from 'react';
+
+const browser = typeof window !== 'undefined';
+
+const localValue = browser ? localStorage.getItem('theme') : 'light';
+const systemTheme =
+  browser && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+// The atom to hold the value goes here
+const themeAtom = atom(localValue || systemTheme);
+
+/** Sitewide theme */
+export function useTheme() {
+  const [theme, setTheme] = useAtom(themeAtom);
+
+  useEffect(() => {
+    if (!browser) return;
+
+    localStorage.setItem('theme', theme);
+
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
+  }, [theme]);
+
+  return [theme, setTheme];
+}
+```
