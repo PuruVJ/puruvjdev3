@@ -141,7 +141,7 @@ body.dark {
 }
 ```
 
-> If this theming system's way of changing the `light` variable to a dark color feels counter-intuitive to you, you can create your own system too. I have personally used this theming system on half a dozen apps and it's extremely effective. Just my opinion 🙂
+> If this theming system's way of changing the `light` variable to a dark color feels counter-intuitive to you, you can create your own system too. I have personally used this theming system in half a dozen apps and it's extremely effective. Just my opinion 🙂
 
 # Setting them up in a JS Object
 
@@ -173,6 +173,10 @@ const theme = {
 
 > ATTENTION 🛑: Do not make this object in a component or context or anywhere! It has to be in a separate JavaScript object, entirely out of React's clutches.
 
-# Putting into practise!
+# Putting into practice!
+
+Now, here's the best part: Using our theme config JS variable!
+
+Here's a demo of using it in 2 of very famous CSS in JS libraries
 
 # No theme switching without a theme switcher, eh?
