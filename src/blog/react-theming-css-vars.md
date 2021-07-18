@@ -237,13 +237,15 @@ Ultimately the final CSS that reaches the browser is
 }
 ```
 
-We're only passing references to the CSS variables in our `theme.colors.primary.main` JS expressions. Because this object lives out of React, and is ultimately never changed, the theme switching triggers no re-renders. All the repainting is taken care of smoothly by the browser, because we change the CSS variables directly based on `body.[class]`, no JavaScript required other changing the class.
+We're only passing references to the CSS variables in our `theme.colors.primary.main` JS expressions. Because this object lives out of React, and is ultimately never changed, the theme switching triggers no re-renders. All the repainting is taken care of smoothly by the browser, because we change the CSS variables directly based on `body.[class]`, no JavaScript required other than changing the class.
 
 And as you type out the `theme.colors.*` part, VSCode auto fills it in for you, so you simply **can't** mistype a variable at all. Simply not possible.
 
 # Where it falls apart...
 
 The main focus here is on the intellisense provided by the editor. But that is simply not possible if you're using something like **CSS Modules**, where it's just **plain CSS**. There, you'll have to remember CSS variables names and hope you don't mess em up 🤐.
+
+Thankfully though, if you use a similar theming system on every app you make, it gets embedded into your muscle memory and you don't even have to think about it anymore, so there's one way to have the intellisense embedded right in your brains 😅
 
 # Bonus: Theme Switcher hook
 
@@ -291,8 +293,6 @@ Finally, create the atom. This will be our main store where we actually store th
 
 > If running in SSR/Prerendering mode, `localValue = 'light'` and `systemTheme = 'light'`, `localValue || systemTheme` will turn out to be `light`. So, important point here: Your app in SSR will be themed with light theme, so if you prerender your app, it will end up with light theme, in terms of plain HTML. As the JavaScript loads, it will sync to the most relevant theme possible.
 
-> Why didn't I just put the `localValue` and `systemTheme` variables inside the hook? The reason: If I put them in the hook, everytime the hooks is initialized in any component, or a component re-renders, this hooks will run again, and will fetch these values again from localstorage and media queries. These are pretty fast, but localstorage is blocking, and when used a lot, can introduce jank. So we initialize these 2 vars once in the lifetime of the app, because we need these only to get the initial value.
-
 Finally let's begin our hook:
 
 Let's make this atom a local state using `useAtom`: `const [theme, setTheme] = useAtom(themeAtom);`. These will be our theme in the form of state. Themes can be modified using `setTheme`.
@@ -317,6 +317,8 @@ If it is successful, it goes on, and removes all the classes corresponding to ou
 Finally, we return the `[theme, setTheme]` pair as it is, so we can use it just like we use `useState`. You could also return these as objects `{ theme, setTheme }` giving them explicit naming.
 
 This is it for this hook!!
+
+> Why didn't I just put the `localValue` and `systemTheme` variables inside the hook? The reason: If I put them in the hook, everytime the hooks is initialized in any component, or a component re-renders, this hooks will run again, and will fetch these values again from localstorage and media queries. These are pretty fast, but localstorage is blocking, and when used a lot, can introduce jank. So we initialize these 2 vars once in the lifetime of the app, because we need these only to get the initial value.
 
 And I got my TypeScript kin covered too 😉👇
 
