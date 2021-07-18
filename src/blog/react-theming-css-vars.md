@@ -362,4 +362,4 @@ Note that you don't have to use Jotai here only!. You could recreate the same gl
 
 Hoped this articles helps you make a more informed decision for when you implement your own theme switching system, in terms of squeezing out more performance from the app!
 
-Peace out!
+Peace out! ✌️
