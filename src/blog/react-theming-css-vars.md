@@ -278,3 +278,86 @@ export function useTheme() {
   return [theme, setTheme];
 }
 ```
+
+A lot going here. So here's the breakdown.
+
+Checking whether the code is running in browser or not by checking `typeof window !== 'undefined';`
+
+We get the value stored in localstorage. If localstorage has the theme in it, then we'll consider it the highest priority, as it would be the one chosen by the user. Also, because there's no localstorage in Node, We have to fallback to default value of `light` if it's running in SSR mode.
+
+We also retrieve the device preference using `prefers-color-scheme: dark`, in case the localstorage value doesn't exist. Again, this falls back to value `light` if device preference is `dark` or code is running in SSR.
+
+Finally, create the atom. This will be our main store where we actually store the current theme, usable and changeable as state. Notice the value we give it: `localValue || systemTheme`. Here's what can happen with these values:
+
+> If running in SSR/Prerendering mode, `localValue = 'light'` and `systemTheme = 'light'`, `localValue || systemTheme` will turn out to be `light`. So, important point here: Your app in SSR will be themed with light theme, so if you prerender your app, it will end up with light theme, in terms of plain HTML. As the JavaScript loads, it will sync to the most relevant theme possible.
+
+> Why didn't I just put the `localValue` and `systemTheme` variables inside the hook? The reason: If I put them in the hook, everytime the hooks is initialized in any component, or a component re-renders, this hooks will run again, and will fetch these values again from localstorage and media queries. These are pretty fast, but localstorage is blocking, and when used a lot, can introduce jank. So we initialize these 2 vars once in the lifetime of the app, because we need these only to get the initial value.
+
+Finally let's begin our hook:
+
+Let's make this atom a local state using `useAtom`: `const [theme, setTheme] = useAtom(themeAtom);`. These will be our theme in the form of state. Themes can be modified using `setTheme`.
+
+Next thing, we got the most important part of our hook that will actually make the current theme known to our CSS.
+
+```ts
+useEffect(() => {
+  if (!browser) return;
+
+  localStorage.setItem('theme', theme);
+
+  document.body.classList.remove('light', 'dark');
+  document.body.classList.add(theme);
+}, [theme]);
+```
+
+It's `useEffect` that runs whenever `theme` changes, as you can see in the array in the 2nd argument. When this runs, it checks if the code is running in browser. If it isn't, it simply stops further execution by putting a `return`.
+
+If it is successful, it goes on, and removes all the classes corresponding to out themes on `<body>`, then it adds the class corresponding to the latest value of `theme` variable.
+
+Finally, we return the `[theme, setTheme]` pair as it is, so we can use it just like we use `useState`. You could also return these as objects `{ theme, setTheme }` giving them explicit naming.
+
+This is it for this hook!!
+
+And I got my TypeScript kin covered too 😉👇
+
+```ts
+import { atom, useAtom } from 'jotai';
+import { useEffect } from 'react';
+
+export type Theme = 'light' | 'dark';
+
+const browser = typeof window !== 'undefined';
+
+const localValue = (browser ? localStorage.getItem('theme') : 'light') as Theme;
+const systemTheme: Theme =
+  browser && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+// The atom to hold the value goes here
+const themeAtom = atom<Theme>(localValue || systemTheme);
+
+/** Sitewide theme */
+export function useTheme() {
+  const [theme, setTheme] = useAtom(themeAtom);
+
+  useEffect(() => {
+    if (!browser) return;
+
+    localStorage.setItem('theme', theme);
+
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
+  }, [theme]);
+
+  return [theme, setTheme] as const;
+}
+```
+
+So this is the final code we got for switching themes robustly. This hook is simple and understandable (I hope 😅), due to the simplicity of Jotai.
+
+Note that you don't have to use Jotai here only!. You could recreate the same global store value with **React Context**, but that includes some more boilerplate.
+
+# Conclusion
+
+Hoped this articles helps you make a more informed decision for when you implement your own theme switching system, in terms of squeezing out more performance from the app!
+
+Peace out!
