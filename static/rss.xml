@@ -11,6 +11,14 @@
     </image>
     
           <item>
+            <title>Near-native TypeScript in NodeJS // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/near-native-typescript-in-node</link>
+            <description>It's hard to get TypeScript working in NodeJS. You got tons of config to set up, and it can get irritating with the build times.</description>
+            <pubDate>Sun, 25 Jul 2021 18:30:00 GMT</pubDate>
+          </item>
+        
+
+          <item>
             <title>Get the most out of CSS Modules with TypeScript in 5 minutes // Puru Vijay</title>
             <link>https://puruvj.dev/blog/css-modules-typescript-intellisense</link>
             <description>If you're a TypeScript Dev, here are a few things you can do to get that sweet, sweet CSS class intellisense</description>
