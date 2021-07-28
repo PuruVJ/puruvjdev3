@@ -17,7 +17,7 @@ But for browser, it isn't as big of an issue adding all these tools, because
 
 But for NodeJS, it's a whole **new** story. Writing code for NodeJS at its very base is just writing a JS file, and executing it via `node index.js`. That's how it's been since the beginning.
 
-So, to visualize this whole pain, let's introduce a character to the story: **Maahi**. Maahi is a frontend web developer, and now she's trying to get into writing NodeJS code. She thinks: **Easy peasy, it's just JavaScript, how different it can be!**. And that is true, after 2 weeks of reading article after article, she cracks NodeJS development enough to be able to write full fledges programs in it.
+So, to visualize this whole pain, let's introduce a character to the story: **Annabeth**. Annabeth is a frontend web developer, and now she's trying to get into writing NodeJS code. She thinks: **Easy peasy, it's just JavaScript, how different it can be!**. And that is true, after 2 weeks of reading article after article, she cracks NodeJS development enough to be able to write full fledges programs in it.
 
 But after just 2 weeks, she's already heartsick for her most favorite part of programming: **TypeScript**. She had been very disciplined and focused, and focused only on raw NodeJS-edition of JavaScript.
 
@@ -60,6 +60,56 @@ The sweet spot she had been with this approach is now fading away. After that de
 
 She's even considering dropping TypeScript now. Which alone is quite tragic. Even if uses the [JSDoc sugar to get TypeScript like features working in JavaScript](https://www.puruvj.dev/blog/get-to-know-typescript--using-typescript-without-typescript), it still isn't as good a an experience as writing TypeScript directly is.
 
-So she's just browsing twitter, reading web development news. She suddenly comes across this new tool called [esno](https://github.com/antfu/esno). She opened it up, saw the docs, and her eyes flew wide open!!
+So she's just browsing around on net, searching for possible solutions, and comes across this little package called [ts-node](https://www.npmjs.com/package/ts-node).
+
+## ts-node
+
+`ts-node` allows you to directly run your TypeScript files, kinda like this 👇
+
+```bash
+ts-node index.ts
+```
+
+It creates no output files at all, it simply runs the file specified, in the same way as `node index.js`, so it completely eliminates that blunder of you running the old output code, cuz there's no output at all.
+
+Annabeth gets excited, straight away does an `npm install ts-node` in her project, and runs this command. And it works!! No more stale output file problem, no need to run 2 different terminals, or 2 different terminals.
+
+But she notices a bigger problem: `ts-node` is still **SLOW**. Almost as slow as `tsc && node index.js`.
+
+Her excitement trickles away. She's back to square one. Ok, maybe a little more than square one, considering that the whole extra command or extra terminal issue is gone.
+
+But she is considering going back to starting `tsc --watch` in one terminal and running `node index.js` in another. It doesn't feel so bad. She'll just have to make sure to remember to run the watcher before she starts coding in the project. Or she could set up a script to open both terminals with the commands in one click.
+
+She accepts her predicament, and goes on writing code like this. But this mistake, of forgetting to turn on `tsc --watch` still keeps happening to her. It's really annoying. She has even automated it with a bash script, but even then she sometimes forgets to run the script to set up the environment, so she basically still is running stale code sometimes. She certainly has gotten better at realising that, but it still doesn't make it much pleasant.
+
+So she continues 2 weeks with this approach.
+
+Then one day, she's browsing twitter, and sees a post about this new tool called [esno](https://github.com/antfu/esno). She opens up the link, reads about it. She thinks _"This is just like `ts-node`"_. She is ready to shrug it off, but one word stops her in her tracks: **esbuild**.
+
+It's written right in the very heading of the page: **TypeScript / ESNext node runtime powered by esbuild**
+
+She knows <mark>esbuild</mark>. She hasn't used it directly, but she has used tools built on it, like Vite and Snowpack, and she has firsthand felt the speed these marvelous tools brought to developer experience.
+
+So she decides to try it.
+
+## Trying esno
+
+She opens up her terminal, runs
+
+```bash
+npm i esno
+```
+
+then runs the command:
+
+```
+npx esno index.ts
+```
+
+She starts to get up from her chair to get some water, then notices some movement from the side of her eye. There's text on her terminal where she ran the code.
+
+She couldn't believe her eyes!!! The code had run in just 2 seconds!! This was nothing like `ts-node`, which took 6-7 seconds. This was near instant. She sat back in a hurry, and re-run the command, This time, it didn't even take 2 seconds. it was instantaneous!! Her mind was blown!!! She opened her code editor, changed some code, and re-run it. Again, 100% instantaneous.
 
 ![Eyes wide open; cat](../../static/media/native-ts-in-node--eyes-wide-open-cat.gif)
+
+She felt so joyful in the moment she couldn't express it. She could use TypeScript in Node in a very natural way. No more extra terminal watchers, no more waiting 10 seconds for code to run, nothing nada!!! It just worked!!
