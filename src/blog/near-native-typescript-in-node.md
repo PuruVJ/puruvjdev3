@@ -112,4 +112,60 @@ She couldn't believe her eyes!!! The code had run in just 2 seconds!! This was n
 
 ![Eyes wide open; cat](../../static/media/native-ts-in-node--eyes-wide-open-cat.gif)
 
-She felt so joyful in the moment she couldn't express it. She could use TypeScript in Node in a very natural way. No more extra terminal watchers, no more waiting 10 seconds for code to run, nothing nada!!! It just worked!!
+She felt so joyful in the moment she couldn't express it. Now she could use TypeScript in Node in a very natural way. No more extra terminal watchers, no more waiting 10 seconds for the code to run, nothing nada!!! It just worked!!
+
+We developers generally don't get a happy ending. It's one thing after the other for us. There's no ending.
+
+But what Annabeth got here in this story was no less than a happy ending.
+
+# Technical breakdown
+
+I hope you loved this story, and got something good out of it.
+
+But if you're all serious and just looking for a direct answer, I got that for you!
+
+Here's a technical breakdown 👇
+
+## tsc && node index.js
+
+**Advantages:**
+
+1. Simple
+
+(Pretty much it 😁)
+
+**Disadvantages:**
+
+1. Slow - This can become excruciatingly slow as codebase grows, even going into 20-30 seconds for each time, if big enough codebase
+
+2. Generates output files - This can be bad. It's very easy to forget to run `tsc && node index.js`, and rather directly run `node index.js`, in which case you'd be running stale code without knowing about it for some time
+
+## tsc --watch || node index.js
+
+This means running `tsc --watch` separately in a terminal, and running `node index.js` in a separate terminal whenever you need to run your code.
+
+**Advantages:**
+
+1. Fast - No need to wait for tsc to complete compilation, as `--watch` has incremental generation, meaning it recompiles the changed code within seconds
+
+**Disadvantages:**
+
+1. Easy to forget to start watcher - It's very easy to forget to run `tsc --watch` in a terminal before you start to run your code in Node. This extends the _Generates Output Files_ problem I listed above in `tsc && node index.js`. Because the output files already exist, you won't get an error either that you're running stale code
+
+2. **Mental and Memory overhead of starting the watcher** - You have to remember to start the watcher everyday. And having an extra terminal is also more memory consumption.
+
+## ts-node
+
+**Advantages:**
+
+1. Feels very native - It's just `ts-node index.ts`, extremely close to writing `node index.js`. It feels better than concatenating 2 commands(`tsc && node index.js`) or starting 2 terminals which consume quite some memory and there's mental overhead.
+
+2. Does not generate any files - This is really good, cuz this time, if you run `node index.js`, it will fail, cuz `index.js` file doesn't even exists!! That's the beauty of it!! All the compilation and running the code happens in memory, the filesystem is left untouched, so it's impossible to run stale code.
+
+**Disadvantages:**
+
+1. Slow 😕 - As great as this approach is, it has the same problem as `tsc && index.js`, where the code is compiled every single time
+
+## esno (and esmo)
+
+[esno](https://github.com/antfu/esno) is exactly the same thing is
