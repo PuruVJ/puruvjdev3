@@ -166,6 +166,54 @@ This means running `tsc --watch` separately in a terminal, and running `node ind
 
 1. Slow 😕 - As great as this approach is, it has the same problem as `tsc && index.js`, where the code is compiled every single time
 
-## esno (and esmo)
+## esno
 
-[esno](https://github.com/antfu/esno) is exactly the same thing is
+[esno](https://github.com/antfu/esno) is exactly the same thing `ts-node`, but it's magnitudes faster!! Almost feels like you're running JS directly in Node without any intermediate step!
+
+Installing in your project 👇
+
+```bash
+npm i esno -D
+
+# Yarn
+yarn add esno -D
+```
+
+Running it 👇
+
+```bash
+npx esno index.ts
+
+# Yarn
+yarn esno index.ts
+```
+
+## esmo
+
+If your project is running in Module mode, that is you have a `"type": "module"` in your `package.json`, then `esno` won't work. `esno` converts your code into <mark>CommonJS</mark>, which won't work in Module context.
+
+So for that, you can use `esmo`. `esmo` is the exact same as `esno`, but it transpiles code to <mark>ES Modules</mark>.
+
+> `esmo` needs to be installed separately
+
+Installing in your project 👇
+
+```bash
+npm i esmo -D
+
+# Yarn
+yarn add esmo -D
+```
+
+Running it 👇
+
+```bash
+npx esmo index.ts
+
+# Yarn
+yarn esmo index.ts
+```
+
+# Bonus: tsup
+
+I know your weird-names-in-a-day meter would be overflowing just by `esno` and `esmo`, now what the hell is this `tsup`?
