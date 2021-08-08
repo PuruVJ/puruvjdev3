@@ -77,7 +77,7 @@ Deno is platform for JavaScript/typeScript, like NodeJS, with the added benefit 
 
 This was perfect for me. I could write code in my favorite language, and convert it over to an executable that I could configure to run on System startup, so I'd never have to run it myself ever again.
 
-![Perfection meme from X Men](../../static/media/golang-as-javascripter--xmen-perfection-meme.jpg)
+![Perfection meme from X Men](../../static/media/golang-as-javascripter--xmen-perfection-meme.gif)
 
 Only it wasn't perfect 🤐🤐.
 
