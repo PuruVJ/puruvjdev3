@@ -89,7 +89,7 @@ The executable's size was <mark>56 MB</mark> for windows, and as high as <mark>9
 
 56MB isn't a lot for me. Even 90 MB is nothing. But it kept nagging at me. I try to keep the sizes of apps/websites as low as I can, and 56MB felt just way too big for that.
 
-And not only that. Because I had made this project public(Here it is: [github.com/PuruVJ/auto-class-launcher-deno]) and usable for everyone, my batchmates tried to use it, and well, 60-90Mb was way too big for them, due to limited internet and all.
+And not only that. Because I had made this project public(Here it is: [PuruVJ/auto-class-launcher-deno](https://github.com/PuruVJ/auto-class-launcher-deno)) and usable for everyone, my batchmates tried to use it, and well, 60-90Mb was way too big for them, due to limited internet and all.
 
 So I got a good excuse to re-write it.
 
