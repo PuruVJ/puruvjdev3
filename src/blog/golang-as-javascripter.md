@@ -53,7 +53,7 @@ What do I mean by that? Let's rewind a little!!
 
 # The lazy undergraduate
 
-I am the lazy undergraduate in question 😄.
+> Spoiler: I am the lazy undergraduate in question 😄.
 
 I took admission in university a few months back. Thanks to Covid-19, our classes are fully online. It means there are a bunch of Google meet links that I had to hunt for every class.
 
