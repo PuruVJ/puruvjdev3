@@ -82,7 +82,7 @@ This was perfect for me. I could write code in my favorite language, and convert
 
 ![Perfection meme from X Men](../../static/media/golang-as-javascripter--xmen-perfection-meme.gif)
 
-Only it wasn't perfect 🤐🤐.
+Only it wasn't perfect 🤐🤐
 
 The code itself was amazingly easy to write. I completed it in 3 hours, because I was so familiar with TypeScript.
 
@@ -128,9 +128,11 @@ And here's my observations, as an avid JavaScripter learning Go for the very fir
 
 Really, that's the first point I noticed about it. It isn't much different from JavaScript. There are variables, functions, if, else, for, switch blocks, Error handling system and what not.
 
-OFC, it depends on how comfortable you're with languages, generally, but if you're very comfortable with TypeScript or Dart or any other statically typed language, you'll feel right at home with Go.
+That is the main point of Go, really!! It combines all the knowledge of 60 years of programming into a very simple language which doesn't invent a lot of new stuff. Rather, it focuses on problems that aren't even code related(directly), and fixes other problems, like feature creep, standard formatting, Goroutines and stuff that isn't answered well enough in a majority of languages to the day.
 
-But even then, it isn't necessary to know a Statically typed language before, as Go will infer as much as it can without you needing to tell it much.
+OFC, it depends on how comfortable you're with programming languages, generally, but if you're very comfortable with TypeScript or Dart or any other statically typed language, you'll feel right at home with Go.
+
+But even then, it isn't necessary to know a Statically typed language before, as Go will infer as much of the types as it can without you needing to tell it much.
 
 ## Variables are Pythonic, but not quite...
 
@@ -185,7 +187,7 @@ someVal = "Hello"
 
 1st time, I'm declaring the variable using the `:=` operator. But when setting its value later in the program, I use the regular `=` operator.
 
-This is a small thing, but it makes a huge difference!! I even actually prefer it over JavaScript's `let` variable declaration. It is cleaner, but no **so clean** it sacrifices developer ergonomics.
+This is a small thing, but it makes a huge difference!! I even actually prefer it over JavaScript's `let` variable declaration. It is cleaner, but not **so clean** it sacrifices developer ergonomics.
 
 And if you prefer a more verbose way, that's there too
 
@@ -204,5 +206,73 @@ const someVal = "hello"
 I really love the fact that Go goes the extra length to keep the code clean, but doesn't shy away from providing the standard, more verbose APIs when they're needed. It's the best of both worlds.
 
 ## Type System
+
+Go's Type system is similar to the type system of TypeScript, where most of the time, you don't even need to specify types for your variables.
+
+In TypeScript, this below:
+
+```ts
+const x = 'hello';
+```
+
+is inferred as `string` automatically. Same with number or boolean or just anything.
+
+Go works like this too!!
+
+```go
+x := "hello"
+```
+
+is inferred as `string`. Works similar to TypeScript!!
+
+This kind of type system is personally my favorite!! Having too much type information makes the code hard to scan, in my opinion!
+
+Having types only where absolutely needed is the way I roll, and I am glad Go has that same philosophy 🤩
+
+OFC, there was one place where I found Go's system to be less convenient.
+
+You see, in the project, I input the timetable and link information from an external `.json` file. That JSON file has the following TypeScript structure 👇
+
+```ts
+type ClassConfig = {
+  link?: string;
+  times: {
+    day: 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
+    time: string;
+  }[];
+}[];
+```
+
+As you can see, I have an object type inside the main object type. If you're a TypeScript developer, you wouldn't even think about it twice.
+
+But in Golang, you can't define a type with a struct inside struct 🤐
+
+So I had to do this
+
+```go
+type ClassTime struct {
+	Day  string `json:"day,omitempty"`
+	Time string `json:"time,omitempty"`
+}
+
+type Class struct {
+	Link  string      `json:"link,omitempty"`
+	Times []ClassTime `json:"times"`
+}
+
+type ClassConfig map[string]Class
+```
+
+So yeah, had to declare 2 more types to get the TypeScript behavior 🥲. But here's the added benefit of the types not being in sync
+
+> Those tags in structs are a way to tell go to expect this data to be a json field, and don't include a field if it is not there in the JSON itself.
+
+## Standard library is the 🧑‍🍳😘
+
+> Bonus points if you can figure out the heading fully 😜
+
+## go:embed is DOPE!! 🤯🤯
+
+## No .map .filter .every 😭
 
 ## Heartsick for the +
