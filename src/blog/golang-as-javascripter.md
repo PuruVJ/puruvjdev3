@@ -87,7 +87,7 @@ But where the issue was while compiling the code into an executable.
 
 The executable's size was <mark>56 MB</mark> for windows, and as high as <mark>90MB</mark> for MacOS M1.
 
-56Mb isn't a lot for me. Even 90 MB is nothing. But it kept nagging at me. I try to keep the sizes of apps/websites as low as I can, and 56MB felt just way too big for that.
+56MB isn't a lot for me. Even 90 MB is nothing. But it kept nagging at me. I try to keep the sizes of apps/websites as low as I can, and 56MB felt just way too big for that.
 
 And not only that. Because I had made this project public(Here it is: [github.com/PuruVJ/auto-class-launcher-deno]) and usable for everyone, my batchmates tried to use it, and well, 60-90Mb was way too big for them, due to limited internet and all.
 
@@ -101,4 +101,105 @@ But oh boy, Rust was hard. Extremely hard!! I gave up after a few hours.
 
 Then, I finally turned towards Go!!
 
-I sat down at night to make it. I created the project, initialized the Go
+# Learning Go
+
+I sat down at night to make it. I created the project, initialized the Go boilerplate(which is just a `go.mod` file and a `main.go` with 4 lines of code), **then** I opened up the Go Tutorial.
+
+Yeah, this might seem strange to you. Initialize a project, and **then** start learning that thing? Why would you do that??
+
+Well, I'm a huge proponent of <mark>Learning by Doing</mark>, where you learn the bare minimum upfront, and the rest you learn by trying to make a small project in it. It makes you learn the thing the hard way, but really fast, without wasting any time on trivialities.
+
+In case of Go, though, I didn't need anything upfront, cuz I had seen the syntax before a bit and it looked simple enough to me.
+
+> Spoiler: Learning by Doing really works, I learnt basic Go in 3-4 hours only 😉
+
+# Observations about migrating
+
+This folks is the part you came to read about actually!! Read on!!
+
+So I migrated the whole app to Go, completely bug free, in 1 day.
+
+And here's my observations, as an avid JavaScripter learning Go for the very first time!!
+
+## It isn't much different!!
+
+Really, that's the first point I noticed about it. It isn't much different from JavaScript. There are variables, functions, if, else, for, switch blocks, Error handling system and what not.
+
+OFC, it depends on how comfortable you're with languages, generally, but if you're very comfortable with TypeScript or Dart or any other statically typed language, you'll feel right at home with Go.
+
+But even then, it isn't necessary to know a Statically typed language before, as Go will infer as much as it can without you needing to tell it much.
+
+## Variables are Pythonic, but not quite...
+
+Here's how JavaScript variables are defined.
+
+```js
+// Declare variable
+let someVal;
+someVal = 'hello';
+
+// Set it to something later on
+someVal = 'world';
+```
+
+If you wanna do it explicitly in TypeScript,
+
+```ts
+let someVal: string;
+someVal = 'hello';
+
+// Set it to something later on
+someVal = 'world';
+```
+
+OFC, TypeScript is intelligent and you don't always need to specify types for a variable.
+
+As you can see, it's **extremely clear** where this variable is defined. You are scrolling through a file, there's the big `const` and `let` glaring right at you. The source is extremely clear.
+
+Now let's come to Python.
+
+The above example of declaring a variable here 👇
+
+```py
+someVal = 'hello'
+
+# Set it to something later on
+someVal = 'world'
+```
+
+Can you the declaration part and the part where we set it's value to something, later on in the program? There's no difference. No way to know where this variable was defined.
+
+It's irritating in my opinion. There needs to be some distinction between the two!!
+
+Now, why I talk about Python variables? Cuz Golang variables, in their simplest form, are very much like Python variables, but they have one extra character that prevents the confusion that Python variables introduce. That character is `:`
+
+```go
+someVal := "hello"
+
+// Set it to something later on
+someVal = "Hello"
+```
+
+1st time, I'm declaring the variable using the `:=` operator. But when setting its value later in the program, I use the regular `=` operator.
+
+This is a small thing, but it makes a huge difference!! I even actually prefer it over JavaScript's `let` variable declaration. It is cleaner, but no **so clean** it sacrifices developer ergonomics.
+
+And if you prefer a more verbose way, that's there too
+
+```go
+var someVal string = "hello"
+```
+
+Just like JavaScript's `var someVal = "hello"`, but here the data type is necessary. If you're a TypeScripter, you'll feel right at home here.
+
+And ofc, you also have `const` in go, and its declaration is the exact same as doing it in JavaScript
+
+```go
+const someVal = "hello"
+```
+
+I really love the fact that Go goes the extra length to keep the code clean, but doesn't shy away from providing the standard, more verbose APIs when they're needed. It's the best of both worlds.
+
+## Type System
+
+## Heartsick for the +
