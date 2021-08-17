@@ -267,13 +267,13 @@ So I had to do this
 
 ```go
 type ClassTime struct {
-	Day  string `json:"day,omitempty"`
-	Time string `json:"time,omitempty"`
+  Day  string `json:"day,omitempty"`
+  Time string `json:"time,omitempty"`
 }
 
 type Class struct {
-	Link  string      `json:"link,omitempty"`
-	Times []ClassTime `json:"times"`
+  Link  string      `json:"link,omitempty"`
+  Times []ClassTime `json:"times"`
 }
 
 type ClassConfig map[string]Class
@@ -329,9 +329,7 @@ In Deno, I had directly inlined the config inside a .ts file as a simple JS Obje
 Rather than explaining what it does, I'll just show you 👇
 
 ```go
-import (
-  _ "embed"
-)
+import ( _ "embed" )
 
 //go:embed sample.json
 var sampleConfigStr []byte
@@ -355,13 +353,13 @@ And, remember the Class definitions above?
 
 ```go
 type ClassTime struct {
-	Day  string `json:"day,omitempty"`
-	Time string `json:"time,omitempty"`
+  Day  string `json:"day,omitempty"`
+  Time string `json:"time,omitempty"`
 }
 
 type Class struct {
-	Link  string      `json:"link,omitempty"`
-	Times []ClassTime `json:"times"`
+  Link  string      `json:"link,omitempty"`
+  Times []ClassTime `json:"times"`
 }
 
 type ClassConfig map[string]Class
@@ -390,7 +388,7 @@ In JS, you have this little trick to convert any data type to a number, by just 
 +'11.5'; // 11.5
 
 +true; // 1
-+false; //1
++false; //0
 ```
 
 This trick is very useful in JS. Sadly, Go doesn't have this, you have to use `strconv.atoi` function, which you can't use in value, as it returns a tuple of value and error, so you need an extra line
