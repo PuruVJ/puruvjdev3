@@ -140,7 +140,7 @@ So I migrated the whole app to Go, (mostly) bug free, in 1 day.
 
 And here's my observations, as an avid JavaScripter learning Go for the very first time!!
 
-## It isn't much different (Positively 🙂)!!
+## It isn't much different (Positively 🙂)
 
 Really, that's the first point I noticed about it. It isn't much different from JavaScript. There are variables, functions, `if`, `else`, `for`, `switch` blocks, Error handling system and what not.
 
