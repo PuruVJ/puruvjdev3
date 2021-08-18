@@ -1,7 +1,7 @@
 ---
 title: Trying Golang as a JavaScript lover
 description: I have written JavaScript, TypeScript, Dart, Python, PHP, C, C++, but never tried golang before. Here is my first hand experience trying it out
-date: 15 Aug, 2021
+date: 18 Aug, 2021
 cover_image: media/golang-as-javascripter--cover-image.jpg
 series: 'Go for JavaScript developers'
 ---
