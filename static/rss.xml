@@ -11,8 +11,8 @@
     </image>
     
           <item>
-            <title>macOS Web: From Preact to Svelte // Puru Vijay</title>
-            <link>https://puruvj.dev/blog/macos-preact-to-svelte</link>
+            <title>Why I moved from React to Svelte // Puru Vijay</title>
+            <link>https://puruvj.dev/blog/macos-react-to-svelte</link>
             <description>I recently moved macOS web from Preact to Svelte. Here's the firsthand account of my experience.</description>
             <pubDate>Mon, 23 Aug 2021 18:30:00 GMT</pubDate>
           </item>
