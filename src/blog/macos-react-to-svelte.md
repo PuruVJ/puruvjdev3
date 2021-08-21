@@ -199,6 +199,6 @@ Until 12th August, 2021, when I was so bored I decided to just rebuild the whole
 
 I began migrating on morning of 12th August, kept at it whole day, and got the Dock, the menubar, and the action center working, as it was a matter of copy pasting only.
 
-As for the dock animation, I had [already done an article about it](puruvj.dev/blog/macos-dock-animation-svelte), so all I had to do was just copy paste stuff.
+As for the dock animation, I had [already done an article about it](https://puruvj.dev/blog/macos-dock-animation-svelte), so all I had to do was just copy paste stuff.
 
 I continued on 13th too, working whole day, implementing the different apps
