@@ -201,4 +201,49 @@ I began migrating on morning of 12th August, kept at it whole day, and got the D
 
 As for the dock animation, I had [already done an article about it](https://puruvj.dev/blog/macos-dock-animation-svelte), so all I had to do was just copy paste stuff.
 
-I continued on 13th too, working whole day, implementing the different apps
+I continued on 13th too, working whole day, implementing the different apps. Finally completed by the end of the day.
+
+## Results
+
+Unsurprisingly, the bundle size went down and runtime performance went up. If you have been following Web Dev news on Twitter and Reddit, you probably saw this coming from a mile away.
+
+But the extent of these improvements was **very** surprising. I'll just let the cat out of the bag: Initial bundle size went down to <mark>28.5KB</mark> of JS, min+brotli🤯🤯🤯🤯🤯. That's less than half of what it was before.
+
+And runtime performance went up by a lot. With the previous version, the dock animation could get janky when my computer was overloaded. Not by a lot, but it was visible. After I moved to Svelte, even that much jank was gone. **Fully gone!**
+
+And here's the takeaways from this process 👇
+
+```svelte
+<div
+  class="container"
+  bind:this={containerEl}
+  use:clickOutside={{ callback: () => ($activeMenu = '') }}
+  use:focusOutside={{ callback: () => ($activeMenu = '') }}
+>
+  {#each Object.entries($menuBarMenus) as [menuID, menuConfig]}
+    <div>
+      <div style="height: 100%">
+        <button
+          class="menu-button"
+          class:default-menu={menuID === 'default'}
+          class:apple-icon-button={menuID === 'apple'}
+          style="--scale: {$activeMenu === menuID ? 1 : 0}"
+          on:click={() => ($activeMenu = menuID)}
+          on:mouseover={() => $activeMenu && ($activeMenu = menuID)}
+          on:focus={() => ($activeMenu = menuID)}
+        >
+          {#if menuID === 'apple'}
+            <Icon path={mdiApple} size={18} />
+          {:else}
+            {menuConfig.title}
+          {/if}
+        </button>
+      </div>
+
+      <div class="menu-parent" style="visibility: {$activeMenu !== menuID ? 'hidden' : 'visible'}">
+        <Menu menu={menuConfig.menu} />
+      </div>
+    </div>
+  {/each}
+</div>
+```
