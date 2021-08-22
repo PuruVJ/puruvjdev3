@@ -213,37 +213,16 @@ And runtime performance went up by a lot. With the previous version, the dock an
 
 And here's the takeaways from this process 👇
 
-```svelte
-<div
-  class="container"
-  bind:this={containerEl}
-  use:clickOutside={{ callback: () => ($activeMenu = '') }}
-  use:focusOutside={{ callback: () => ($activeMenu = '') }}
->
-  {#each Object.entries($menuBarMenus) as [menuID, menuConfig]}
-    <div>
-      <div style="height: 100%">
-        <button
-          class="menu-button"
-          class:default-menu={menuID === 'default'}
-          class:apple-icon-button={menuID === 'apple'}
-          style="--scale: {$activeMenu === menuID ? 1 : 0}"
-          on:click={() => ($activeMenu = menuID)}
-          on:mouseover={() => $activeMenu && ($activeMenu = menuID)}
-          on:focus={() => ($activeMenu = menuID)}
-        >
-          {#if menuID === 'apple'}
-            <Icon path={mdiApple} size={18} />
-          {:else}
-            {menuConfig.title}
-          {/if}
-        </button>
-      </div>
+## Svelte Code is much simpler
 
-      <div class="menu-parent" style="visibility: {$activeMenu !== menuID ? 'hidden' : 'visible'}">
-        <Menu menu={menuConfig.menu} />
-      </div>
-    </div>
-  {/each}
-</div>
-```
+This comes as no surprise, Svelte code is much shorter, more readable than JSX.
+
+I tweeted a little part of it 👇
+
+![Svelte is simpler tweet](../../static/media/macos-preact-to-svelte--svelte-simplicity-tweet.png)
+
+> [Source](https://twitter.com/puruvjdev/status/1425866919853260800)
+
+## Svelte Motion = 🔥
+
+## Those transitions 😍
