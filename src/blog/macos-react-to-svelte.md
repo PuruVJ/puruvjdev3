@@ -223,6 +223,78 @@ I tweeted a little part of it 👇
 
 > [Source](https://twitter.com/puruvjdev/status/1425866919853260800)
 
+Every single component in the new Svelte Codebase is around 20-30% smaller. The number of files is literally **half** as before, cuz I don't need to separate `.scss` files anymore. Styles exists in the one `.svelte` file only.
+
+And some components that are now longer than before, they are longer cuz I got rid of some abstracted small components entirely, which I had refactored away earlier. Because Svelte is so simple in terms of readability, I could just inline these components and the code still looked very clean. 💯 points for Svelte!!
+
 ## Svelte Motion = 🔥
+
+macOS is an Operating system, and no OS is complete without animations. This is where Svelte's built in Motion stores and transitions come in.
+
+Svelte's Motion stores are extremely lightweight, and extremely powerful. They power the dock animation when you hover over it, and using them is extremely easy.
+
+Previously I was using Framer Motion. Framer Motion is a great library and my go-to thing for animations in P/React. But there's just one little issue with it: It's not exactly small 🥲
+
+This is the bundlephobia size of `framer-motion`
+
+![Framer Motion bundlephobia size. Gzip size = 32KB](../../static/media/macos-preact-to-svelte--bundlephobia-framer-motion.png)
+
+This isn't very big, but this ain't small either. 32KB Gzip is a lot 🤐
+
+Framer Motion's size is indicative of its capabilities. Framer Motion can do a **lot**. Really, it can do anything animation related under the sun.
+
+But ofc, there's no such thing as a good tool and a bad tool. There's only the **right tool for the JOB**, and Framer Motion was overqualified for my use case.
+
+But Svelte fit right in. It had exactly what I needed(Except for one small piece, which I got from `popmotion`. Jut 3Kb big 😌), and most importantly, it allowed me to programmatically handle it, which is easier than going the declarative route.
+
+Here's a little example. Go to [macos.vercel.app](https://macos.vercel.app), click on any icon on the dock. It jumps up an down once.
+
+Animating that with Framer Motion looked somewhat like this 👇
+
+```js
+const [animateObj, setAnimateObj] = useState({ translateY: ['0%', '0%', '0%'] });
+
+<motion.span
+  onTap={() => setAnimateObj({ translateY: ['0%', '-39.2%', '0%'] })}
+  initial={false}
+  animate={animateObj}
+  transition={{ type: 'spring', duration: 0.7 }}
+  transformTemplate={({ translateY }) => `translateY(${translateY})`}
+>
+  {/* Markup */}
+</motion.span>;
+```
+
+This is pretty simple, but there are a few issues with it: Have to tell it to not run in the beginning, how to translate it. All these can be condensed into 1 big issue: It's declarative.
+
+I'm a JS guy first. Declarative programming doesn't come naturally to me. I see the world as cause and effect. You click, something happens.
+
+Doing the same thing in Svelte was much more easier and programmatic 👇
+
+```html
+<script>
+  // Spring animation for the click animation
+  const appOpenIconBounceTransform = tweened(0, {
+    duration: 400,
+    easing: sineInOut,
+  });
+
+  async function openApp(e: MouseEvent) {
+    /* State related stuff */
+
+    // Animate the icon
+    await appOpenIconBounceTransform.set(-39.2);
+
+    // Now animate it back to its place
+    appOpenIconBounceTransform.set(0);
+  }
+</script>
+
+<span style="transform: translate3d(0, {$appOpenIconBounceTransform}%, 0)">
+  <!-- Stuff -->
+</span>
+```
+
+It's very clean and simple now. Plus it's not declarative anymore. I **tell** the program **explicitly** when to go up, and when to come back down. The program literally reads like this: `Go up -39.2%, and when you're done with that, go down to base position`. As simple as that ¯\\\_(ツ)\_/¯
 
 ## Those transitions 😍
