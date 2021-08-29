@@ -1,5 +1,5 @@
 ---
-title: 'Why I moved from React to Svelte'
+title: 'macOS Web: Why I moved from React to Svelte'
 description: I recently moved macOS web from Preact to Svelte. Here's the firsthand account of my experience.
 date: '24 Aug, 2021'
 ---
