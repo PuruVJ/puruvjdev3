@@ -1,26 +1,26 @@
 ---
 title: 'macOS Web: Why I moved from React to Svelte'
-description: I recently moved macOS web from Preact to Svelte. Here's the firsthand account of my experience.
+description: I recently moved macOS web from Preact to Svelte. Here's a firsthand account of my experience.
 date: '24 Aug, 2021'
 ---
 
 macOS is an amazing operating system. It looks really good, works really fast(Thanks to Apple's hardware), is very consistent, and overall an amazing experience.
 
-Personally, I have never been much infatuated with macOS. But that changed last year, when macOS Big Sur came out with the super sleek and modern design with those beautiful blurs. I instantly fell in love with it 😍. Just look how beautiful it is 😌.
+Personally, I have never been much infatuated with macOS. But that changed last year when macOS Big Sur came out with the super sleek and modern design with those beautiful blurs. I instantly fell in love with it 😍 Just look how beautiful it is 😌
 
-Unfortunately, I couldn't afford to buy the MacBook(You're overpriced, Apple 😑), but I couldn't not want it. I spent weeks just watching review videos and screenshots of it. I am not a designer, but I have a good taste in design, and Big Sur was it! Finally when the craving became too much, I was like, _"Screw it! I'll just make it myself"_
+Unfortunately, I couldn't afford to buy the MacBook(You're overpriced, Apple 😑), but I couldn't not want it. I spent weeks just watching review videos and screenshots of it. I am not a designer, but I have a good taste in design, and Big Sur was it! Finally, when the craving became too much, I was like, _"Screw it! I'll just make it myself"_
 
 ![Fine... I'll do it myself, quoted by Thanos](../../static/media/macos-preact-to-svelte--fine-i-will-do-it-myself.gif)
 
-So that's what I did 😁. I recreated the interface of macOS Big Sur for Web. You can see it @ [macos.vercel.app](https://macos.vercel.app).
+So that's what I did 😁 I recreated the interface of macOS Big Sur for Web. You can see it @ [macos.vercel.app](https://macos.vercel.app).
 
 # Early days (React)!
 
 I began working on this project back in November 2020, with the stack being React with Snowpack as the bundler+dev server, JSS for styling, and restater for state management, and I created just the topbar(without the opening menus), the animated dock, and the background. Nothing much, really. Quite easy to do. You can visit it here [macos-web-mmo5af3r6.vercel.app](https://macos-web-mmo5af3r6.vercel.app/)
 
-If you look closely, the dock animation isn't as smooth as it is in the latest iteration. Not to mention, this very simple app is using loads of dependencies. It loaded <mark>146KB</mark> min+brotli of JS, and 0KB of CSS(It was CSS-in-JS, so no separate CSS file). For reference, the current version in Svelte loads only <mark>28.5KB</mark> of JS, and <mark>3.6KB</mark> of CSS, and it does a **lot** more than the November version.
+The dock animation isn't as smooth as it is in the latest iteration if you look closely. Not to mention, this very simple app is using loads of dependencies. It loaded <mark>146KB</mark> min+brotli of JS, and 0KB of CSS(It was CSS-in-JS, so no separate CSS file). For reference, the current version in Svelte loads only <mark>28.5KB</mark> of JS, and <mark>3.6KB</mark> of CSS, and it does a **lot** more than the November version.
 
-Here's the `package.json` dependencies of the November version 👇
+Here's the `package.json` `dependencies` field of the November version 👇
 
 ```json
 {
@@ -40,25 +40,25 @@ Here's the `package.json` dependencies of the November version 👇
 
 See?! So much stuff for so little!
 
-So this was the state of the app. Then I didn't work on it. I was bored of it. Then I had an accident, broke my spine, was prescribed 3 months bedrest. I was so bored out of my mind, I thought, what the heck, I'll just continue working on it.
+So this was the state of the app. Then I didn't work on it. I was bored of it. Then I had an accident, broke my spine, was prescribed 3 months bed rest. I was so bored out of my mind, I thought, what the heck, I'll just continue working on it.
 
-So I revived the project, made some heavy changes. Like I threw away `restater` library to use [Jotai](https://github.com/pmndrs/jotai), because it was much more simpler.
+So I revived the project, made some heavy changes. Like I threw away `restater` library to use [Jotai](https://github.com/pmndrs/jotai), because it was much simpler.
 
 Fast forward two months, I made some drastic changes. I replaced Snowpack(Bundler and dev server) with [ViteJS](https://vitejs.dev/). Why? No specific reason, I just felt it was more polished and had some superb features which I could use to make the app smaller in size.
 
-I replaced the existing JSS style with `styled-components`. Not perf related really, just that writing CSS as JS objects wasn't fun.
+I replaced the existing JSS style with `styled-components`. Not perf-related really, just that writing CSS as JS objects wasn't fun.
 
 I also got rid of some dependencies to reduce bundle size.
 
 That brings us to <mark>120KB</mark> min+brotli JS. You can see it for yourself: [macos-web-git-feat-switch-to-vite-puruvj.vercel.app](https://macos-web-git-feat-switch-to-vite-puruvj.vercel.app/)
 
-I was still not satisfied with it. The app felt slow, the dock animation janky, menus wouldn't open up instantly. Not satisfactory!
+I was still not satisfied with it. The app felt slow, the dock animation was janky, menus wouldn't open up instantly. Not satisfactory!
 
 Then, I did something **very** drastic: I moved the app from **React** to **Preact**.
 
 # The era of Preact
 
-Yepp!! I did that. I'm crazy that way 😏.
+Yepp!! I did that. I'm crazy that way 😏
 
 Anyways, moving React to Preact was a very smooth experience. I just had to install the official `@preactjs/preset-vite` Vite plugin by Preact team, and it took care of aliasing `react` in `import React from 'react'` to `preact/compat` and everything. It was very seamless. It just worked. Huge kudos to the Preact team!!
 
@@ -66,7 +66,7 @@ And that, my friend, made all the difference in the world.
 
 The site got fast. Animations lost their jank. Menus opened instantly. **Everything just worked!**.
 
-Best part: Bundle size went down by a **lottt!!**. React + React DOM is 42KB. Preact Core + Compat is just 4KB, max!
+And the best part: Bundle size went down by a **lot!!**. React + React DOM is 42KB. Preact Core + Compat is just 4KB, max!
 
 You can check it out here yourself [macos-web-git-feat-move-to-preact-puruvj.vercel.app](https://macos-web-git-feat-move-to-preact-puruvj.vercel.app/).
 
@@ -125,7 +125,7 @@ And I couldn't use the <mark>babel-plugin-styled-components</mark>, as it wouldn
 
 So it was then that I decided to move to the basics, **CSS Modules** (SCSS Modules, to be exact 😉)
 
-So I did that. Took a lot of effort, but the final result was worth it. It took the JS size from around 110KB to <mark>85KB</mark>, and the CSS was <mark>3.3KB</mark>. This was a huge amount of reduction, and made the app feel really fast. The load of supplying CSS was removed from the JS, and that alone made a lot of difference.
+So I did that. Took a lot of effort, but the final result was worth it. It took the JS size from around 110KB to <mark>85KB</mark>, and the CSS was <mark>3.3KB</mark>. This was a huge amount of reduction and made the app feel really fast. The burden of supplying CSS was removed from the JS, and that alone made a lot of difference.
 
 Here's an in-detail write-up of moving to CSS Modules: [Why I moved from Styled Components to (S)CSS modules](https://www.puruvj.dev/blog/move-to-css-modules-from-styled-components)
 
@@ -167,8 +167,8 @@ import { AppID } from '__/stores/apps.store';
 import { lazy } from 'react';
 
 type AppNexusProps = {
-  appID: AppID;
-  isBeingDragged: boolean;
+  appID: AppID,
+  isBeingDragged: boolean,
 };
 
 const Calculator = lazy(() => import('./Calculator/Calculator'));
@@ -193,15 +193,15 @@ by just dynamically importing stuff 🤯🤯
 
 And this is when I took a break from this project(again!)...
 
-Until 12th August, 2021, when I was so bored I decided to just rebuild the whole thing again in Svelte. So that's what I did.
+Until 12th August 2021, when I was so bored I decided to just rebuild the whole thing again in Svelte. So that's what I did.
 
 # Svelte: The golden age
 
-I began migrating on morning of 12th August, kept at it whole day, and got the Dock, the menubar, and the action center working, as it was a matter of copy pasting only.
+I began migrating on the morning of 12th August, kept at it the whole day, and got the Dock, the menubar, and the action center working, as it was a matter of copy-pasting only.
 
-As for the dock animation, I had [already done an article about it](https://puruvj.dev/blog/macos-dock-animation-svelte), so all I had to do was just copy paste stuff.
+As for the dock animation, I had [already done an article about it](https://puruvj.dev/blog/macos-dock-animation-svelte), so all I had to do was just copy-paste stuff, again 😏.
 
-I continued on 13th too, working whole day, implementing the different apps. Finally completed by the end of the day.
+I continued on the 13th too, working the whole day, implementing the different apps. Finally completed by the end of the day.
 
 # Results
 
@@ -217,9 +217,9 @@ The process of migrating to Svelte from a React app was gruelling and hard and r
 
 **Ignore the line above, it was total BS 🤣**
 
-Moving to Svelte was an **extremely simple** process. It was literally copying the JSX code, pasting it as is, removing the CSS Modules stuff and adding regular old classes.
+Moving to Svelte was an **extremely simple** process. It was literally copying the JSX code, pasting it as is, removing the CSS Modules stuff, and adding regular old classes.
 
-Because Svelte's state is very close to React's useState, moving it was a matter of copy-pasting all the state related code, and modifying it to be a regular Variable.
+Because Svelte's state is very close to React's useState, moving it was a matter of copy-pasting all the state-related code and modifying it to be a regular Variable.
 
 So this 👇
 
@@ -267,7 +267,7 @@ I copied the `atom`s as is, renamed their function to `writable`, remove the who
 
 ## What about Styles?
 
-Same thing literally. Because Styles were just plain SCSS, independent of the framework, there was literally nothing to do here. Just copy paste styles from the .scss file to the Svelte SFCs, and we're done.
+The same thing literally. Because Styles were just plain SCSS, independent of the framework, there was literally nothing to do here. Just copy-pasted styles from the .scss file to the Svelte SFCs, and we're done.
 
 This whole process was so simple, that it took me just 2 days to completely migrate away.
 
@@ -289,7 +289,7 @@ I tweeted a little part of it 👇
 
 Every single component in the new Svelte Codebase is around 20-30% smaller. The number of files is literally **half** as before, cuz I don't need to separate `.scss` files anymore. Styles exists in the one `.svelte` file only.
 
-And some components that are now longer than before, they are longer cuz I got rid of some abstracted small components entirely, which I had refactored away earlier. Because Svelte is so simple in terms of readability, I could just inline these components and the code still looked very clean. 💯 points for Svelte!!
+And some components that are now longer than before, are longer because I got rid of some abstracted small components entirely, which I had refactored away earlier. Because Svelte is so simple in terms of readability, I could just inline these components and the code still looked very clean. 💯 points for Svelte!!
 
 ## Svelte Motion = 🔥
 
@@ -311,7 +311,7 @@ But ofc, there's no such thing as a good tool and a bad tool. There's only the *
 
 But Svelte fit right in. It had exactly what I needed(Except for one small piece, which I got from `popmotion`. Jut 3Kb big 😌), and most importantly, it allowed me to programmatically handle it, which is easier than going the declarative route.
 
-Here's a little example. Go to [macos.vercel.app](https://macos.vercel.app), click on any icon on the dock. It jumps up an down once.
+Here's a little example. Go to [macos.vercel.app](https://macos.vercel.app), click on any icon on the dock. It jumps up and down once.
 
 Animating that with Framer Motion looked somewhat like this 👇
 
@@ -333,7 +333,7 @@ This is pretty simple, but there are a few issues with it: Have to tell it to no
 
 I'm a JS guy first. Declarative programming doesn't come naturally to me. I see the world as cause and effect. You click, something happens.
 
-Doing the same thing in Svelte was much more easier and programmatic 👇
+Doing the same thing in Svelte was much easier and programmatic 👇
 
 ```html
 <script>
@@ -363,7 +363,7 @@ It's very clean and simple now. Plus it's not declarative anymore. I **tell** th
 
 ## Those transitions 😍
 
-Transitions in Svelte are basically animations to be run when some DOM is created or destroyed. This is nearly impossible to do in P/React without relying on external libraries like Framer Motion. But in Svelte, this is in-built, and extremelyyyyyyy easy to do.
+Transitions in Svelte are basically animations to be run when some DOM is created or destroyed. This is nearly impossible to do in P/React without relying on external libraries like Framer Motion. But in Svelte, this is in-built and extremelyyyyyyy easy to do.
 
 So, ofc, I put in transitions everywhere I could. Earlier, when you opened/closed any app, there was no transition. Now, when you close a window, it collapses into itself while closing, giving an awesome transition.
 
@@ -391,8 +391,10 @@ And that is it!! Now there's a really nice transition, with around 10 lines of c
 
 I added in transitions in many other places which I couldn't add before with Framer Motion. Not because they weren't possible, but because the syntax felt unnatural there, but here in Svelte, it just fits right in!
 
-Really, moving to Svelte made me realize how extremely powerful it is. A lot of React developers treat Svelte as a toy(I was one of them), but really, it isn't a toy. In fact I'd say it's more powerful than React. Yes, less control over everything than React, but for 95% of developers, it is a better choice than React anyway.
-
 # Final Words
 
+Really, moving to Svelte made me realize how extremely powerful it is. A lot of React developers treat Svelte as a toy(I was one of them), but really, it isn't a toy. In fact I'd say it's more powerful than React. Yes, less control over everything than React, but it is a better choice for 95% of developers than React anyway.
+
 Hope you liked this half-historical half-technical article, and it gave you some enthusiasm to try Svelte, if you haven't already.
+
+Peace out ✌️
