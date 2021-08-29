@@ -162,7 +162,7 @@ Implementing Code splitting was very easy. The components that aren't needed on 
 
 One component where I do code splitting was the `AppNexus.tsx`. This is basically a gateway to render the right app component when you open any app. This is as easy as 👇
 
-```tsx
+```js
 import { AppID } from '__/stores/apps.store';
 import { lazy } from 'react';
 
@@ -203,7 +203,7 @@ As for the dock animation, I had [already done an article about it](https://puru
 
 I continued on 13th too, working whole day, implementing the different apps. Finally completed by the end of the day.
 
-## Results
+# Results
 
 Unsurprisingly, the bundle size went down and runtime performance went up. If you have been following Web Dev news on Twitter and Reddit, you probably saw this coming from a mile away.
 
@@ -211,7 +211,71 @@ But the extent of these improvements was **very** surprising. I'll just let the 
 
 And runtime performance went up by a lot. With the previous version, the dock animation could get janky when my computer was overloaded. Not by a lot, but it was visible. After I moved to Svelte, even that much jank was gone. **Fully gone!**
 
-And here's the takeaways from this process 👇
+# The process
+
+The process of migrating to Svelte from a React app was gruelling and hard and rough and mentally taxing. It was exhausting.
+
+**Ignore the line above, it was total BS 🤣**
+
+Moving to Svelte was an **extremely simple** process. It was literally copying the JSX code, pasting it as is, removing the CSS Modules stuff and adding regular old classes.
+
+Because Svelte's state is very close to React's useState, moving it was a matter of copy-pasting all the state related code, and modifying it to be a regular Variable.
+
+So this 👇
+
+```js
+const [xPos, setXPos] = useState(0);
+const [yPos, setYPos] = useState(0);
+const [isMenuVisible, setIsMenuVisible] = useState(false);
+```
+
+became this in svelte 👇
+
+```js
+let xPos = 0;
+let yPos = 0;
+let isMenuVisible = false;
+```
+
+This is it. Literally got rid of a lot of noise, but the skeleton structure remained the same.
+
+## But what about Global state?
+
+Yes, global state would've been a problem, but the thing is: **It Wasn't**.
+
+Moving React global state would be a huge pain if I were using the React Context or Redux, where person A tells person B to tell person C to change the state. I personally never liked this Reducer pattern. It made sense to use it on super big codebases, but I never encountered the problem myself.
+
+So I searched rigorously for a global management system as simple as possible. I already had a taste of the simplicity that [StencilJS store](https://stenciljs.com/docs/stencil-store) and Svelte Stores provided.
+
+After searching long, I found this amazing library called [Jotai](https://jotai.pmnd.rs/) which provided a global state very very similar to Svelte Stores, and I **freaking loved it!!! 😍😍**
+
+It was exactly what I needed.
+
+Here's a little snippet of how it works 👇
+
+```js
+// Create global store
+const themeAtom = atom('light');
+
+// Inside the component
+const [theme, setTheme] = useAtom(themeAtom);
+```
+
+It makes the state management very linear, just like `useState`. Which made migrating it to Svelte extremely easy.
+
+I copied the `atom`s as is, renamed their function to `writable`, remove the whole `const [val, setVal] = useAtom(someAtom);` syntax entirely and put a `$` before the store where I was using it. And that's it! This is literally how I migrated away.
+
+## What about Styles?
+
+Same thing literally. Because Styles were just plain SCSS, independent of the framework, there was literally nothing to do here. Just copy paste styles from the .scss file to the Svelte SFCs, and we're done.
+
+This whole process was so simple, that it took me just 2 days to completely migrate away.
+
+![Let's get this party started](../../static/media/macos-preact-to-svelte--party-celebration.gif)
+
+# Observations
+
+Here are my takeaways from this whole process 👇
 
 ## Svelte Code is much simpler
 
@@ -298,3 +362,37 @@ Doing the same thing in Svelte was much more easier and programmatic 👇
 It's very clean and simple now. Plus it's not declarative anymore. I **tell** the program **explicitly** when to go up, and when to come back down. The program literally reads like this: `Go up -39.2%, and when you're done with that, go down to base position`. As simple as that ¯\\\_(ツ)\_/¯
 
 ## Those transitions 😍
+
+Transitions in Svelte are basically animations to be run when some DOM is created or destroyed. This is nearly impossible to do in P/React without relying on external libraries like Framer Motion. But in Svelte, this is in-built, and extremelyyyyyyy easy to do.
+
+So, ofc, I put in transitions everywhere I could. Earlier, when you opened/closed any app, there was no transition. Now, when you close a window, it collapses into itself while closing, giving an awesome transition.
+
+Adding this window close transition was literally just this 👇
+
+```html
+<script>
+  function windowCloseTransition(el, { duration = 300 }) {
+    const existingTransform = getComputedStyle(el).transform;
+
+    return {
+      duration,
+      easing: sineInOut,
+      css: (t) => `opacity: ${t}; transform: ${existingTransform} scale(${t})`,
+    };
+  }
+</script>
+
+<section out:windowCloseTransition></section>
+```
+
+And that is it!! Now there's a really nice transition, with around 10 lines of code only.
+
+> I see this as an absolute win ~~ Professor Hulk
+
+I added in transitions in many other places which I couldn't add before with Framer Motion. Not because they weren't possible, but because the syntax felt unnatural there, but here in Svelte, it just fits right in!
+
+Really, moving to Svelte made me realize how extremely powerful it is. A lot of React developers treat Svelte as a toy(I was one of them), but really, it isn't a toy. In fact I'd say it's more powerful than React. Yes, less control over everything than React, but for 95% of developers, it is a better choice than React anyway.
+
+# Final Words
+
+Hope you liked this half-historical half-technical article, and it gave you some enthusiasm to try Svelte, if you haven't already.
