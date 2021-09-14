@@ -20,7 +20,6 @@
 
 <script lang="ts">
   export let blogsList: IBlog[];
-  export const prerender = true;
 
   onMount(async () => {
     import('lazysizes');
