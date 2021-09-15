@@ -9,6 +9,9 @@ export interface IBlog {
   series?: string;
   seriesIndex?: number;
   toc: TOC[];
+
+  redirectTo?: string;
+  platform?: string;
 }
 
 export type TOC = {

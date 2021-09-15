@@ -32,6 +32,9 @@ export declare type BlogData = {
   cover_image: string;
 
   body: string;
+
+  redirectTo?: string;
+  platform?: string;
 };
 
 export type Series = {

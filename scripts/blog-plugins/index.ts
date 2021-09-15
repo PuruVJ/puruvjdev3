@@ -1,4 +1,4 @@
-export { generateTOC } from './generate-toc';
+export { generateTOCPlugin } from './generate-toc';
 export { headingsWithAnchorsPlugin } from './headings-anchor';
 export { imageOptimMarkupPlugin } from './image-optim-markup';
 export { seriesLinksPlugin } from './series-links';

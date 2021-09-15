@@ -5,7 +5,7 @@ import readingTime from 'reading-time';
 import { getHighlighter } from 'shiki';
 import { getBlogData } from './blog-data';
 import {
-  generateTOC,
+  generateTOCPlugin,
   headingsWithAnchorsPlugin,
   imageOptimMarkupPlugin,
   linkNoOpenerPlugin,
@@ -13,7 +13,7 @@ import {
   twemojiPlugin,
 } from './blog-plugins/index';
 import { ASSETS_ROOT_PATH } from './constants';
-import { UnwrapPromise } from './types';
+import type { UnwrapPromise } from './types';
 
 export async function blogMDHtml({
   blogData,
@@ -30,7 +30,18 @@ export async function blogMDHtml({
   console.log('\n');
 
   // Let's do it
-  for (let { body, series, title, id, description, date, cover_image, seriesIndex } of blogData) {
+  for (let {
+    body,
+    series,
+    title,
+    id,
+    description,
+    date,
+    cover_image,
+    seriesIndex,
+    redirectTo,
+    platform,
+  } of blogData) {
     // Let's render it
     let html = md.render(body);
 
@@ -48,7 +59,7 @@ export async function blogMDHtml({
       document = seriesLinksPlugin(document, seriesPostsList, series, id);
     }
 
-    const toc = generateTOC(document);
+    const toc = generateTOCPlugin(document);
 
     document = twemojiPlugin(document);
 
@@ -71,6 +82,8 @@ export async function blogMDHtml({
         toc,
         series,
         seriesIndex,
+        redirectTo,
+        platform,
       }),
     );
 
