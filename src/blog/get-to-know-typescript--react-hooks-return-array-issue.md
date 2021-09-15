@@ -5,6 +5,10 @@ date: 19 Feb, 2021
 series: 'Get to know TypeScript'
 ---
 
+<!--
+redirect_to: 'https://github.com'
+platform: 'Layercode' -->
+
 {{ series-links }}
 
 ![Batman and Robin's dance](../../static/media/segregate-array-return-types-react-batman-robin.gif)

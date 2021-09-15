@@ -1,26 +1,39 @@
 <script lang="ts">
-  import { mdiChevronRight } from '@mdi/js';
-  import { formatDate } from '../helpers/format-date';
-  import type { IBlog } from '../interfaces/blog.interface';
+  import { mdiChevronRight, mdiOpenInNew } from '@mdi/js';
+  import { formatDate } from '$lib/helpers/format-date';
+  import type { IBlog } from '$lib/interfaces/blog.interface';
   import Icon from './Icon.svelte';
-  import { page } from '$app/stores';
 
   export let blogsList: IBlog[];
   export let seeMore: boolean = false;
-
-  $: console.log($page);
 </script>
 
-{#each blogsList as { title, id, description, date, series }}
-  <a class="blog-link" sveltekit:prefetch href="/blog/{id}" aria-label={title}>
+{#each blogsList as { title, id, description, date, series, redirectTo, platform }}
+  <a
+    class="blog-link"
+    href={redirectTo ?? `/blog/${id}`}
+    aria-label={title}
+    {...redirectTo ? { target: '_blank' } : { 'sveltekit:prefetch': true }}
+  >
     <span class="series">
       {#if series}
         <mark>SERIES</mark> {series}
       {/if}
     </span>
     <h2 class="title">{@html title}</h2>
-    <p class="description">{description}</p>
-    <p class="more-info"><span /><time>{formatDate(date)}</time></p>
+    <p class="description">{@html description}</p>
+    <p class="more-info">
+      {#if redirectTo}
+        <span class="published-tagline">
+          Published on {platform}
+          <Icon path={mdiOpenInNew} size={18} />
+        </span>
+      {/if}
+
+      <span />
+
+      <time>{formatDate(date)}</time>
+    </p>
   </a>
 {/each}
 
@@ -76,6 +89,17 @@
     font-family: 'JetBrains Mono', monospace;
     margin-top: 0.3rem;
     font-weight: 500;
+
+    .published-tagline {
+      --color: rgba(var(--app-color-dark-rgb), 0.6);
+
+      color: var(--color);
+      fill: var(--color);
+
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
   }
 
   .blog-link {
@@ -96,13 +120,13 @@
       --bgc-opacity: 0.15;
 
       &:hover,
-      &:focus {
+      &:focus-visible {
         --bgc-opacity: 0.3;
       }
     }
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       --bgc-opacity: 0.1;
     }
 
@@ -122,7 +146,14 @@
     font-family: 'JetBrains Mono', monospace;
 
     mark {
-      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-family: 'JetBrains Mono', sans-serif;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    p.more-info {
+      flex-direction: column-reverse;
+      align-items: flex-end;
     }
   }
 </style>

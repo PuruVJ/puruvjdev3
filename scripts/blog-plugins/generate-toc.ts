@@ -8,12 +8,9 @@ type TOC = {
   length: number;
 };
 
-export function generateTOC(document: Document) {
+export function generateTOCPlugin(document: Document) {
   // Find out only the h1, h2, h3
-
-  /** @type {HTMLHeadingElement[]} */
-  // @ts-ignore
-  const headingEls: HTMLHeadingElement[] = [...document.querySelectorAll('h1, h2, h3')];
+  const headingEls = [...document.querySelectorAll<HTMLHeadingElement>('h1, h2, h3')];
 
   const TOCdata: TOC[] = [];
 

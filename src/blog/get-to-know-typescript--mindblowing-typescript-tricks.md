@@ -6,6 +6,11 @@ cover_image: media/mindblowing-typescript-tricks--cover.jpg
 series: 'Get to know TypeScript'
 ---
 
+<!--
+redirect_to: 'https://github.com'
+platform: 'Layercode'
+ -->
+
 ![Colorful](../../static/media/mindblowing-typescript-tricks--cover.jpg)
 
 {{ series-links }}
@@ -135,9 +140,8 @@ Now the fun part begins.
 Suppose you have an Array, and you wanna extract the type of each Element from an array
 
 ```ts
-type ArrayElement<
-  ArrayType extends readonly unknown[]
-> = ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+type ArrayElement<ArrayType extends readonly unknown[]> =
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
 ```
 
 We're using TypeScript's `infer` here, which helps pick out specific types from a complex type.

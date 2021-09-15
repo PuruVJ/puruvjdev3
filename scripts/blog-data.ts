@@ -29,6 +29,8 @@ export async function getBlogData() {
 
   for (const [idx, { attributes: attrs, body }] of Object.entries(frontMatterData)) {
     const published = attrs.published ?? true;
+    const redirectTo = attrs.redirect_to;
+    const platform = attrs.platform;
 
     // Skip everything if not published
     if (!published) continue;
@@ -60,6 +62,7 @@ export async function getBlogData() {
       title: attrs.title,
       seriesIndex,
       series,
+      ...(redirectTo ? { redirectTo, platform } : {}),
     });
   }
 

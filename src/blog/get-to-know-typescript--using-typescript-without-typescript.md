@@ -6,6 +6,9 @@ published: true
 series: 'Get to know TypeScript'
 ---
 
+<!-- redirect_to: 'https://github.com'
+platform: 'Layercode' -->
+
 {{ series-links }}
 
 Before starting, I wanna get this outta the way: If your reaction on reading the title was anywhere close to Hermione's 👇

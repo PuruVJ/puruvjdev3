@@ -18,7 +18,9 @@
   }) => {
     try {
       const res = await fetch(`/data/blog/${blogID}.json`);
-      const data = await res.json();
+      const data: IBlog = await res.json();
+
+      if (data.redirectTo) return { redirect: data.redirectTo, status: 302 };
 
       return { props: { blogData: data } };
     } catch (e) {

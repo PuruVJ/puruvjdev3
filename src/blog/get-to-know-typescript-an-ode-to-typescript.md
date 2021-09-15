@@ -6,6 +6,9 @@ cover_image: media/declaring-my-undying-love-for-typescript-sun-love.jpg
 series: 'Get to know TypeScript'
 ---
 
+<!-- redirect_to: 'https://github.com'
+platform: 'Layercode' -->
+
 ![Love sunset](../../static/media/declaring-my-undying-love-for-typescript-sun-love.jpg)
 
 {{ series-links }}
