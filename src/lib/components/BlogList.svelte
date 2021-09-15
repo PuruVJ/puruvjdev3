@@ -149,4 +149,11 @@
       font-family: 'JetBrains Mono', sans-serif;
     }
   }
+
+  @media screen and (max-width: 400px) {
+    p.more-info {
+      flex-direction: column-reverse;
+      align-items: flex-end;
+    }
+  }
 </style>
