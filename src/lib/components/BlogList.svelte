@@ -146,7 +146,7 @@
     font-family: 'JetBrains Mono', monospace;
 
     mark {
-      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-family: 'JetBrains Mono', sans-serif;
     }
   }
 </style>
