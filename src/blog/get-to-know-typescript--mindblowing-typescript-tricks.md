@@ -4,9 +4,12 @@ description: There's a lot about TypeScript that most people don't know. I'll su
 date: 19 Mar, 2021
 cover_image: media/mindblowing-typescript-tricks--cover.jpg
 series: 'Get to know TypeScript'
+---
+
+<!--
 redirect_to: 'https://github.com'
 platform: 'Layercode'
----
+ -->
 
 ![Colorful](../../static/media/mindblowing-typescript-tricks--cover.jpg)
 

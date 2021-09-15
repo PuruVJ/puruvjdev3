@@ -4,9 +4,10 @@ description: TypeScript is cool. Super cool. It's made us Web Dev's life super e
 date: 1 Feb, 2021
 cover_image: media/declaring-my-undying-love-for-typescript-sun-love.jpg
 series: 'Get to know TypeScript'
-redirect_to: 'https://github.com'
-platform: 'Layercode'
 ---
+
+<!-- redirect_to: 'https://github.com'
+platform: 'Layercode' -->
 
 ![Love sunset](../../static/media/declaring-my-undying-love-for-typescript-sun-love.jpg)
 

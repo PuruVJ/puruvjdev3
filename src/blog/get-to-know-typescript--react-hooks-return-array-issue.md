@@ -3,9 +3,11 @@ title: React TypeScript Hooks issue when returning array
 description: React and TypeScript make up a great pair. But when you're trying to make your own hooks, and returning an array, TypeScript yells at your. Find out why.
 date: 19 Feb, 2021
 series: 'Get to know TypeScript'
-redirect_to: 'https://github.com'
-platform: 'Layercode'
 ---
+
+<!--
+redirect_to: 'https://github.com'
+platform: 'Layercode' -->
 
 {{ series-links }}
 

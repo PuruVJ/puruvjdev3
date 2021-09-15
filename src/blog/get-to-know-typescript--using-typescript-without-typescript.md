@@ -4,9 +4,10 @@ description: Wanna use TypeScript but don't want all the compiler and tooling ov
 date: 12 Feb, 2021
 published: true
 series: 'Get to know TypeScript'
-redirect_to: 'https://github.com'
-platform: 'Layercode'
 ---
+
+<!-- redirect_to: 'https://github.com'
+platform: 'Layercode' -->
 
 {{ series-links }}
 
