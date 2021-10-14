@@ -66,7 +66,7 @@
       <h2 id="about-me">
         I am a 19 y/o
         <mark>self-taught fullstack web developer</mark>
-        based in India with 6 years of hobbyist experience. I make
+        based in India with 6 years of experience. I make
         <mark>blazing fast and performant</mark>
         web apps. Like this blog.
       </h2>
