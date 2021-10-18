@@ -21,7 +21,7 @@
     }
 
     // Fetch and conquer
-    const req = await fetch(`/api/likes/${blogID}`);
+    const req = await fetch(`${API.getEmos}?blogID=${blogID}`);
 
     const data = await req.json();
 
@@ -29,34 +29,34 @@
   }
 
   async function toggleLikes() {
-    const operation = marked ? 'dec' : 'inc';
+    const incrementer = marked ? -1 : 1;
 
-    $emoStates[blogID].likes += operation === 'inc' ? 1 : -1;
+    $emoStates[blogID].likes += incrementer;
 
     marked = !marked;
 
-    const formData = new FormData();
-    formData.append('operation', operation);
-
     try {
       // Make the request
-      const req = await fetch(`/api/likes/${blogID}`, {
-        body: formData,
+      const req = await fetch(API.setEmos, {
+        body: JSON.stringify({ ...$emoStates[blogID], blogID }),
         method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
       });
 
       const res = await req.text();
 
       if (res === 'fail') {
-        $emoStates[blogID].likes -= operation === 'inc' ? 1 : -1;
+        $emoStates[blogID].likes -= incrementer;
         marked = !marked;
       }
     } catch (e) {
-      $emoStates[blogID].likes -= operation === 'inc' ? 1 : -1;
+      $emoStates[blogID].likes -= incrementer;
       marked = !marked;
     }
 
-    if (operation === 'inc') {
+    if (incrementer === 1) {
       localStorage.setItem(`like:${blogID}`, 'true');
     } else {
       localStorage.removeItem(`like:${blogID}`);
