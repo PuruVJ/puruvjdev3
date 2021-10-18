@@ -5,20 +5,19 @@ import type { ReadOnlyFormData } from '@sveltejs/kit/types/helper';
 const { VITE_SUPABASE_URL, VITE_SUPABASE_API_KEY } = import.meta.env as Record<string, string>;
 
 const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_API_KEY);
-const likesTable = supabase.from('likes');
+const likesTable = supabase.from<{ id: string; likes: number }>('likes');
 
 export const get: RequestHandler = async ({ params }) => {
   const { blogID } = params;
 
   try {
-    const results = await likesTable.select('*').eq('id', blogID);
-
+    const results = await likesTable.select('likes').eq('id', blogID);
     const { data, statusText } = results;
 
     if (statusText !== 'OK')
       return {
         status: 400,
-        body: 'something went wrong',
+        body: { error: 'something went wrong' },
       };
 
     if (data.length === 0) {
@@ -66,7 +65,7 @@ export const post: RequestHandler = async ({ params, body }) => {
 
     const incrementVal = operation === 'inc' ? +1 : -1;
 
-    await likesTable.update([{ likes: data[0].likes + incrementVal }]).eq('id', blogID);
+    await likesTable.update({ likes: data[0].likes + incrementVal }).eq('id', blogID);
 
     return {
       status: 200,

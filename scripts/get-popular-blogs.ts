@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import { ASSETS_ROOT_PATH } from './constants';
 import { BlogData } from './types';
 
-const URL = `https://puruvj.dev/api/get-emos?blogID=`;
+const URL = `https://puruvj.dev/api/likes/`;
 const MAX_COUNT = 6;
 
 export async function getPopularBlogPosts({ blogData }: { blogData: BlogData[] }) {
@@ -13,7 +13,7 @@ export async function getPopularBlogPosts({ blogData }: { blogData: BlogData[] }
   for (const { id, date } of blogData) {
     const req = await fetch(`${URL}${id}`);
 
-    const { likes } = await req.json();
+    const { likes } = (await req.json()) as { likes: number };
 
     likesList.push({ id, likes, date });
   }
