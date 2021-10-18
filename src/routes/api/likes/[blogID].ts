@@ -45,6 +45,8 @@ export const post: RequestHandler = async ({ params, body }) => {
   const { blogID } = params as { blogID: string; method: 'inc' | 'dec' };
   const operation = (body as ReadOnlyFormData).get('operation') as 'inc' | 'dec';
 
+  console.log(operation);
+
   try {
     if (!['inc', 'dec'].includes(operation)) {
       return {

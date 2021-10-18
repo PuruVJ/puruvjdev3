@@ -35,14 +35,14 @@
 
     marked = !marked;
 
+    const formData = new FormData();
+    formData.append('operation', operation);
+
     try {
       // Make the request
       const req = await fetch(`/api/likes/${blogID}`, {
-        body: JSON.stringify({ operation }),
+        body: formData,
         method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
       });
 
       const res = await req.text();
