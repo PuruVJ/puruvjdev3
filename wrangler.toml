@@ -1,0 +1,9 @@
+name = "puruvjdev"
+type = "webpack"
+route = 'https://puruvj.dev'
+zone_id = ''
+usage_model = ''
+compatibility_flags = []
+workers_dev = true
+site = {bucket = "./build",entry-point = "workers-site"}
+compatibility_date = "2021-10-19"

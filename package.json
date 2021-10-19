@@ -20,7 +20,7 @@
     "throttle-debounce": "^3.0.1"
   },
   "devDependencies": {
-    "@sveltejs/adapter-vercel": "^1.0.0-next.31",
+    "@sveltejs/adapter-cloudflare-workers": "^1.0.0-next.24",
     "@sveltejs/kit": "^1.0.0-next.184",
     "@types/html-to-text": "^8.0.1",
     "@types/jsdom": "^16.2.13",

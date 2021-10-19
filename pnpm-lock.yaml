@@ -3,7 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@mdi/js': ^6.2.95
   '@supabase/supabase-js': ^1.24.0
-  '@sveltejs/adapter-vercel': ^1.0.0-next.31
+  '@sveltejs/adapter-cloudflare-workers': ^1.0.0-next.24
   '@sveltejs/kit': ^1.0.0-next.184
   '@types/html-to-text': ^8.0.1
   '@types/jsdom': ^16.2.13
@@ -47,7 +47,7 @@ dependencies:
   throttle-debounce: 3.0.1
 
 devDependencies:
-  '@sveltejs/adapter-vercel': 1.0.0-next.31
+  '@sveltejs/adapter-cloudflare-workers': 1.0.0-next.24
   '@sveltejs/kit': 1.0.0-next.184_sass@1.42.1+svelte@3.43.1
   '@types/html-to-text': 8.0.1
   '@types/jsdom': 16.2.13
@@ -77,6 +77,10 @@ devDependencies:
   yaml: 1.10.2
 
 packages:
+
+  /@iarna/toml/2.2.5:
+    resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
+    dev: true
 
   /@mdi/js/6.2.95:
     resolution: {integrity: sha512-fbD22sEBathqVSQWcxshEtzhhRNFmMnV64z6T7DClRbQ9N5axorykt3Suv2zPzLDyiqH7UhNRu0VPvPCPDNpnQ==}
@@ -131,9 +135,10 @@ packages:
       '@supabase/storage-js': 1.4.1
     dev: false
 
-  /@sveltejs/adapter-vercel/1.0.0-next.31:
-    resolution: {integrity: sha512-W8p/U00B6ihVrDpwMkgEexfVUzaLmn4MRtXj//Gw4NDFfsrZR4P5wBidrOAIkCYBMvqCOHD+vbAvIiAMOaN23g==}
+  /@sveltejs/adapter-cloudflare-workers/1.0.0-next.24:
+    resolution: {integrity: sha512-IbLw800QHPrw9YWHHV6S8jlye7QnF4BwhhnW5Dwoi71gArB48qzBRuM5Wi0Qp4xpavd/cZO6mpA/rHI+kuELNQ==}
     dependencies:
+      '@iarna/toml': 2.2.5
       esbuild: 0.13.4
     dev: true
 

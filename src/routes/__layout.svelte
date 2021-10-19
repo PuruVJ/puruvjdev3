@@ -1,3 +1,7 @@
+<script context="module">
+  export const prerender = true;
+</script>
+
 <script lang="ts">
   import { dev } from '$app/env';
   import { page } from '$app/stores';

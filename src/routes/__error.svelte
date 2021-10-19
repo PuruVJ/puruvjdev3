@@ -1,3 +1,7 @@
+<script context="module">
+  export const prerender = true;
+</script>
+
 <script>
   import NotFoundSvg from '$lib/components/NotFoundSVG.svelte';
   import { fadeIn, fadeOut } from '$lib/fade';
