@@ -3,16 +3,13 @@ node_modules
 /.svelte
 /.svelte-kit
 /build
-/functions
 
 .DS_Store
 /node_modules/
-/.vercel_build_output/
 .env
 
 .vercel
 
-/api/node_modules
 .vercel
 
 .vercel

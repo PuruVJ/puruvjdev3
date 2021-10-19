@@ -21,7 +21,13 @@
     }
 
     // Fetch and conquer
-    const req = await fetch(`${API.getEmos}?blogID=${blogID}`);
+    const req = await fetch(`${API.LIKES}/${blogID}`, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+    });
 
     const data = await req.json();
 
@@ -29,34 +35,37 @@
   }
 
   async function toggleLikes() {
-    const incrementer = marked ? -1 : 1;
+    const operation = marked ? 'dec' : 'inc';
 
-    $emoStates[blogID].likes += incrementer;
+    $emoStates[blogID].likes += operation === 'inc' ? 1 : -1;
 
     marked = !marked;
 
     try {
       // Make the request
-      const req = await fetch(API.setEmos, {
-        body: JSON.stringify({ ...$emoStates[blogID], blogID }),
+      const req = await fetch(`${API.LIKES}/${blogID}`, {
+        body: JSON.stringify({ operation }),
         method: 'POST',
         headers: {
-          'Content-type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': 'true',
         },
+        mode: 'no-cors',
       });
 
       const res = await req.text();
 
       if (res === 'fail') {
-        $emoStates[blogID].likes -= incrementer;
+        $emoStates[blogID].likes -= operation === 'inc' ? 1 : -1;
         marked = !marked;
       }
     } catch (e) {
-      $emoStates[blogID].likes -= incrementer;
+      $emoStates[blogID].likes -= operation === 'inc' ? 1 : -1;
       marked = !marked;
     }
 
-    if (incrementer === 1) {
+    if (operation === 'inc') {
       localStorage.setItem(`like:${blogID}`, 'true');
     } else {
       localStorage.removeItem(`like:${blogID}`);
